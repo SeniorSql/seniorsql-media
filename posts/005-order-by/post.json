@@ -1,0 +1,13 @@
+{
+  "tag": "Уровень 1 · ORDER BY",
+  "slides": [
+    {"type": "cover", "emoji": "🏆", "title": "ТОП-3 за одну строку: `ORDER BY` + `LIMIT`", "subtitle": "А в конце — задача с собеса про вторую зарплату"},
+    {"type": "code", "title": "Сортировка", "code": "SELECT name, salary\nFROM employees\nORDER BY salary DESC;", "table": {"columns": ["name", "salary"], "rows": [["Мария", 150000], ["Анна", 120000], ["Олег", 90000], ["Иван", 80000]]}, "body": ["• `ASC` — по возрастанию (по умолчанию)", "• `DESC` — по убыванию"]},
+    {"type": "code", "title": "Сортировка по двум столбцам", "code": "SELECT dept, name, salary\nFROM employees\nORDER BY dept, salary DESC;", "table": {"columns": ["dept", "name", "salary"], "rows": [["HR", "Иван", 80000], ["IT", "Мария", 150000], ["IT", "Анна", 120000], ["Sales", "Олег", 90000]]}, "body": ["Сначала по отделу (А→Я), внутри отдела — по зарплате (больше → меньше)"]},
+    {"type": "code", "title": "ТОП-3 по зарплате", "code": "SELECT name, salary\nFROM employees\nORDER BY salary DESC\nLIMIT 3;", "table": {"columns": ["name", "salary"], "rows": [["Мария", 150000], ["Анна", 120000], ["Олег", 90000]]}},
+    {"type": "code", "title": "В разных базах — по-разному", "code": "-- PostgreSQL, MySQL, SQLite\n... LIMIT 3\n\n-- SQL Server\nSELECT TOP 3 ...\n\n-- Стандарт SQL, Oracle 12c+\n... FETCH FIRST 3 ROWS ONLY", "note": ["⚠️ Без `ORDER BY` база не обещает никакого порядка. `LIMIT 3` без сортировки — **любые** 3 строки."]},
+    {"type": "code", "title": "Задача с собеса: **вторая** по величине зарплата", "code": "SELECT DISTINCT salary\nFROM employees\nORDER BY salary DESC\nLIMIT 1 OFFSET 1;", "table": {"columns": ["salary"], "rows": [[120000]]}, "body": ["• `OFFSET 1` — пропустить 1 строку", "• `DISTINCT` — если у двоих одинаковая максимальная зарплата"]},
+    {"type": "cta", "title": "Дальше — шпаргалка: порядок выполнения запроса", "comment": "Как ещё найти вторую зарплату? Пиши варианты в комментариях"}
+  ],
+  "caption": "ORDER BY + LIMIT = любой рейтинг за одну строку 🏆\n\n• ORDER BY salary DESC — от большего к меньшему\n• ORDER BY dept, salary DESC — сортировка по двум столбцам\n• LIMIT 3 — первые три строки\n• LIMIT 1 OFFSET 1 — вторая строка\n\n⚠️ LIMIT без ORDER BY возвращает случайные строки — частая ошибка в отчётах.\n\nЗадача с собеса: найти вторую по величине зарплату. Решение — на 6-м слайде. А какие ещё способы знаешь? Пиши в комментариях 👇\n\n💾 Сохрани.\n➕ Подпишись @seniorsql — урок каждый будний день.\n✈️ Задачи с разбором — в Telegram (ссылка в профиле).\n\n#sql #sqlзапросы #изучениеsql #базыданных #собеседование #аналитикданных #postgresql #айти #программирование #обучениеайти"
+}
