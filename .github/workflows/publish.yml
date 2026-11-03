@@ -2,7 +2,8 @@ name: publish
 
 on:
   schedule:
-    - cron: "0 16 * * 1-5"   # 19:00 по Москве, пн–пт
+    - cron: "0 9 * * *"    # 12:00 по Москве, каждый день
+    - cron: "0 16 * * *"   # 19:00 по Москве, каждый день
   workflow_dispatch:
     inputs:
       post:
