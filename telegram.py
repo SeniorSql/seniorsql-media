@@ -3,7 +3,7 @@
 # Запуск вручную: python3 telegram.py telegram/welcome.json
 import json, os, sys, pathlib, urllib.request, urllib.error
 
-TOKEN = os.environ.get("TG_TOKEN", "")
+TOKEN = os.environ.get("TG_TOKEN", "").strip()
 CHAT = os.environ.get("TG_CHAT", "@sqlsenior")
 
 
