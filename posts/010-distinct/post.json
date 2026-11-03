@@ -1,0 +1,17 @@
+{
+  "tag": "Уровень 2 · DISTINCT",
+  "slides": [
+    {"type": "cover", "emoji": "🧹", "title": "`DISTINCT`: убираем **дубли** одной строчкой", "subtitle": "И две ловушки, о которых молчат в курсах"},
+    {"type": "code", "title": "Какие отделы есть в компании?", "before": ["`SELECT dept` вернёт IT, Sales, IT, HR — IT дважды. Убираем повторы:"], "code": "SELECT DISTINCT dept\nFROM employees;", "table": {"columns": ["dept"], "rows": [["IT"], ["Sales"], ["HR"]]}, "note": ["⚠️ Без `ORDER BY` порядок строк не гарантирован"]},
+    {"type": "code", "title": "Ловушка 1: `DISTINCT` — для **всей строки**", "code": "SELECT DISTINCT dept, salary\nFROM employees;", "table": {"columns": ["dept", "salary"], "rows": [["IT", 120000], ["Sales", 90000], ["IT", 150000], ["HR", 80000]]}, "body": ["IT снова дважды: пары «отдел + зарплата» разные. `DISTINCT` сравнивает **все столбцы** вместе.", "Скобки не помогают: `DISTINCT(dept), salary` — то же самое."]},
+    {"type": "code", "title": "Ловушка 2: `NULL`", "before": ["Телефоны: `NULL`, `NULL`, `'555-01'`"], "code": "SELECT DISTINCT phone\nFROM clients;\n-- 2 строки: NULL и '555-01'\n\nSELECT COUNT(DISTINCT phone)\nFROM clients;\n-- 1", "body": ["• `DISTINCT` считает все `NULL` одинаковыми и оставляет **один**", "• `COUNT(DISTINCT ...)` пропускает `NULL` совсем"]},
+    {"type": "code", "title": "Сколько разных отделов?", "code": "SELECT COUNT(DISTINCT dept) AS depts\nFROM employees;", "table": {"columns": ["depts"], "rows": [[3]]}, "body": ["`COUNT(*)` дал бы 4 — по числу сотрудников"]},
+    {"type": "text", "title": "`DISTINCT` или `GROUP BY`?", "body": ["• Нужен просто список без повторов — `DISTINCT`", "• Нужны ещё и итоги по группе (`COUNT`, `SUM`) — `GROUP BY`", "• `SELECT DISTINCT dept` и `SELECT dept ... GROUP BY dept` дают одинаковый результат"], "note": ["💡 Senior-совет: `DISTINCT` — не лекарство от дублей после `JOIN`. Появились дубли — сначала найди, откуда они."]},
+    {"type": "cta", "title": "Дальше — `CASE`: «если… то…» прямо в SQL", "comment": "Где ты ловил дубли в данных? Расскажи в комментариях"}
+  ],
+  "telegram": {
+    "text": "<b>🧩 Задача дня · DISTINCT</b>\n\nТаблица <code>visits</code>:\n<pre>user_id | page\n1       | home\n1       | home\n1       | cart\n2       | home\n3       | NULL</pre>\n\n1) Сколько строк вернёт <code>SELECT DISTINCT user_id, page FROM visits</code>?\n2) Чему равен <code>SELECT COUNT(DISTINCT page) FROM visits</code>?\n\nОтвет 👇\n\n<tg-spoiler>1) 4 строки: (1, home), (1, cart), (2, home), (3, NULL). Повтор (1, home) убран.\n2) 2: home и cart. COUNT(DISTINCT ...) не считает NULL.</tg-spoiler>",
+    "quiz": {"question": "Столбец city: 'Москва', 'Москва', NULL, NULL, 'Казань'. Сколько строк вернёт SELECT DISTINCT city?", "options": ["2", "3", "4", "5"], "correct": 1, "explanation": "DISTINCT считает все NULL одинаковыми и оставляет один. Итог: Москва, Казань и NULL — 3 строки."}
+  },
+  "caption": "DISTINCT — убирает повторяющиеся строки из результата 🧹\n\n• SELECT DISTINCT dept — список отделов без повторов\n• DISTINCT работает для всей строки, а не для одного столбца\n• все NULL для DISTINCT одинаковые — останется один\n• COUNT(DISTINCT col) — число разных значений, NULL не считает\n\nИ совет: дубли после JOIN не прячь за DISTINCT — сначала найди их причину.\n\n💾 Сохрани — пригодится.\n➕ Подпишись @seniorsql — уроки каждый день.\n✈️ Задачи с разбором — в Telegram (ссылка в профиле).\n\n#sql #distinct #sqlзапросы #изучениеsql #базыданных #аналитикданных #собеседование #postgresql #айти #программирование"
+}
