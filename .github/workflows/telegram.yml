@@ -1,0 +1,21 @@
+name: telegram
+
+# Ручная отправка разового поста в Telegram (например, приветствия).
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "JSON-файл из папки telegram/"
+        required: true
+        default: "telegram/welcome.json"
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 telegram.py "$FILE"
+        env:
+          FILE: ${{ github.event.inputs.file }}
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: "@sqlsenior"
