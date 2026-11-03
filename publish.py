@@ -67,3 +67,11 @@ link = call("GET", media_id, fields="permalink").get("permalink", "")
 with done_file.open("a", encoding="utf-8") as f:
     f.write(post.name + "\n")
 print(f"Опубликовано: {post.name} {link}")
+
+# Задача к посту — в Telegram. Ошибка здесь не отменяет публикацию в Instagram.
+if meta.get("telegram"):
+    import telegram
+    try:
+        telegram.send(meta["telegram"])
+    except Exception as e:
+        print(f"::warning::{e}")
