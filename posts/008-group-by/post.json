@@ -1,0 +1,13 @@
+{
+  "tag": "Уровень 2 · GROUP BY",
+  "slides": [
+    {"type": "cover", "emoji": "📊", "title": "`GROUP BY` и `HAVING` за 6 слайдов", "subtitle": "Как посчитать итоги по отделам, клиентам, месяцам"},
+    {"type": "code", "title": "Сколько людей и какая средняя зарплата в каждом отделе", "code": "SELECT dept,\n       COUNT(*)    AS cnt,\n       AVG(salary) AS avg_salary\nFROM employees\nGROUP BY dept;", "table": {"columns": ["dept", "cnt", "avg_salary"], "rows": [["IT", 2, 135000], ["Sales", 1, 90000], ["HR", 1, 80000]]}},
+    {"type": "text", "title": "Как это работает", "body": ["1️⃣ `GROUP BY dept` собирает строки с одинаковым отделом в одну группу", "2️⃣ `COUNT` и `AVG` считаются для каждой группы отдельно", "3️⃣ Каждая группа превращается в одну строку результата"], "note": ["💡 IT: Анна 120 000 + Мария 150 000 → 2 человека, среднее 135 000"]},
+    {"type": "code", "title": "Главное правило `GROUP BY`", "bad": {"code": "SELECT dept, name, COUNT(*)\nFROM employees\nGROUP BY dept;", "label": "❌ ошибка: в IT двое — чьё имя показать?"}, "body": ["В `SELECT` можно писать только:", "• столбцы из `GROUP BY`", "• агрегаты: `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`"]},
+    {"type": "code", "title": "`HAVING` — фильтр по группам", "code": "SELECT dept, COUNT(*) AS cnt\nFROM employees\nGROUP BY dept\nHAVING COUNT(*) > 1;", "table": {"columns": ["dept", "cnt"], "rows": [["IT", 2]]}, "body": ["Оставили только отделы, где больше одного человека"]},
+    {"type": "text", "title": "`WHERE` или `HAVING`?", "before": ["• `WHERE` фильтрует **строки** — до группировки", "• `HAVING` фильтрует **группы** — после неё"], "code": "SELECT dept, COUNT(*) AS cnt\nFROM employees\nWHERE salary > 85000   -- строки\nGROUP BY dept\nHAVING COUNT(*) > 1;   -- группы", "note": ["💡 Что можно отфильтровать в `WHERE` — фильтруй там. Так быстрее: в группировку попадёт меньше строк."]},
+    {"type": "cta", "title": "Уровень 2 почти пройден 💪", "comment": "Напиши запрос: отделы со средней зарплатой больше 100 000"}
+  ],
+  "caption": "GROUP BY и HAVING — итоги по группам за один запрос 📊\n\n• GROUP BY dept — одна строка на каждый отдел\n• COUNT, SUM, AVG считаются внутри группы\n• в SELECT — только столбцы из GROUP BY и агрегаты\n• WHERE фильтрует строки, HAVING — группы\n\nДомашка: напиши в комментариях запрос, который выводит отделы со средней зарплатой больше 100 000. Проверю 👇\n\n💾 Сохрани.\n➕ Подпишись @seniorsql — урок каждый будний день.\n✈️ Задачи с разбором — в Telegram (ссылка в профиле).\n\n#sql #groupby #sqlзапросы #изучениеsql #базыданных #аналитикданных #собеседование #postgresql #айти #программирование"
+}
