@@ -1,0 +1,12 @@
+{
+  "tag": "Найди ошибку · NULL",
+  "slides": [
+    {"type": "cover", "emoji": "🕵️", "title": "Найди ошибку: запрос вернул **0 строк**", "subtitle": "Хотели найти сотрудников без руководителя. Что не так?"},
+    {"type": "code", "title": "Таблица и запрос", "tableFirst": true, "table": {"label": "employees", "columns": ["id", "name", "manager_id"], "rows": [[1, "Анна", null], [2, "Олег", 1], [3, "Мария", 1], [4, "Иван", 3]]}, "code": "SELECT name\nFROM employees\nWHERE manager_id = NULL;", "body": ["Результат: **пусто**. Хотя у Анны руководителя нет. Подумай — и листай →"]},
+    {"type": "text", "title": "`NULL` — это «неизвестно»", "body": ["• `NULL` — не ноль и не пустая строка. Это «значения нет»", "• Любое сравнение с `NULL` даёт не TRUE, а **UNKNOWN**. Даже `NULL = NULL`", "• `WHERE` оставляет только строки, где условие TRUE. Поэтому 0 строк"]},
+    {"type": "code", "title": "Правильно: `IS NULL`", "good": {"code": "SELECT name\nFROM employees\nWHERE manager_id IS NULL;", "label": "✅ правильно"}, "table": {"columns": ["name"], "rows": [["Анна"]]}, "body": ["А у кого руководитель есть — `IS NOT NULL`"]},
+    {"type": "text", "title": "Ещё 2 ловушки с `NULL`", "body": ["❌ `WHERE manager_id <> 1` вернёт только Ивана. Анны не будет: её NULL тоже ни с чем не сравнивается", "❌ `NOT IN (1, NULL)` вернёт **0 строк** всегда. Если в списке есть NULL — бери `NOT EXISTS`", "✅ Заменить NULL на значение: `COALESCE(manager_id, 0)`"]},
+    {"type": "cta", "title": "Запомни: с `NULL` — только `IS`", "comment": "Попадался на эту ловушку? Напиши «да» в комментариях"}
+  ],
+  "caption": "Почему WHERE manager_id = NULL ничего не находит? 🕵️\n\nNULL — это «неизвестно». Любое сравнение с NULL даёт UNKNOWN, а не TRUE. Даже NULL = NULL.\n\n✅ Правильно: IS NULL / IS NOT NULL\n⚠️ <> тоже не видит строки с NULL\n⚠️ NOT IN со списком, где есть NULL, всегда возвращает 0 строк\n\nЭто один из самых частых вопросов на собеседовании.\n\n💾 Сохрани, чтобы не наступить на грабли.\n➕ Подпишись @seniorsql — урок каждый будний день.\n✈️ Задачи с разбором — в Telegram (ссылка в профиле).\n\n#sql #null #sqlзапросы #изучениеsql #базыданных #собеседование #аналитикданных #postgresql #айти #программирование"
+}
