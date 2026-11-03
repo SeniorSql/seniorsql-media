@@ -24,6 +24,8 @@ jobs:
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: "17841466669220590"
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: "@sqlsenior"
           POST: ${{ github.event.inputs.post }}
       - name: Save progress
         run: |
