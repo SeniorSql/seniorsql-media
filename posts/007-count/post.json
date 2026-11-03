@@ -1,0 +1,13 @@
+{
+  "tag": "Уровень 2 · COUNT",
+  "slides": [
+    {"type": "cover", "emoji": "🔢", "title": "`COUNT(*)`, `COUNT(col)`, `COUNT(DISTINCT)`: в чём разница?", "subtitle": "Один вопрос с собеса — три разных ответа"},
+    {"type": "text", "title": "Таблица заказов", "table": {"label": "orders", "columns": ["id", "client", "promo"], "rows": [[1, "Анна", "SALE10"], [2, "Олег", null], [3, "Анна", "SALE10"], [4, "Мария", "NEW"], [5, "Олег", null]]}, "body": ["5 заказов, у двух нет промокода"]},
+    {"type": "code", "title": "Четыре счётчика — один запрос", "code": "SELECT\n  COUNT(*)               AS all_rows,\n  COUNT(promo)           AS with_promo,\n  COUNT(DISTINCT promo)  AS promos,\n  COUNT(DISTINCT client) AS clients\nFROM orders;", "table": {"columns": ["all_rows", "with_promo", "promos", "clients"], "rows": [[5, 3, 2, 3]]}},
+    {"type": "text", "title": "Почему так", "body": ["• `COUNT(*)` — все строки, **5**", "• `COUNT(promo)` — строки, где promo не NULL, **3**", "• `COUNT(DISTINCT promo)` — разные промокоды: SALE10 и NEW, **2**", "• `COUNT(DISTINCT client)` — разные клиенты, **3**"]},
+    {"type": "code", "title": "Ловушка: `AVG` тоже пропускает `NULL`", "before": ["Бонусы трёх сотрудников: 100, NULL, 200"], "code": "AVG(bonus)              -- 150\nAVG(COALESCE(bonus, 0)) -- 100", "body": ["Если NULL значит «бонус 0» — заменяй через `COALESCE`, иначе среднее будет завышено"], "note": ["💡 `SUM`, `MIN`, `MAX` тоже не видят NULL. Только `COUNT(*)` считает всё."]},
+    {"type": "text", "title": "А `COUNT(1)` быстрее, чем `COUNT(*)`?", "body": ["Нет. Это миф. В современных базах `COUNT(1)` и `COUNT(*)` работают **одинаково**.", "Пиши `COUNT(*)` — так понятнее."]},
+    {"type": "cta", "title": "Следующий урок — `GROUP BY` и `HAVING`", "comment": "Какой вопрос по SQL тебе задавали на собесе? Разберу в следующих постах"}
+  ],
+  "caption": "COUNT(*) vs COUNT(col) vs COUNT(DISTINCT col) 🔢\n\n• COUNT(*) — все строки\n• COUNT(col) — только где col не NULL\n• COUNT(DISTINCT col) — уникальные значения без NULL\n\n⚠️ AVG, SUM, MIN, MAX тоже пропускают NULL — среднее может оказаться больше, чем ты ждёшь.\n💡 COUNT(1) не быстрее COUNT(*) — это миф.\n\nКакой вопрос по SQL задавали тебе на собеседовании? Пиши в комментариях — разберу 👇\n\n💾 Сохрани.\n➕ Подпишись @seniorsql — урок каждый будний день.\n✈️ Задачи с разбором — в Telegram (ссылка в профиле).\n\n#sql #sqlзапросы #изучениеsql #базыданных #собеседование #аналитикданных #postgresql #айти #программирование #обучениеайти"
+}
