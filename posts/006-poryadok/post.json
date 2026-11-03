@@ -1,0 +1,13 @@
+{
+  "tag": "Шпаргалка · Порядок выполнения",
+  "slides": [
+    {"type": "cover", "emoji": "🧠", "title": "В каком порядке база **на самом деле** выполняет запрос", "subtitle": "Поймёшь это — перестанешь ловить половину ошибок"},
+    {"type": "code", "title": "Пишем в одном порядке…", "code": "SELECT dept, COUNT(*) AS cnt\nFROM employees\nWHERE salary > 50000\nGROUP BY dept\nHAVING COUNT(*) > 1\nORDER BY cnt DESC\nLIMIT 10;"},
+    {"type": "text", "title": "…а выполняется в другом", "body": ["1️⃣ `FROM` / `JOIN` — берём таблицы", "2️⃣ `WHERE` — отбираем строки", "3️⃣ `GROUP BY` — собираем группы", "4️⃣ `HAVING` — отбираем группы", "5️⃣ `SELECT` — считаем столбцы и псевдонимы", "6️⃣ `ORDER BY` — сортируем", "7️⃣ `LIMIT` — обрезаем"], "note": ["💡 Это логический порядок. Оптимизатор может хитрить, но результат всегда такой, как будто шли по нему."]},
+    {"type": "code", "title": "Ошибка №1: псевдоним в `WHERE`", "bad": {"code": "SELECT name, salary * 12 AS year_salary\nFROM employees\nWHERE year_salary > 1000000;", "label": "❌ ошибка: year_salary не существует"}, "good": {"code": "SELECT name, salary * 12 AS year_salary\nFROM employees\nWHERE salary * 12 > 1000000;", "label": "✅ правильно"}, "body": ["`WHERE` (шаг 2) работает раньше `SELECT` (шаг 5)"]},
+    {"type": "code", "title": "Ошибка №2: агрегат в `WHERE`", "bad": {"code": "WHERE COUNT(*) > 1", "label": "❌ групп ещё нет"}, "good": {"code": "GROUP BY dept\nHAVING COUNT(*) > 1", "label": "✅ правильно"}, "body": ["Фильтр по `COUNT`, `SUM`, `AVG` — только в `HAVING`"]},
+    {"type": "text", "title": "3 правила на память", "body": ["❌ Псевдоним из `SELECT` нельзя в `WHERE`", "❌ Агрегаты нельзя в `WHERE` — для них `HAVING`", "✅ Псевдоним можно в `ORDER BY` — он идёт после `SELECT`"]},
+    {"type": "cta", "title": "Сохрани шпаргалку — на собесах это спрашивают постоянно", "comment": "Знал этот порядок раньше? Да / нет — в комментарии"}
+  ],
+  "caption": "Шпаргалка: порядок выполнения SQL-запроса 🧠\n\nПишем: SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT\nВыполняется: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT\n\nОтсюда:\n❌ псевдоним из SELECT нельзя использовать в WHERE\n❌ COUNT/SUM нельзя в WHERE — для этого HAVING\n✅ псевдоним можно в ORDER BY\n\n💾 Сохрани — это любимый вопрос на собеседованиях.\n➕ Подпишись @seniorsql — урок каждый будний день.\n✈️ Задачи с разбором — в Telegram (ссылка в профиле).\n\n#sql #шпаргалка #sqlзапросы #изучениеsql #базыданных #собеседование #аналитикданных #postgresql #айти #программирование"
+}
