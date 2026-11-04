@@ -29,9 +29,11 @@ jobs:
           TG_CHAT: "@sqlsenior"
           POST: ${{ github.event.inputs.post }}
       - name: Save progress
+        if: always()
         run: |
           git config user.name "seniorsql-bot"
           git config user.email "seniorsql-bot@users.noreply.github.com"
-          git add published.txt
+          touch published.txt telegram_sent.txt
+          git add published.txt telegram_sent.txt
           git commit -m "published" || exit 0
           git push
