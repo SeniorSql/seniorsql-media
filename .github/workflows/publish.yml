@@ -9,6 +9,10 @@ on:
       post:
         description: "Папка поста (пусто = следующий в очереди)"
         required: false
+      telegram:
+        description: "Отправлять задачу в Telegram (false = только Instagram)"
+        required: false
+        default: "true"
 
 permissions:
   contents: write
@@ -25,7 +29,7 @@ jobs:
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: "17841466669220590"
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_TOKEN: ${{ github.event.inputs.telegram != 'false' && secrets.TG_TOKEN || '' }}
           TG_CHAT: "@sqlsenior"
           POST: ${{ github.event.inputs.post }}
       - name: Save progress
