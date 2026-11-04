@@ -5,8 +5,9 @@
 import json, os, sys, time, pathlib, urllib.request, urllib.parse, urllib.error
 
 API = "https://graph.facebook.com/v23.0"
-TOKEN = os.environ["IG_TOKEN"]
-IG = os.environ["IG_USER_ID"]
+TOKEN = os.environ.get("IG_TOKEN", "")
+IG = os.environ.get("IG_USER_ID", "")
+BUFFER = os.environ.get("BUFFER_TOKEN", "").strip()  # если есть — Instagram публикуется через Buffer
 REPO = os.environ["GITHUB_REPOSITORY"]
 BRANCH = os.environ.get("GITHUB_REF_NAME", "main")
 
@@ -74,6 +75,47 @@ def instagram(post):
     return call("GET", media_id, fields="permalink").get("permalink", "")
 
 
+def buffer_call(query, variables=None):
+    body = json.dumps({"query": query, "variables": variables or {}}).encode()
+    req = urllib.request.Request("https://api.buffer.com", data=body, method="POST", headers={
+        "Content-Type": "application/json", "Authorization": f"Bearer {BUFFER}"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            res = json.load(r)
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f"Ошибка Buffer API: {e.code} {e.read().decode()}")
+    if res.get("errors"):
+        raise RuntimeError(f"Ошибка Buffer API: {res['errors']}")
+    return res["data"]
+
+
+def buffer_instagram(post):
+    meta = load(post)
+    images = sorted(post.glob("*.jpg"))
+    if not 2 <= len(images) <= 10:
+        raise RuntimeError(f"{post.name}: в карусели должно быть 2–10 картинок, а их {len(images)}")
+    orgs = buffer_call("query { account { organizations { id } } }")["account"]["organizations"]
+    channel = None
+    for org in orgs:
+        chans = buffer_call("query($o: OrganizationId!) { channels(input: {organizationId: $o}) { id service name } }",
+                            {"o": org["id"]})["channels"]
+        channel = next((c for c in chans if c["service"].lower() == "instagram"), None)
+        if channel:
+            break
+    if not channel:
+        raise RuntimeError("В Buffer не подключён Instagram")
+    urls = [f"https://raw.githubusercontent.com/{REPO}/{BRANCH}/{img.as_posix()}" for img in images]
+    res = buffer_call("""mutation($input: CreatePostInput!) { createPost(input: $input) {
+        ... on PostActionSuccess { post { id status } }
+        ... on MutationError { message } } }""", {"input": {
+        "text": meta["caption"], "channelId": channel["id"], "schedulingType": "automatic", "mode": "shareNow",
+        "assets": [{"image": {"url": u}} for u in urls],
+        "metadata": {"instagram": {"type": "post", "shouldShareToFeed": True}}}})["createPost"]
+    if "message" in res:
+        raise RuntimeError(f"Buffer отказал: {res['message']}")
+    return f"Buffer, пост {res['post']['id']} ({res['post']['status']})"
+
+
 failed = False
 
 # 1. Instagram
@@ -83,7 +125,7 @@ if not ig_queue:
 else:
     post = ig_queue[0]
     try:
-        link = instagram(post)
+        link = buffer_instagram(post) if BUFFER else instagram(post)
         mark(ig_file, post.name)
         print(f"Instagram: опубликовано {post.name} {link}")
     except Exception as e:
