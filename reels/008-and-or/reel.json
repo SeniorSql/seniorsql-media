@@ -1,0 +1,15 @@
+{
+  "ready": true,
+  "series": "SQL-задачка #8",
+  "emoji": "🛒",
+  "hook": "Хотели товары **дешевле 100**. Что нашли?",
+  "badge": "Классика бага в WHERE",
+  "question": "Что выведет запрос?",
+  "table": {"name": "products", "columns": ["name", "category", "price"], "rows": [["Ручка", "office", 50], ["Книга", "books", 900], ["Лампа", "home", 300]]},
+  "code": "SELECT name\nFROM products\nWHERE category = 'books'\n   OR category = 'home'\n  AND price < 100;",
+  "options": ["Книга", "Ничего", "Книга, Лампа"],
+  "correct": 0,
+  "explain": "AND выполняется раньше OR. Нужны скобки: `(… OR …) AND price < 100`",
+  "check": {"sql": "SELECT string_agg(name, ', ') FROM products WHERE category = 'books' OR category = 'home' AND price < 100", "answer": "Книга"},
+  "caption": "Дешевле 100 нет ни одной книги и лампы… но запрос что-то нашёл 🛒\n\nA, B или C? Пиши в комментах 👇\n\nПравило: смешиваешь AND и OR — ставь скобки. Всегда.\n\n➕ Подпишись @seniorsql — задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #sqlзадачи #where #аналитикданных #собеседование #айти #программирование #postgresql"
+}
