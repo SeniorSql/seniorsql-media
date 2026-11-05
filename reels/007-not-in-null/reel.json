@@ -1,0 +1,15 @@
+{
+  "ready": true,
+  "series": "SQL-задачка #7",
+  "emoji": "💀",
+  "hook": "Самая коварная ловушка: **NOT IN**",
+  "badge": "Валит даже синьоров",
+  "question": "Сколько строк найдёт запрос?",
+  "table": {"name": "users", "columns": ["id", "name"], "rows": [[1, "Анна"], [2, "Олег"], [3, "Мария"]]},
+  "code": "SELECT COUNT(*)\nFROM users\nWHERE id NOT IN (1, NULL);",
+  "options": ["2", "Ошибку", "0"],
+  "correct": 2,
+  "explain": "Сравнение с NULL — «неизвестно», и NOT IN не пропускает ни одну строку. Бери `NOT EXISTS`",
+  "check": {"sql": "SELECT COUNT(*) FROM users WHERE id NOT IN (1, NULL)", "answer": "0"},
+  "caption": "Очевидно же 2? 💀\n\nПиши ответ в комментах — A, B или C 👇\n\nВ жизни NULL прилетает из подзапроса: WHERE id NOT IN (SELECT manager_id FROM ...) — и отчёт пустой. Сохрани 💾\n\n➕ Подпишись @seniorsql — задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #null #sqlзадачи #собеседование #postgresql #аналитикданных #айти #программирование"
+}
