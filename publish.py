@@ -116,7 +116,51 @@ def buffer_instagram(post):
     return f"Buffer, пост {res['post']['id']} ({res['post']['status']})"
 
 
+PAGES = "https://seniorsql.github.io/seniorsql-media"  # mp4 отдаём с GitHub Pages (правильный тип video/mp4)
+reels_root = pathlib.Path("reels")
+reels_file = pathlib.Path("reels_published.txt")
+
+
+def buffer_channel():
+    for org in buffer_call("query { account { organizations { id } } }")["account"]["organizations"]:
+        chans = buffer_call("query($o: OrganizationId!) { channels(input: {organizationId: $o}) { id service name } }",
+                            {"o": org["id"]})["channels"]
+        ch = next((c for c in chans if c["service"].lower() == "instagram"), None)
+        if ch:
+            return ch
+    raise RuntimeError("В Buffer не подключён Instagram")
+
+
+def buffer_reel(reel):
+    meta = json.loads((reel / "reel.json").read_text(encoding="utf-8"))
+    base = f"{PAGES}/reels/{reel.name}"
+    res = buffer_call("""mutation($input: CreatePostInput!) { createPost(input: $input) {
+        ... on PostActionSuccess { post { id status } }
+        ... on MutationError { message } } }""", {"input": {
+        "text": meta["caption"], "channelId": buffer_channel()["id"], "schedulingType": "automatic", "mode": "shareNow",
+        "assets": [{"video": {"url": f"{base}/reel.mp4", "thumbnailUrl": f"{base}/cover.jpg"}}],
+        "metadata": {"instagram": {"type": "reel", "shouldShareToFeed": True}}}})["createPost"]
+    if "message" in res:
+        raise RuntimeError(f"Buffer отказал: {res['message']}")
+    return f"Buffer, пост {res['post']['id']} ({res['post']['status']})"
+
+
 failed = False
+
+# 0. Reels — следующий готовый ролик ("ready": true), если этот запуск — слот для Reels
+if BUFFER and os.environ.get("REEL_SLOT") == "true" and reels_root.exists():
+    sent = done(reels_file)
+    ready = [r for r in sorted(reels_root.iterdir()) if r.is_dir() and r.name not in sent and (r / "reel.json").exists()
+             and json.loads((r / "reel.json").read_text(encoding="utf-8")).get("ready")]
+    if not ready:
+        print("Reels: очередь пуста")
+    else:
+        try:
+            print(f"Reels: опубликовано {ready[0].name} {buffer_reel(ready[0])}")
+            mark(reels_file, ready[0].name)
+        except Exception as e:
+            print(f"::error::Reels ({ready[0].name}): {e}")
+            failed = True
 
 # 1. Instagram
 ig_queue = [root / os.environ["POST"]] if os.environ.get("POST") else queue(done(ig_file))
