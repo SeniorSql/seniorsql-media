@@ -1,0 +1,15 @@
+{
+  "ready": true,
+  "series": "SQL-задачка #9",
+  "emoji": "🗂️",
+  "hook": "GROUP BY и **NULL**: сколько будет групп?",
+  "badge": "Частый вопрос на собесе",
+  "question": "Сколько строк вернёт запрос?",
+  "table": {"name": "clients", "columns": ["name", "city"], "rows": [["Анна", "Москва"], ["Олег", null], ["Мария", null], ["Иван", "Москва"]]},
+  "code": "SELECT city, COUNT(*)\nFROM clients\nGROUP BY city;",
+  "options": ["1", "3", "2"],
+  "correct": 2,
+  "explain": "Москва — 2 и одна общая группа NULL — 2. В GROUP BY все NULL попадают в одну группу",
+  "check": {"sql": "SELECT COUNT(*) FROM (SELECT city, COUNT(*) FROM clients GROUP BY city) t", "answer": "2"},
+  "caption": "NULL ≠ NULL… но в GROUP BY они вместе 🗂️\n\nСколько строк — A, B или C? Пиши в комментах 👇\n\nВ отчётах эта группа обычно подписана как «(пусто)». Сохрани 💾\n\n➕ Подпишись @seniorsql — SQL-задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #groupby #null #sqlзадачи #аналитикданных #собеседование #айти #postgresql"
+}
