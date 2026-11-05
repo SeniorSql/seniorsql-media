@@ -120,7 +120,9 @@ failed = False
 
 # 1. Instagram
 ig_queue = [root / os.environ["POST"]] if os.environ.get("POST") else queue(done(ig_file))
-if not ig_queue:
+if os.environ.get("IG_PAUSE") == "1" and not os.environ.get("POST"):
+    print("Instagram: карусели на паузе (IG_PAUSE=1)")
+elif not ig_queue:
     print("Instagram: очередь пуста — нет готовых постов")
 else:
     post = ig_queue[0]
