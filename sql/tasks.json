@@ -1,0 +1,137 @@
+{
+  "_help": "Задачи для тренажёра, Telegram и слайда «Задача». Таблицы создаются автоматически по rows (типы угадываются: целые → INT, дробные → NUMERIC, 2024-01-31 → DATE, 2024-01-31 10:00 → TIMESTAMP, остальное → TEXT). expected — что должно получиться (проверяется самотестом sql/index.html#selftest). check — запрос для проверки задач на изменение данных (DELETE/UPDATE). ordered: true — порядок строк важен.",
+  "tasks": [
+    {
+      "id": "002", "topic": "SELECT", "level": 1,
+      "title": "Название и цена",
+      "tables": [{"name": "products", "columns": ["id", "title", "price", "category"], "rows": [[1, "Ручка", 50, "office"], [2, "Книга SQL", 900, "books"], [3, "Кружка", 350, "home"], [4, "Блокнот", 120, "office"]]}],
+      "question": "Выведи только название и цену всех товаров.",
+      "expected": {"columns": ["title", "price"], "rows": [["Ручка", 50], ["Книга SQL", 900], ["Кружка", 350], ["Блокнот", 120]]},
+      "solution": "SELECT title, price\nFROM products;",
+      "hint": "После SELECT перечисли нужные столбцы через запятую.",
+      "explain": "SELECT выбирает столбцы, FROM — таблицу. Лишние столбцы не берём."
+    },
+    {
+      "id": "003", "topic": "WHERE", "level": 1,
+      "title": "Не из IT, зарплата 80–100 тыс.",
+      "tables": [{"name": "employees", "columns": ["id", "name", "dept", "salary"], "rows": [[1, "Анна", "IT", 120000], [2, "Олег", "Sales", 90000], [3, "Мария", "IT", 150000], [4, "Иван", "HR", 80000], [5, "Ольга", "Sales", 105000]]}],
+      "question": "Выведи имя и зарплату сотрудников **не из IT** с зарплатой от 80 000 до 100 000 включительно.",
+      "expected": {"columns": ["name", "salary"], "rows": [["Олег", 90000], ["Иван", 80000]]},
+      "solution": "SELECT name, salary\nFROM employees\nWHERE dept <> 'IT'\n  AND salary BETWEEN 80000 AND 100000;",
+      "hint": "Два условия соединяются через AND. «Не равно» — это <>. Диапазон — BETWEEN.",
+      "explain": "BETWEEN включает обе границы, поэтому Иван с 80 000 попал в результат."
+    },
+    {
+      "id": "004", "topic": "NULL", "level": 1,
+      "title": "Заказы не с SALE10",
+      "tables": [{"name": "orders", "columns": ["id", "client", "promo"], "rows": [[1, "Анна", "SALE10"], [2, "Олег", null], [3, "Мария", "WINTER"], [4, "Иван", "SALE10"], [5, "Ольга", null]]}],
+      "question": "Выведи id и клиента для заказов, где промокод **не SALE10**. Заказы без промокода (NULL) тоже нужны.",
+      "expected": {"columns": ["id", "client"], "rows": [[2, "Олег"], [3, "Мария"], [5, "Ольга"]]},
+      "solution": "SELECT id, client\nFROM orders\nWHERE promo <> 'SALE10'\n   OR promo IS NULL;",
+      "hint": "Условие promo <> 'SALE10' не находит строки, где promo = NULL. Их нужно добавить отдельно.",
+      "explain": "Любое сравнение с NULL даёт «неизвестно», и WHERE такую строку отбрасывает. Поэтому добавляем OR promo IS NULL."
+    },
+    {
+      "id": "005", "topic": "ORDER BY", "level": 1,
+      "title": "Две самые дешёвые книги",
+      "tables": [{"name": "products", "columns": ["title", "price", "category"], "rows": [["Ручка", 50, "office"], ["Детектив", 400, "books"], ["Словарь", 300, "books"], ["Азбука", 300, "books"], ["Кружка", 350, "home"], ["Роман", 500, "books"]]}],
+      "question": "Выведи название и цену **двух самых дешёвых** книг (category = 'books'). Если цена одинаковая — по названию от А до Я.",
+      "expected": {"columns": ["title", "price"], "rows": [["Азбука", 300], ["Словарь", 300]]},
+      "ordered": true,
+      "solution": "SELECT title, price\nFROM products\nWHERE category = 'books'\nORDER BY price, title\nLIMIT 2;",
+      "hint": "Сначала отфильтруй книги, потом отсортируй по двум столбцам и возьми 2 строки через LIMIT.",
+      "explain": "ORDER BY price, title: сначала по цене, а при равной цене — по названию. LIMIT 2 оставляет первые две строки."
+    },
+    {
+      "id": "006", "topic": "Порядок выполнения", "level": 1,
+      "title": "Годовая зарплата",
+      "tables": [{"name": "employees", "columns": ["id", "name", "dept", "salary"], "rows": [[1, "Анна", "IT", 120000], [2, "Олег", "Sales", 90000], [3, "Мария", "IT", 150000], [4, "Иван", "HR", 80000], [5, "Ольга", "Sales", 105000]]}],
+      "question": "Выведи имя и годовую зарплату (salary × 12) сотрудников, у которых годовая зарплата **больше 1 300 000**.",
+      "expected": {"columns": ["name", "year_salary"], "rows": [["Анна", 1440000], ["Мария", 1800000]]},
+      "solution": "SELECT name, salary * 12 AS year_salary\nFROM employees\nWHERE salary * 12 > 1300000;",
+      "hint": "Псевдоним из SELECT нельзя использовать в WHERE: WHERE выполняется раньше SELECT. Повтори выражение salary * 12.",
+      "explain": "Порядок выполнения: FROM → WHERE → SELECT. Когда работает WHERE, псевдонима year_salary ещё не существует."
+    },
+    {
+      "id": "007", "topic": "COUNT", "level": 2,
+      "title": "Клиенты с промокодом",
+      "tables": [{"name": "orders", "columns": ["id", "client", "promo"], "rows": [[1, "Анна", "SALE10"], [2, "Олег", null], [3, "Анна", "SALE10"], [4, "Мария", "NEW"], [5, "Олег", null]]}],
+      "question": "Посчитай, сколько **разных клиентов** хотя бы раз использовали промокод.",
+      "expected": {"columns": ["count"], "rows": [[2]]},
+      "solution": "SELECT COUNT(DISTINCT client)\nFROM orders\nWHERE promo IS NOT NULL;",
+      "hint": "Оставь только заказы с промокодом (IS NOT NULL) и посчитай уникальных клиентов: COUNT(DISTINCT ...).",
+      "explain": "Анна и Мария — 2 клиента. Без WHERE получилось бы 3: посчитался бы и Олег."
+    },
+    {
+      "id": "008", "topic": "GROUP BY", "level": 2,
+      "title": "Отделы, где больше одного человека",
+      "tables": [{"name": "employees", "columns": ["id", "name", "dept", "salary"], "rows": [[1, "Анна", "IT", 120000], [2, "Олег", "Sales", 90000], [3, "Мария", "IT", 150000], [4, "Иван", "HR", 80000], [5, "Ольга", "Sales", 105000]]}],
+      "question": "Выведи отдел и число сотрудников в нём. Только отделы, где сотрудников **больше одного**.",
+      "expected": {"columns": ["dept", "count"], "rows": [["IT", 2], ["Sales", 2]]},
+      "solution": "SELECT dept, COUNT(*)\nFROM employees\nGROUP BY dept\nHAVING COUNT(*) > 1;",
+      "hint": "Сгруппируй по отделу (GROUP BY). Фильтр по количеству — в HAVING, а не в WHERE.",
+      "explain": "WHERE фильтрует строки до группировки, HAVING — готовые группы. Условие на COUNT(*) возможно только в HAVING."
+    },
+    {
+      "id": "009", "topic": "DELETE", "level": 2,
+      "title": "Удали тестовые заказы",
+      "tables": [{"name": "orders", "columns": ["id", "client", "amount"], "rows": [[1, "Анна", 500], [2, "test", 1], [3, "Олег", 700], [4, "test", 1], [5, "Мария", 300]]}],
+      "question": "Удали из таблицы orders все тестовые заказы (client = 'test'). Остальные заказы не трогай.",
+      "check": "SELECT id, client FROM orders ORDER BY id;",
+      "expected": {"label": "orders после удаления", "columns": ["id", "client"], "rows": [[1, "Анна"], [3, "Олег"], [5, "Мария"]]},
+      "solution": "DELETE FROM orders\nWHERE client = 'test';",
+      "hint": "Нужен DELETE с условием WHERE. У TRUNCATE условия нет — он удалит всё.",
+      "explain": "В жизни перед DELETE сначала запусти SELECT с тем же WHERE и проверь, что удалишь именно эти строки."
+    },
+    {
+      "id": "010", "topic": "DISTINCT", "level": 2,
+      "title": "Страницы без повторов",
+      "tables": [{"name": "visits", "columns": ["user_id", "page"], "rows": [[1, "home"], [1, "home"], [1, "cart"], [2, "home"], [3, null]]}],
+      "question": "Выведи список страниц, которые посещали, **без повторов**. Пустые значения (NULL) не нужны.",
+      "expected": {"columns": ["page"], "rows": [["cart"], ["home"]]},
+      "solution": "SELECT DISTINCT page\nFROM visits\nWHERE page IS NOT NULL;",
+      "hint": "DISTINCT убирает повторы. NULL отсекаем через WHERE ... IS NOT NULL.",
+      "explain": "Без WHERE в ответе была бы ещё строка NULL: для DISTINCT это отдельное значение."
+    },
+    {
+      "id": "011", "topic": "CASE", "level": 2,
+      "title": "Размер заказа",
+      "tables": [{"name": "orders", "columns": ["id", "amount"], "rows": [[1, 500], [2, 1500], [3, 3000], [4, null]]}],
+      "question": "Выведи id и размер заказа: меньше 1 000 — 'мелкий', от 1 000 до 2 999 — 'средний', от 3 000 — 'крупный'. Если суммы нет — 'нет суммы'.",
+      "expected": {"columns": ["id", "size"], "rows": [[1, "мелкий"], [2, "средний"], [3, "крупный"], [4, "нет суммы"]]},
+      "solution": "SELECT id,\n  CASE\n    WHEN amount IS NULL THEN 'нет суммы'\n    WHEN amount >= 3000 THEN 'крупный'\n    WHEN amount >= 1000 THEN 'средний'\n    ELSE 'мелкий'\n  END AS size\nFROM orders;",
+      "hint": "CASE проверяет WHEN сверху вниз и берёт первое подходящее. Проверку на NULL поставь первой.",
+      "explain": "Если NULL не проверить отдельно, заказ 4 попадёт в ELSE и станет «мелким» — это ошибка."
+    },
+    {
+      "id": "012", "topic": "Найди ошибку", "level": 2,
+      "title": "Процент богатых по отделам",
+      "tables": [{"name": "employees", "columns": ["name", "dept", "salary"], "rows": [["Анна", "IT", 120000], ["Мария", "IT", 150000], ["Пётр", "IT", 90000], ["Олег", "Sales", 90000], ["Ольга", "Sales", 105000], ["Иван", "HR", 80000]]}],
+      "question": "Для каждого отдела выведи, сколько **процентов** сотрудников получают больше 100 000. Округли до целого.",
+      "expected": {"columns": ["dept", "pct"], "rows": [["HR", 0], ["IT", 67], ["Sales", 50]]},
+      "solution": "SELECT dept,\n  ROUND(100.0 * SUM(CASE WHEN salary > 100000 THEN 1 ELSE 0 END) / COUNT(*)) AS pct\nFROM employees\nGROUP BY dept;",
+      "hint": "В PostgreSQL целое делится на целое без остатка: 2 / 3 = 0. Умножай на 100.0, а не на 100. И не забудь ELSE 0.",
+      "explain": "Без ELSE 0 у отдела HR получится NULL вместо 0. А без 100.0 доли превратятся в 0."
+    },
+    {
+      "id": "013", "topic": "Даты", "level": 2,
+      "title": "Выручка за февраль",
+      "tables": [{"name": "orders", "columns": ["id", "created_at", "amount"], "rows": [[1, "2024-01-31 23:10", 500], [2, "2024-02-01 09:00", 700], [3, "2024-02-29 18:45", 300], [4, "2024-03-01 00:00", 900]]}],
+      "question": "Посчитай выручку (сумму amount) за **февраль 2024**.",
+      "expected": {"columns": ["sum"], "rows": [[1000]]},
+      "solution": "SELECT SUM(amount)\nFROM orders\nWHERE created_at >= '2024-02-01'\n  AND created_at < '2024-03-01';",
+      "hint": "Бери диапазон «от 1 февраля включительно до 1 марта не включая». BETWEEN с датами здесь опасен.",
+      "explain": "BETWEEN '2024-02-01' AND '2024-02-29' потеряет заказ 3: он в 18:45, а граница — 29 февраля в 00:00."
+    },
+    {
+      "id": "014", "topic": "Дубликаты", "level": 2,
+      "title": "Повторяющиеся email",
+      "tables": [{"name": "users", "columns": ["id", "email"], "rows": [[1, "anna@mail.ru"], [2, "oleg@mail.ru"], [3, "anna@mail.ru"], [4, "ivan@mail.ru"], [5, "oleg@mail.ru"], [6, "anna@mail.ru"]]}],
+      "question": "Выведи email, которые встречаются **больше одного раза**, и сколько раз каждый встречается.",
+      "expected": {"columns": ["email", "count"], "rows": [["anna@mail.ru", 3], ["oleg@mail.ru", 2]]},
+      "solution": "SELECT email, COUNT(*)\nFROM users\nGROUP BY email\nHAVING COUNT(*) > 1;",
+      "hint": "Сгруппируй по email и оставь группы, где COUNT(*) > 1.",
+      "explain": "Это задача №1 на собеседованиях аналитиков. Следующий вопрос обычно: «А теперь удали дубли»."
+    }
+  ]
+}
