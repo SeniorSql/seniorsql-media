@@ -1,0 +1,14 @@
+{
+  "series": "SQL-задачка #3",
+  "emoji": "🤯",
+  "hook": "Склеиваем строку с **NULL**. Что получится?",
+  "badge": "Даже миддлы путаются",
+  "question": "Что выведет запрос в PostgreSQL?",
+  "table": {"name": "users", "columns": ["first_name", "last_name"], "rows": [["Анна", "Смирнова"], ["Олег", null]]},
+  "code": "SELECT first_name\n    || ' ' || last_name\nFROM users\nWHERE first_name = 'Олег';",
+  "options": ["`Олег`", "`NULL`", "Ошибку"],
+  "correct": 1,
+  "explain": "Любая склейка с NULL даёт NULL. Спасает `COALESCE(last_name, '')` или `CONCAT()`",
+  "check": {"sql": "SELECT coalesce(first_name || ' ' || last_name, 'NULL') FROM users WHERE first_name = 'Олег'", "answer": "NULL"},
+  "caption": "Олег есть, имя есть… а результат? 🤯\n\nA, B или C — пиши в комментах, потом проверь себя в конце видео 👇\n\nЧасто ломает отчёты: «ФИО» внезапно пустые у половины клиентов.\n\n➕ Подпишись @seniorsql — SQL-задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #sqlзадачи #postgresql #аналитикданных #собеседование #айти #программирование #базыданных"
+}
