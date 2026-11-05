@@ -1,4 +1,5 @@
 {
+  "ready": true,
   "series": "SQL-задачка #1",
   "emoji": "🤔",
   "hook": "Что выведет этот **COUNT**?",
