@@ -45,9 +45,10 @@ def task_text(task_id):
     parts += [f"✅ <b>Должно получиться{': ' + esc(label) if label else ''}:</b>", grid(t["expected"]["columns"], t["expected"]["rows"])]
     if t.get("hint"):
         parts += [f"💡 Подсказка: <tg-spoiler>{esc(plain(t['hint']))}</tg-spoiler>", ""]
-    parts += [f"🔒 Ответ: <tg-spoiler>{esc(' '.join(t['solution'].split()))}</tg-spoiler>"]
+    answer = " ".join(t["solution"].split())
     if t.get("explain"):
-        parts += [md(t["explain"])]
+        answer += "\n" + plain(t["explain"])
+    parts += [f"🔒 Ответ: <tg-spoiler>{esc(answer)}</tg-spoiler>"]
     parts += ["", "✍️ Напиши запрос в тренажёре — он сам проверит, верно ли 👇"]
     return "\n".join(parts), TRAINER + "#" + t["id"]
 
