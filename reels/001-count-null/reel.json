@@ -1,0 +1,14 @@
+{
+  "series": "SQL-задачка #1",
+  "emoji": "🤔",
+  "hook": "Что выведет этот **COUNT**?",
+  "badge": "7 из 10 джунов ошибаются",
+  "question": "Что выведет запрос?",
+  "table": {"name": "orders", "columns": ["id", "promo"], "rows": [[1, "SALE"], [2, null], [3, "WINTER"], [4, null], [5, "SALE"]]},
+  "code": "SELECT COUNT(promo)\nFROM orders;",
+  "options": ["5", "3", "2"],
+  "correct": 1,
+  "explain": "`COUNT(столбец)` не считает NULL. А `COUNT(*)` вернул бы 5",
+  "check": {"sql": "SELECT COUNT(promo) FROM orders", "answer": "3"},
+  "caption": "Простой COUNT — а ошибаются почти все 🤔\n\nНапиши в комментах A, B или C — и только потом досматривай до ответа 👇\n\nЗадача каждый день. Подпишись @seniorsql, чтобы прокачать SQL до уровня Senior 🚀\n\n✍️ Тренажёр, где можно решать самому — ссылка в профиле\n\n#sql #sqlзадачи #аналитикданных #собеседование #программирование #айти #postgresql #базыданных"
+}
