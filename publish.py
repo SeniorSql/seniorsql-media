@@ -138,7 +138,8 @@ def buffer_reel(reel):
         ... on PostActionSuccess { post { id status } }
         ... on MutationError { message } } }""", {"input": {
         "text": meta["caption"], "channelId": buffer_channel()["id"], "schedulingType": "automatic", "mode": "shareNow",
-        "assets": [{"video": {"url": f"{base}/reel.mp4", "thumbnailUrl": f"{base}/cover.jpg"}}],
+        # обложка — кадр-крючок на 0,5 с (свою картинку соцсети не принимают)
+        "assets": [{"video": {"url": f"{base}/reel.mp4", "metadata": {"thumbnailOffset": 500}}}],
         "metadata": {"instagram": {"type": "reel", "shouldShareToFeed": True}}}})["createPost"]
     if "message" in res:
         raise RuntimeError(f"Buffer отказал: {res['message']}")
