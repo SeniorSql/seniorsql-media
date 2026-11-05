@@ -1,0 +1,20 @@
+name: check
+# Проверка без публикации: собирает тексты задач для Telegram и печатает их в лог
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Telegram task texts
+        run: |
+          python3 -m py_compile publish.py telegram.py
+          python3 - <<'EOF'
+          import json, telegram
+          for t in json.load(open("sql/tasks.json", encoding="utf-8"))["tasks"]:
+              text, url = telegram.task_text(t["id"])
+              print("=" * 40, t["id"], len(text), "символов", url)
+              print(text)
+          EOF
