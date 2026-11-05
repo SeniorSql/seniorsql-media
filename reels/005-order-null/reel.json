@@ -1,0 +1,15 @@
+{
+  "ready": true,
+  "series": "SQL-задачка #5",
+  "emoji": "🏆",
+  "hook": "Кто получит **самый большой** бонус?",
+  "badge": "Ловушка в рейтингах",
+  "question": "Что выведет запрос в PostgreSQL?",
+  "table": {"name": "staff", "columns": ["name", "bonus"], "rows": [["Анна", 100], ["Олег", null], ["Мария", 300]]},
+  "code": "SELECT name\nFROM staff\nORDER BY bonus DESC\nLIMIT 1;",
+  "options": ["Мария", "Анна", "Олег"],
+  "correct": 2,
+  "explain": "В PostgreSQL при DESC значения NULL идут первыми. Лечится: `ORDER BY bonus DESC NULLS LAST`",
+  "check": {"sql": "SELECT name FROM staff ORDER BY bonus DESC LIMIT 1", "answer": "Олег"},
+  "caption": "Топ-1 по бонусу — это же Мария? 🏆\n\nОтвечай в комментах: A, B или C 👇\n\nТак «лучшим сотрудником месяца» в отчёте становится человек без бонуса 😅\n\n➕ Подпишись @seniorsql — задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #postgresql #sqlзадачи #orderby #аналитикданных #собеседование #айти #программирование"
+}
