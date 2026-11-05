@@ -75,6 +75,8 @@ def send(tg, pin=False):
         extra = {"reply_markup": {"inline_keyboard": [[button]]}} if button else {}
         msg = call("sendMessage", chat_id=CHAT, text=text, parse_mode="HTML", link_preview_options={"is_disabled": True}, **extra)
         if pin:
+            if tg.get("unpin_old"):
+                call("unpinAllChatMessages", chat_id=CHAT)  # старое закреплённое сообщение снимаем
             call("pinChatMessage", chat_id=CHAT, message_id=msg["message_id"], disable_notification=True)
     quiz = tg.get("quiz")
     if quiz:
