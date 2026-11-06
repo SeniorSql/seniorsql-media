@@ -1,0 +1,19 @@
+name: tg-edit
+# Ручной запуск: отправить или исправить один пост Telegram из файла (например telegram/welcome.json с полем "edit")
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "Файл поста"
+        default: "telegram/welcome.json"
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Telegram
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: "@sqlsenior"
+        run: python3 telegram.py "${{ github.event.inputs.file }}"
