@@ -71,6 +71,13 @@ def send(tg, pin=False):
     if tg.get("task"):
         text, url = task_text(tg["task"])
         button = {"text": "✍️ Решить в тренажёре", "url": url}
+    if text and tg.get("edit"):
+        # "edit": номер сообщения — исправить уже опубликованный пост, а не слать новый
+        extra = {"reply_markup": {"inline_keyboard": [[button]]}} if button else {}
+        call("editMessageText", chat_id=CHAT, message_id=tg["edit"], text=text, parse_mode="HTML",
+             link_preview_options={"is_disabled": True}, **extra)
+        print(f"Telegram: исправлено сообщение {tg['edit']} в {CHAT}")
+        return
     if text:
         extra = {"reply_markup": {"inline_keyboard": [[button]]}} if button else {}
         msg = call("sendMessage", chat_id=CHAT, text=text, parse_mode="HTML", link_preview_options={"is_disabled": True}, **extra)
