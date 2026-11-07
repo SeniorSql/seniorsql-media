@@ -6,3 +6,4 @@
 006-poryadok
 007-count
 008-group-by
+009-delete-truncate-drop
