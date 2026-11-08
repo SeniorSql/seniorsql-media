@@ -8,3 +8,4 @@
 008-group-by
 009-delete-truncate-drop
 010-distinct
+011-case
