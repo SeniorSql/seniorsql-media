@@ -7,3 +7,4 @@
 007-count
 008-group-by
 009-delete-truncate-drop
+010-distinct
