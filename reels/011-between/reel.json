@@ -1,0 +1,15 @@
+{
+  "ready": true,
+  "series": "SQL-задачка #11",
+  "emoji": "📏",
+  "hook": "Цена **от 100 до 200**. Сколько заказов?",
+  "badge": "Спорят даже опытные",
+  "question": "Что выведет запрос?",
+  "table": {"name": "orders", "columns": ["id", "price"], "rows": [[1, 100], [2, 150], [3, 200], [4, 250]]},
+  "code": "SELECT COUNT(*)\nFROM orders\nWHERE price BETWEEN\n      100 AND 200;",
+  "options": ["1", "2", "3"],
+  "correct": 2,
+  "explain": "BETWEEN включает обе границы: 100 и 200 тоже попадают. Это то же, что `>= 100 AND <= 200`",
+  "check": {"sql": "SELECT COUNT(*) FROM orders WHERE price BETWEEN 100 AND 200", "answer": "3"},
+  "caption": "Края входят или нет? 📏\n\nA, B или C — пиши в комментах 👇\n\nЗапомни: BETWEEN всегда включает обе границы. Сохрани 💾\n\n➕ Подпишись @seniorsql — SQL-задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #between #sqlзадачи #sqlдляначинающих #аналитикданных #айти #программирование #postgresql"
+}
