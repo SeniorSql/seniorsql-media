@@ -5,3 +5,4 @@
 005-order-null
 006-avg-null
 007-not-in-null
+008-and-or
