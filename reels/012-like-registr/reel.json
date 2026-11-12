@@ -1,0 +1,15 @@
+{
+  "ready": true,
+  "series": "SQL-задачка #12",
+  "emoji": "🔤",
+  "hook": "Ищем имена **на букву «а»**. Кого найдём?",
+  "badge": "Частая ошибка новичков",
+  "question": "Что выведет запрос в PostgreSQL?",
+  "table": {"name": "users", "columns": ["name"], "rows": [["Анна"], ["алина"], ["Олег"], ["Арсений"]]},
+  "code": "SELECT name\nFROM users\nWHERE name LIKE 'а%';",
+  "options": ["алина", "Анна, алина, Арсений", "Ничего"],
+  "correct": 0,
+  "explain": "LIKE в PostgreSQL различает регистр: «а» ≠ «А». Нужны обе — пиши `ILIKE 'а%'`",
+  "check": {"sql": "SELECT string_agg(name, ', ') FROM users WHERE name LIKE 'а%'", "answer": "алина"},
+  "caption": "Анна и Арсений тоже на «а»… или нет? 🔤\n\nA, B или C — пиши в комментах 👇\n\nВ PostgreSQL LIKE чувствителен к регистру, а ILIKE — нет. Сохрани 💾\n\n➕ Подпишись @seniorsql — SQL-задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #like #sqlзадачи #sqlдляначинающих #аналитикданных #айти #программирование #postgresql"
+}
