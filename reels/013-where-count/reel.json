@@ -1,0 +1,15 @@
+{
+  "ready": true,
+  "series": "Найди ошибку #13",
+  "emoji": "🐞",
+  "hook": "Ищем клиентов с **2+ заказами**. Где баг?",
+  "badge": "Ловушка с собеса",
+  "question": "Что будет при запуске?",
+  "table": {"name": "orders", "columns": ["id", "client"], "rows": [[1, "Анна"], [2, "Олег"], [3, "Анна"]]},
+  "code": "SELECT client\nFROM orders\nWHERE COUNT(*) > 1\nGROUP BY client;",
+  "options": ["Анна", "Ошибка", "Анна, Олег"],
+  "correct": 1,
+  "explain": "В WHERE нельзя COUNT: он фильтрует строки до группировки. Пиши `HAVING COUNT(*) > 1`",
+  "check": {"sql": "SELECT client FROM orders WHERE COUNT(*) > 1 GROUP BY client", "answer": "ERROR: aggregate functions are not allowed in WHERE"},
+  "caption": "Запрос выглядит логично. Но что скажет база? 🐞\n\nA, B или C — пиши в комментах 👇\n\nWHERE фильтрует строки, HAVING — группы. Сохрани 💾\n\n➕ Подпишись @seniorsql — SQL-задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #having #groupby #sqlзадачи #sqlдляначинающих #аналитикданных #собеседование #postgresql"
+}
