@@ -1,0 +1,15 @@
+{
+  "ready": true,
+  "series": "SQL-задачка #15",
+  "emoji": "🕳️",
+  "hook": "Сумма заказов, которых **нет**. Это 0?",
+  "badge": "Ломает итоги в отчётах",
+  "question": "Что выведет запрос?",
+  "table": {"name": "orders", "columns": ["id", "price"], "rows": [[1, 300], [2, 500], [3, 700]]},
+  "code": "SELECT SUM(price)\nFROM orders\nWHERE price > 1000;",
+  "options": ["NULL", "0", "Ошибка"],
+  "correct": 0,
+  "explain": "Нет строк — SUM вернёт NULL, а не 0. Нужен ноль — пиши `COALESCE(SUM(price), 0)`",
+  "check": {"sql": "SELECT SUM(price) FROM orders WHERE price > 1000", "answer": "NULL"},
+  "caption": "Заказов дороже 1000 нет. Значит сумма 0? 🕳️\n\nA, B или C — пиши в комментах 👇\n\nCOUNT пустоты = 0, а SUM пустоты = NULL. Сохрани 💾\n\n➕ Подпишись @seniorsql — SQL-задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #sum #null #sqlзадачи #sqlдляначинающих #аналитикданных #айти #postgresql"
+}
