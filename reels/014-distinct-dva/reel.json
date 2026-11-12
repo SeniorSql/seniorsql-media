@@ -1,0 +1,15 @@
+{
+  "ready": true,
+  "series": "Угадай результат #14",
+  "emoji": "🎯",
+  "hook": "DISTINCT по **двум столбцам**. Сколько строк?",
+  "badge": "Проверь себя за 10 секунд",
+  "question": "Сколько строк вернёт запрос?",
+  "table": {"name": "visits", "columns": ["city", "name"], "rows": [["Москва", "Анна"], ["Москва", "Анна"], ["Москва", "Олег"], ["Казань", "Анна"]]},
+  "code": "SELECT DISTINCT\n  city, name\nFROM visits;",
+  "options": ["2", "4", "3"],
+  "correct": 2,
+  "explain": "DISTINCT убирает повторы целых строк, а не одного столбца. Разных пар город + имя — 3",
+  "check": {"sql": "SELECT COUNT(*) FROM (SELECT DISTINCT city, name FROM visits) t", "answer": "3"},
+  "caption": "DISTINCT смотрит на city… или на всю строку? 🎯\n\nA, B или C — пиши в комментах 👇\n\nDISTINCT работает по всем столбцам после SELECT. Сохрани 💾\n\n➕ Подпишись @seniorsql — SQL-задачка каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #distinct #sqlзадачи #sqlдляначинающих #аналитикданных #айти #программирование #postgresql"
+}
