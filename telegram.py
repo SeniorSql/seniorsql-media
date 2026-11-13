@@ -35,8 +35,31 @@ def grid(columns, rows):
     return "<pre>" + esc("\n".join(out)) + "</pre>"
 
 
+def start_text(t, step, total):
+    # пост для новичков: урок -> пример -> задача -> что должно получиться -> подсказка/ответ под спойлером
+    parts = [f"🟢 <b>SQL с нуля · шаг {step} из {total}</b>", f"<b>{esc(t['title'])}</b>", ""]
+    parts += [f"📘 {md(t['lesson'])}", ""]
+    if t.get("example"):
+        parts += ["Пример:", f"<pre>{esc(t['example'])}</pre>"]
+    for tb in t["tables"]:
+        parts += [f"📋 Таблица <code>{esc(tb['name'])}</code>:", grid(tb["columns"], tb["rows"])]
+    parts += [f"✍️ <b>Задание:</b> {md(t['question'])}", ""]
+    parts += ["✅ <b>Должно получиться:</b>", grid(t["expected"]["columns"], t["expected"]["rows"])]
+    hints = t.get("hints") or ([t["hint"]] if t.get("hint") else [])
+    if hints:
+        steps = " ".join(f"{i}) {plain(h)}" for i, h in enumerate(hints, 1))
+        parts += [f"💡 Подсказка: <tg-spoiler>{esc(steps)}</tg-spoiler>", ""]
+    parts += [f"🔒 Ответ: <tg-spoiler>{esc(' '.join(t['solution'].split()))}</tg-spoiler>"]
+    parts += ["", "👇 Реши в тренажёре — он сам проверит. Ошибёшься — подскажет, что не так."]
+    return "\n".join(parts)
+
+
 def task_text(task_id):
-    t = next(x for x in json.loads(TASKS.read_text(encoding="utf-8"))["tasks"] if x["id"] == task_id)
+    tasks = json.loads(TASKS.read_text(encoding="utf-8"))["tasks"]
+    t = next(x for x in tasks if x["id"] == task_id)
+    if t.get("section") == "start":
+        start = [x["id"] for x in tasks if x.get("section") == "start"]
+        return start_text(t, start.index(task_id) + 1, len(start)), TRAINER + "#" + t["id"]
     parts = [f"<b>🧩 Задача дня · {esc(t['topic'])}</b>", ""]
     for tb in t["tables"]:
         parts += [f"📋 <b>Дано</b> — таблица <code>{esc(tb['name'])}</code>:", grid(tb["columns"], tb["rows"])]
@@ -61,6 +84,21 @@ def call(method, **params):
             return json.load(r)["result"]
     except urllib.error.HTTPError as e:
         raise RuntimeError(f"Ошибка Telegram ({method}): {e.read().decode()}")
+
+
+def reel(meta, video_url):
+    # ролик из Instagram + викторина с теми же вариантами ответа
+    if not TOKEN:
+        print("TG_TOKEN не задан — Telegram пропущен")
+        return
+    caption = f"🎬 <b>{esc(plain(meta['hook']))}</b>\n\nСмотри ролик и отвечай в викторине ниже 👇"
+    call("sendVideo", chat_id=CHAT, video=video_url, caption=caption, parse_mode="HTML", supports_streaming=True,
+         width=1080, height=1920)
+    code = meta["code"]
+    question = (plain(meta.get("question") or "Что выведет запрос?") + "\n\n" + code)[:300]
+    call("sendPoll", chat_id=CHAT, question=question, options=[{"text": plain(o)[:100]} for o in meta["options"]],
+         type="quiz", correct_option_id=meta["correct"], explanation=plain(meta.get("explain", ""))[:200], is_anonymous=True)
+    print(f"Telegram: ролик и викторина отправлены в {CHAT}")
 
 
 def send(tg, pin=False):
