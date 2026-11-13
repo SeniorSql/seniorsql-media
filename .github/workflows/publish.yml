@@ -44,4 +44,5 @@ jobs:
           touch published.txt telegram_sent.txt reels_published.txt telegram_reels_sent.txt
           git add published.txt telegram_sent.txt reels_published.txt telegram_reels_sent.txt
           git commit -m "published" || exit 0
+          git pull --rebase
           git push
