@@ -163,6 +163,23 @@ if BUFFER and os.environ.get("REEL_SLOT") == "true" and reels_root.exists():
             print(f"::error::Reels ({ready[0].name}): {e}")
             failed = True
 
+# 0б. Telegram в слот Reels (19:00) — последний вышедший ролик + викторина, если его ещё не было в Telegram
+tg_reels_file = pathlib.Path("telegram_reels_sent.txt")
+if os.environ.get("TG_TOKEN") and os.environ.get("REEL_SLOT") == "true" and reels_file.exists():
+    import telegram
+    out = [n for n in reels_file.read_text(encoding="utf-8").split() if (reels_root / n / "reel.json").exists()]
+    todo = [n for n in out if n not in done(tg_reels_file)]
+    if todo:
+        name = todo[-1]
+        try:
+            telegram.reel(json.loads((reels_root / name / "reel.json").read_text(encoding="utf-8")),
+                          f"{PAGES}/reels/{name}/reel.mp4")
+            for n in todo:  # старые ролики в Telegram не догоняем — отмечаем все
+                mark(tg_reels_file, n)
+        except Exception as e:
+            print(f"::error::Telegram, ролик {name}: {e}")
+            failed = True
+
 # 1. Instagram
 ig_queue = [root / os.environ["POST"]] if os.environ.get("POST") else queue(done(ig_file))
 if os.environ.get("IG_PAUSE") == "1" and not os.environ.get("POST"):
@@ -179,8 +196,25 @@ else:
         print(f"::error::Instagram ({post.name}): {e}")
         failed = True
 
-# 2. Telegram — следующий пост, к которому есть задача
-if os.environ.get("TG_TOKEN"):
+# 2. Telegram в дневной слот (12:00) — следующая задача «Старт с нуля» из sql/tasks.json
+if os.environ.get("TG_TOKEN") and os.environ.get("REEL_SLOT") != "true":
+    import telegram
+    sent = done(tg_file)
+    tasks = json.loads(pathlib.Path("sql/tasks.json").read_text(encoding="utf-8"))["tasks"]
+    start = [t["id"] for t in tasks if t.get("section") == "start" and t["id"] not in sent]
+    if start:
+        try:
+            telegram.send({"task": start[0]})
+            mark(tg_file, start[0])
+            print(f"Telegram: задача {start[0]}")
+        except Exception as e:
+            print(f"::error::Telegram (задача {start[0]}): {e}")
+            failed = True
+    else:
+        print("::warning::Telegram: задачи «Старт с нуля» закончились — нужны новые в sql/tasks.json")
+
+# 2б. Старая очередь постов-каруселей (все уже отправлены, оставлено на случай новых постов)
+if os.environ.get("TG_TOKEN") and os.environ.get("REEL_SLOT") != "true" and False:
     import telegram
     for post in queue(done(tg_file)):
         tg = load(post).get("telegram")
