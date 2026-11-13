@@ -41,7 +41,7 @@ jobs:
         run: |
           git config user.name "seniorsql-bot"
           git config user.email "seniorsql-bot@users.noreply.github.com"
-          touch published.txt telegram_sent.txt reels_published.txt
-          git add published.txt telegram_sent.txt reels_published.txt
+          touch published.txt telegram_sent.txt reels_published.txt telegram_reels_sent.txt
+          git add published.txt telegram_sent.txt reels_published.txt telegram_reels_sent.txt
           git commit -m "published" || exit 0
           git push
