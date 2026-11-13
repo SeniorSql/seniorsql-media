@@ -1,0 +1,41 @@
+{
+    "ready":  true,
+    "series":  "SQL с нуля",
+    "emoji":  "⭐",
+    "hook":  "Что значит **звёздочка** в SELECT?",
+    "badge":  "Для новичков",
+    "question":  "Сколько столбцов вернёт запрос?",
+    "table":  {
+                  "rows":  [
+                               [
+                                   "Онегин",
+                                   "Пушкин",
+                                   300
+                               ],
+                               [
+                                   "Нос",
+                                   "Гоголь",
+                                   200
+                               ]
+                           ],
+                  "name":  "books",
+                  "columns":  [
+                                  "title",
+                                  "author",
+                                  "price"
+                              ]
+              },
+    "code":  "SELECT *\nFROM books;",
+    "options":  [
+                    "1",
+                    "2",
+                    "3"
+                ],
+    "correct":  2,
+    "explain":  "Звёздочка * — это «все столбцы». В таблице их 3: title, author, price.",
+    "check":  {
+                  "answer":  "3",
+                  "sql":  "SELECT COUNT(*) FROM information_schema.columns WHERE table_name = \u0027books\u0027"
+              },
+    "caption":  "Звёздочка в SQL ⭐\n\nA, B или C — пиши в комментах 👇\n\nSELECT * — показать все столбцы таблицы. Сохрани 💾\n\n➕ Подпишись @seniorsql — SQL с нуля, задача каждый день\n✍️ Тренажёр для новичков с автопроверкой — ссылка в профиле\n\n#sql #sqlдляначинающих #sqlснуля #аналитикданных #айти #программирование #обучение #postgresql"
+}
