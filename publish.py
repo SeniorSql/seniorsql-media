@@ -197,8 +197,8 @@ else:
         print(f"::error::Instagram ({post.name}): {e}")
         failed = True
 
-# 2. Telegram в дневной слот (12:00) — следующая задача «Старт с нуля» из sql/tasks.json
-if os.environ.get("TG_TOKEN") and os.environ.get("REEL_SLOT") != "true":
+# 2. Telegram — следующая задача «Старт с нуля» из sql/tasks.json (с 14.11.2026 — в каждом запуске: 12:00 и 19:00)
+if os.environ.get("TG_TOKEN"):
     import telegram
     sent = done(tg_file)
     tasks = json.loads(pathlib.Path("sql/tasks.json").read_text(encoding="utf-8"))["tasks"]
