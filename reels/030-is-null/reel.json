@@ -1,0 +1,42 @@
+{
+    "ready":  true,
+    "series":  "SQL с нуля",
+    "emoji":  "📵",
+    "hook":  "Кто **без телефона**?",
+    "badge":  "Для новичков",
+    "question":  "Что выведет запрос?",
+    "table":  {
+                  "rows":  [
+                               [
+                                   "Аня",
+                                   "+7 900 111-22-33"
+                               ],
+                               [
+                                   "Борис",
+                                   null
+                               ],
+                               [
+                                   "Вика",
+                                   null
+                               ]
+                           ],
+                  "name":  "contacts",
+                  "columns":  [
+                                  "name",
+                                  "phone"
+                              ]
+              },
+    "code":  "SELECT name\nFROM contacts\nWHERE phone IS NULL;",
+    "options":  [
+                    "Аня",
+                    "Никого",
+                    "Борис и Вика"
+                ],
+    "correct":  2,
+    "explain":  "NULL — пустая ячейка. IS NULL находит такие строки: у Бориса и Вики телефона нет.",
+    "check":  {
+                  "answer":  "Борис, Вика",
+                  "sql":  "SELECT string_agg(name, \u0027, \u0027) FROM contacts WHERE phone IS NULL"
+              },
+    "caption":  "Как найти пустые ячейки 📵\n\nA, B или C — пиши в комментах 👇\n\nПустая ячейка — это NULL. Ищем её через IS NULL, а не = NULL. Сохрани 💾\n\n➕ Подпишись @seniorsql — SQL с нуля, задача каждый день\n✍️ Тренажёр для новичков с автопроверкой — ссылка в профиле\n\n#sql #sqlдляначинающих #sqlснуля #аналитикданных #айти #программирование #обучение #postgresql"
+}
