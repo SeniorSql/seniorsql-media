@@ -163,9 +163,10 @@ if BUFFER and os.environ.get("REEL_SLOT") == "true" and reels_root.exists():
             print(f"::error::Reels ({ready[0].name}): {e}")
             failed = True
 
-# 0б. Telegram в слот Reels (19:00) — последний вышедший ролик + викторина, если его ещё не было в Telegram
+# 0б. Ролики в Telegram — ВЫКЛЮЧЕНО 13.11.2026 по решению Этибара (в Telegram ролики не нужны).
+# Включается только переменной TG_REELS=1 в publish.yml.
 tg_reels_file = pathlib.Path("telegram_reels_sent.txt")
-if os.environ.get("TG_TOKEN") and os.environ.get("REEL_SLOT") == "true" and reels_file.exists():
+if os.environ.get("TG_REELS") == "1" and os.environ.get("TG_TOKEN") and os.environ.get("REEL_SLOT") == "true" and reels_file.exists():
     import telegram
     out = [n for n in reels_file.read_text(encoding="utf-8").split() if (reels_root / n / "reel.json").exists()]
     todo = [n for n in out if n not in done(tg_reels_file)]
