@@ -68,6 +68,23 @@ button.b{border:none;border-radius:12px;padding:12px 20px;font:800 15px Manrope,
 .status{font-size:13px;color:var(--muted);margin-top:10px}
 footer{color:var(--muted);font-size:14px;text-align:center;margin-top:26px;line-height:1.8}
 .hidden{display:none}
+.tabs{display:flex;gap:10px;margin-bottom:12px}
+.tab{flex:1;border:1.5px solid var(--line);background:var(--panel2);color:var(--muted);border-radius:14px;padding:12px 14px;font:800 15px Manrope,sans-serif;cursor:pointer;text-align:left}
+.tab small{display:block;font-weight:600;font-size:13px;margin-top:2px}
+.tab.on{border-color:var(--green);color:var(--text);background:rgba(74,222,128,.08)}
+.tab.on.more{border-color:var(--yellow);background:rgba(250,204,21,.07)}
+.bar2{height:6px;border-radius:9px;background:var(--line);margin-top:8px;overflow:hidden}
+.bar2 i{display:block;height:100%;background:var(--green);border-radius:9px}
+.lesson{background:linear-gradient(135deg,rgba(56,189,248,.10),rgba(192,132,252,.08));border-color:rgba(56,189,248,.35)}
+.lesson .txt{color:var(--text);font-size:17px;line-height:1.6}
+.lesson b{color:var(--yellow)}
+.lesson pre{background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px;font-size:15px;color:#D7E1F2;white-space:pre-wrap}
+.note{font-size:13px;color:var(--muted);margin-top:6px}
+.tip{font-size:14px;color:var(--muted);margin-bottom:8px}
+.go{background:var(--green);color:#0B1220;margin-top:12px}
+.hintlist{margin:6px 0 0 0;padding-left:20px}
+.hintlist li{margin:4px 0;color:var(--text)}
+.run{font-size:16px!important;padding:13px 26px!important}
 </style>
 </head>
 <body>
@@ -78,7 +95,10 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:26px;line-
     <div class="stat">Решено<br><b id="solved">0</b> из <span id="total">0</span></div>
   </header>
 
+  <div class="tabs" id="tabs"></div>
   <div class="chips" id="chips"></div>
+
+  <div class="card lesson hidden" id="lesson"></div>
 
   <div class="card">
     <div class="meta" id="meta"></div>
@@ -92,6 +112,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:26px;line-
 
   <div class="card">
     <div class="lbl">✍️ Твой запрос</div>
+    <div class="tip">Напиши запрос и нажми «Проверить». Ошибиться не страшно — система подскажет, что не так.</div>
     <div class="ed"><textarea id="sql" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="SELECT ..."></textarea></div>
     <div class="btns">
       <button class="b run" id="run" disabled>Загружаем PostgreSQL…</button>
@@ -169,31 +190,58 @@ function norm(v){
   return /^-?\d+(\.\d+)?$/.test(s) ? String(Number(s)) : s;
 }
 
+// ---- разделы: «Старт с нуля» и «Посложнее» ----
+const SECTIONS = [{key:"start", name:"🟢 Старт с нуля", sub:"для тех, кто ни разу не писал запрос"},
+                  {key:"more", name:"🟡 Посложнее", sub:"задачи с собеседований"}];
+const sec = t => t.section === "start" ? "start" : "more";
+const inSec = k => TASKS.map((t,i) => ({t,i})).filter(x => sec(x.t) === k);
+let hintStep = 0;
+
 function renderChips(){
-  $("chips").innerHTML = TASKS.map((t,i) =>
-    `<button class="chip${i===cur?" on":""}${solved[t.id]?" done":""}" data-i="${i}">${esc(t.id)} · ${esc(t.topic)}</button>`).join("");
+  const k = sec(TASKS[cur]);
+  $("tabs").innerHTML = SECTIONS.map(s => {
+    const list = inSec(s.key), n = list.filter(x => solved[x.t.id]).length;
+    if(!list.length) return "";
+    return `<button class="tab${s.key===k?" on":""}${s.key==="more"?" more":""}" data-s="${s.key}">${s.name}<small>${s.sub} · решено ${n} из ${list.length}</small>`
+      + `<div class="bar2"><i style="width:${Math.round(100*n/list.length)}%"></i></div></button>`;
+  }).join("");
+  $("chips").innerHTML = inSec(k).map((x,j) =>
+    `<button class="chip${x.i===cur?" on":""}${solved[x.t.id]?" done":""}" data-i="${x.i}">${k==="start" ? (j+1) : esc(x.t.id)} · ${esc(x.t.topic)}</button>`).join("");
   $("solved").textContent = TASKS.filter(t => solved[t.id]).length;
   $("total").textContent = TASKS.length;
   const on = $("chips").querySelector(".on"); if(on) on.scrollIntoView({block:"nearest", inline:"center"});
 }
+function hints(t){ return t.hints && t.hints.length ? t.hints : [t.hint || "Подсказки нет."]; }
+function showHint(t){
+  const h = hints(t);
+  $("hint").innerHTML = "💡 <b>Подсказка</b><ol class='hintlist'>" + h.slice(0, hintStep).map(x => `<li>${md(x)}</li>`).join("") + "</ol>";
+  $("hint").classList.toggle("hidden", hintStep === 0);
+  $("hintBtn").textContent = hintStep === 0 ? "💡 Подсказка" : hintStep < h.length ? `💡 Ещё подсказка (${hintStep + 1} из ${h.length})` : "💡 Подсказок больше нет";
+  $("hintBtn").disabled = hintStep >= h.length;
+}
 function open(i){
   cur = Math.max(0, Math.min(TASKS.length - 1, i));
-  const t = TASKS[cur];
+  const t = TASKS[cur], k = sec(t), list = inSec(k), pos = list.findIndex(x => x.i === cur);
   if(location.hash !== "#" + t.id && location.hash !== "#selftest") history.replaceState(null, "", "#" + t.id);
-  $("meta").textContent = `Задача ${t.id} · ${t.topic} · уровень ${t.level}`;
+  $("meta").textContent = k === "start" ? `Старт с нуля · шаг ${pos + 1} из ${list.length} · ${t.topic}` : `Посложнее · задача ${t.id} · ${t.topic}`;
   $("title").textContent = t.title;
+  if(t.lesson){
+    $("lesson").innerHTML = `<div class="meta">📘 Коротко: ${esc(t.topic)}</div><div class="txt" style="margin-top:8px">${md(t.lesson)}</div>`
+      + (t.example ? `<pre>${esc(t.example)}</pre><div class="note">Это пример на другой таблице. Ниже — твоя задача.</div>` : "");
+    $("lesson").classList.remove("hidden");
+  } else $("lesson").classList.add("hidden");
   $("question").innerHTML = "❓ " + md(t.question);
   $("given").innerHTML = t.tables.map(tb => `<div class="lbl">📋 Таблица <code>${esc(tb.name)}</code></div><div class="tbl" style="margin-bottom:12px">${tableHTML(tb.columns, tb.rows)}</div>`).join("");
   $("expLabel").textContent = "✅ " + (t.expected.label ? "Должно получиться: " + t.expected.label : "Должно получиться");
   $("expected").innerHTML = tableHTML(t.expected.columns, t.expected.rows);
-  $("sql").value = store.get("draft:" + t.id, "");
+  $("sql").value = store.get("draft:" + t.id, t.starter || "");
   $("out").innerHTML = "";
-  $("hint").classList.add("hidden"); $("answer").classList.add("hidden");
-  $("hint").innerHTML = "💡 <b>Подсказка.</b> <span class='txt'>" + md(t.hint || "Подсказки нет.") + "</span>";
+  hintStep = 0; showHint(t);
+  $("answer").classList.add("hidden");
   $("answer").innerHTML = "🔒 <b>Ответ</b><pre>" + esc(t.solution) + "</pre><div class='txt'>" + md(t.explain || "") + "</div>";
   $("prev").disabled = cur === 0; $("next").disabled = cur === TASKS.length - 1;
   renderChips();
-  document.title = `${t.id} · ${t.title} — SQL-тренажёр`;
+  document.title = `${t.title} — SQL-тренажёр`;
 }
 
 // ---- выполнение ----
@@ -210,6 +258,10 @@ function compare(t, got, want){
   const g = got.rows.map(r => r.map(norm)), w = want.rows.map(r => r.map(norm));
   const gc = got.fields.length, wc = want.fields.length;
   if(gc !== wc) return {ok:false, t:`Столбцов получилось ${gc}, а нужно ${wc}`, d:"Сравни с таблицей «Должно получиться»: какие столбцы лишние или каких не хватает?"};
+  if(t.names){
+    const gn = got.fields.map(f => String(f.name).toLowerCase()), wn = want.fields.map(f => String(f.name || f).toLowerCase());
+    if(gn.join() !== wn.join()) return {ok:false, t:`Столбцы называются ${gn.join(", ")}, а нужно ${wn.join(", ")}`, d:"Дай столбцу нужное имя с помощью AS."};
+  }
   if(g.length !== w.length) return {ok:false, t:`Строк получилось ${g.length}, а нужно ${w.length}`, d: g.length > w.length ? "Лишние строки — проверь условие WHERE / HAVING." : "Каких-то строк не хватает — проверь условие (не забыл про NULL?)."};
   const key = r => JSON.stringify(r);
   const gs = g.map(key), ws = w.map(key);
@@ -235,18 +287,24 @@ async function check(){
       const c = compare(t, got, want);
       if(c.ok){ solved[t.id] = true; store.set("solved", solved); renderChips(); }
       html = c.ok
-        ? `<div class="verdict ok"><div class="t">✅ Верно! Задача решена</div><div class="txt">${md(t.explain || "")}</div></div>`
+        ? `<div class="verdict ok"><div class="t">✅ Верно! Задача решена</div><div class="txt">${md(t.explain || "")}</div>`
+          + (cur < TASKS.length - 1 ? `<button class="b go" id="goNext">Следующая задача →</button>` : `<div class="txt" style="margin-top:8px">🎉 Это была последняя задача. Новые — каждый день в Telegram.</div>`) + `</div>`
         : `<div class="verdict bad"><div class="t">❌ ${esc(c.t)}</div><div class="txt">${esc(c.d)}</div></div>`;
       if(got) html += `<div class="res"><div class="lbl">Твой результат</div><div class="tbl">${tableHTML(got.fields.map(f => f.name), got.rows)}</div></div>`;
     }
   }catch(e){ html = `<div class="verdict bad"><div class="t">Что-то пошло не так</div><pre>${esc(e.message)}</pre></div>`; }
   $("out").innerHTML = html;
+  if($("goNext")) $("goNext").onclick = () => { open(cur + 1); window.scrollTo({top: 0, behavior: "smooth"}); };
   $("run").disabled = false; $("run").textContent = "▶ Проверить";
 }
 function errHint(m){
+  const col = m.match(/column "([^"]+)" does not exist/);
+  if(col && /[а-яё]/i.test(col[1])) return `Похоже, «${esc(col[1])}» — это текст, а не столбец. Текст пиши в одинарных кавычках: '${esc(col[1])}'.`;
   if(/does not exist/.test(m) && /column/.test(m)) return "Такого столбца нет. Проверь название — или ты используешь псевдоним там, где его ещё нет (например, в WHERE).";
   if(/relation .* does not exist/.test(m)) return "Такой таблицы нет. Проверь название после FROM.";
-  if(/syntax error/.test(m)) return "Синтаксическая ошибка: проверь запятые, кавычки и порядок слов.";
+  if(/syntax error at end of input/.test(m)) return "Запрос оборвался на середине. Чего-то не хватает в конце — например, названия таблицы после FROM.";
+  if(/syntax error/.test(m)) return "Синтаксическая ошибка: проверь запятые, кавычки и порядок слов. Порядок такой: SELECT … FROM … WHERE … ORDER BY … LIMIT …";
+  if(/unterminated quoted string/.test(m)) return "Не хватает закрывающей кавычки ' — текст должен быть в кавычках с двух сторон.";
   if(/must appear in the GROUP BY/.test(m)) return "Каждый столбец в SELECT должен быть в GROUP BY или внутри агрегата (COUNT, SUM…).";
   if(/aggregate functions are not allowed in WHERE/.test(m)) return "Агрегаты нельзя в WHERE — используй HAVING.";
   return "";
@@ -269,12 +327,17 @@ async function selftest(){
 const SELFTEST = location.hash === "#selftest";
 TASKS = (await (await fetch("tasks.json", {cache: "no-cache"})).json()).tasks;
 const byHash = () => Math.max(0, TASKS.findIndex(t => "#" + t.id === location.hash));
-open(location.hash ? byHash() : Math.max(0, TASKS.findIndex(t => !solved[t.id])));
+open(location.hash && location.hash !== "#selftest" ? byHash() : Math.max(0, TASKS.findIndex(t => !solved[t.id])));
 window.addEventListener("hashchange", () => { if(location.hash !== "#selftest") open(byHash()); });
 $("chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if(b) open(+b.dataset.i); });
+$("tabs").addEventListener("click", e => {
+  const b = e.target.closest(".tab"); if(!b) return;
+  const list = inSec(b.dataset.s), first = list.find(x => !solved[x.t.id]) || list[0];
+  if(first) open(first.i);
+});
 $("prev").onclick = () => open(cur - 1);
 $("next").onclick = () => open(cur + 1);
-$("hintBtn").onclick = () => $("hint").classList.toggle("hidden");
+$("hintBtn").onclick = () => { hintStep++; showHint(TASKS[cur]); };
 $("ansBtn").onclick = () => $("answer").classList.toggle("hidden");
 $("run").onclick = check;
 $("sql").addEventListener("input", () => store.set("draft:" + TASKS[cur].id, $("sql").value));
