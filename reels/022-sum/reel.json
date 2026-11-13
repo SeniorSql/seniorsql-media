@@ -1,0 +1,42 @@
+{
+    "ready":  true,
+    "series":  "SQL с нуля",
+    "emoji":  "💸",
+    "hook":  "Сколько **потратила Аня**?",
+    "badge":  "Для новичков",
+    "question":  "Что выведет запрос?",
+    "table":  {
+                  "rows":  [
+                               [
+                                   "Аня",
+                                   100
+                               ],
+                               [
+                                   "Борис",
+                                   200
+                               ],
+                               [
+                                   "Аня",
+                                   50
+                               ]
+                           ],
+                  "name":  "orders",
+                  "columns":  [
+                                  "client",
+                                  "amount"
+                              ]
+              },
+    "code":  "SELECT SUM(amount)\nFROM orders\nWHERE client = \u0027Аня\u0027;",
+    "options":  [
+                    "150",
+                    "350",
+                    "100"
+                ],
+    "correct":  0,
+    "explain":  "WHERE оставил заказы Ани: 100 и 50. SUM сложил их — получилось 150.",
+    "check":  {
+                  "answer":  "150",
+                  "sql":  "SELECT SUM(amount) FROM orders WHERE client = \u0027Аня\u0027"
+              },
+    "caption":  "SUM складывает числа 💸\n\nA, B или C — пиши в комментах 👇\n\nSUM(столбец) — сумма, AVG — среднее, MAX — максимум. Сохрани 💾\n\n➕ Подпишись @seniorsql — SQL с нуля, задача каждый день\n✍️ Тренажёр для новичков с автопроверкой — ссылка в профиле\n\n#sql #sqlдляначинающих #sqlснуля #аналитикданных #айти #программирование #обучение #postgresql"
+}
