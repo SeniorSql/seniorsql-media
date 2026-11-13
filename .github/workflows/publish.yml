@@ -31,8 +31,8 @@ jobs:
           IG_USER_ID: "17841466669220590"
           BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
           IG_PAUSE: "1"   # карусели в Instagram на паузе с 05.11 — переходим на Reels
-          # Reels — 1 в день в 19:00 МСК, плюс при ручном запуске
-          REEL_SLOT: ${{ github.event.schedule == '0 16 * * *' || github.event_name == 'workflow_dispatch' }}
+          # с 14.11.2026: Reels — 2 в день (12:00 и 19:00 МСК), плюс при ручном запуске
+          REEL_SLOT: "true"
           TG_TOKEN: ${{ github.event.inputs.telegram != 'false' && secrets.TG_TOKEN || '' }}
           TG_CHAT: "@sqlsenior"
           POST: ${{ github.event.inputs.post }}
