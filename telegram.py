@@ -35,12 +35,9 @@ def grid(columns, rows):
     return "<pre>" + esc("\n".join(out)) + "</pre>"
 
 
-def start_text(t, step, total):
-    # пост для новичков: урок -> пример -> задача -> что должно получиться -> подсказка/ответ под спойлером
-    parts = [f"🟢 <b>SQL с нуля · шаг {step} из {total}</b>", f"<b>{esc(t['title'])}</b>", ""]
-    parts += [f"📘 {md(t['lesson'])}", ""]
-    if t.get("example"):
-        parts += ["Пример:", f"<pre>{esc(t['example'])}</pre>"]
+def start_text(t):
+    # простая задача для новичков, без номеров шагов и уроков (13.11.2026: «просто бесконечный поток»)
+    parts = [f"<b>🧩 Задача · {esc(t['topic'])}</b>", f"{esc(t['title'])}", ""]
     for tb in t["tables"]:
         parts += [f"📋 Таблица <code>{esc(tb['name'])}</code>:", grid(tb["columns"], tb["rows"])]
     parts += [f"✍️ <b>Задание:</b> {md(t['question'])}", ""]
@@ -58,8 +55,7 @@ def task_text(task_id):
     tasks = json.loads(TASKS.read_text(encoding="utf-8"))["tasks"]
     t = next(x for x in tasks if x["id"] == task_id)
     if t.get("section") == "start":
-        start = [x["id"] for x in tasks if x.get("section") == "start"]
-        return start_text(t, start.index(task_id) + 1, len(start)), TRAINER + "#" + t["id"]
+        return start_text(t), TRAINER + "#" + t["id"]
     parts = [f"<b>🧩 Задача дня · {esc(t['topic'])}</b>", ""]
     for tb in t["tables"]:
         parts += [f"📋 <b>Дано</b> — таблица <code>{esc(tb['name'])}</code>:", grid(tb["columns"], tb["rows"])]
