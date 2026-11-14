@@ -223,7 +223,7 @@ function open(i){
   cur = Math.max(0, Math.min(TASKS.length - 1, i));
   const t = TASKS[cur], k = sec(t), list = inSec(k), pos = list.findIndex(x => x.i === cur);
   if(location.hash !== "#" + t.id && location.hash !== "#selftest") history.replaceState(null, "", "#" + t.id);
-  $("meta").textContent = k === "start" ? `Старт с нуля · шаг ${pos + 1} из ${list.length} · ${t.topic}` : `Посложнее · задача ${t.id} · ${t.topic}`;
+  $("meta").textContent = k === "start" ? `Для начинающих · ${t.topic}` : `Посложнее · задача ${t.id} · ${t.topic}`;
   $("title").textContent = t.title;
   if(t.lesson){
     $("lesson").innerHTML = `<div class="meta">📘 Коротко: ${esc(t.topic)}</div><div class="txt" style="margin-top:8px">${md(t.lesson)}</div>`
