@@ -1,0 +1,46 @@
+﻿{
+    "ready":  true,
+    "series":  "SQL-задачка",
+    "emoji":  "🐾",
+    "hook":  "**GROUP BY**: сколько в каждой группе?",
+    "badge":  "Для новичков",
+    "question":  "Что выведет запрос?",
+    "table":  {
+                  "rows":  [
+                               [
+                                   "Рекс",
+                                   "пёс"
+                               ],
+                               [
+                                   "Мурка",
+                                   "кот"
+                               ],
+                               [
+                                   "Бим",
+                                   "пёс"
+                               ],
+                               [
+                                   "Шарик",
+                                   "пёс"
+                               ]
+                           ],
+                  "name":  "pets",
+                  "columns":  [
+                                  "name",
+                                  "kind"
+                              ]
+              },
+    "code":  "SELECT kind, COUNT(*)\nFROM pets\nGROUP BY kind\nORDER BY kind;",
+    "options":  [
+                    "кот 3, пёс 1",
+                    "кот 4",
+                    "кот 1, пёс 3"
+                ],
+    "correct":  2,
+    "explain":  "GROUP BY собирает одинаковые виды и считает: 1 кот и 3 пса.",
+    "check":  {
+                  "answer":  "кот 1, пёс 3",
+                  "sql":  "SELECT string_agg(kind||\u0027 \u0027||c, \u0027, \u0027 ORDER BY kind) FROM (SELECT kind, COUNT(*) c FROM pets GROUP BY kind) t"
+              },
+    "caption":  "Считаем по группам 🐾\n\nA, B или C — пиши в комментах 👇\n\nGROUP BY делит строки на группы, COUNT считает каждую. Сохрани 💾\n\n➕ Подпишись @seniorsql — новая SQL-задача каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #sqlдляначинающих #sqlснуля #аналитикданных #айти #программирование #обучение #postgresql"
+}
