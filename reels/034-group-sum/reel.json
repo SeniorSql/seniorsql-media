@@ -1,0 +1,46 @@
+﻿{
+    "ready":  true,
+    "series":  "SQL-задачка",
+    "emoji":  "💰",
+    "hook":  "**SUM** по магазинам: сколько у каждого?",
+    "badge":  "Для новичков",
+    "question":  "Что выведет запрос?",
+    "table":  {
+                  "rows":  [
+                               [
+                                   "Север",
+                                   100
+                               ],
+                               [
+                                   "Юг",
+                                   50
+                               ],
+                               [
+                                   "Север",
+                                   70
+                               ],
+                               [
+                                   "Юг",
+                                   30
+                               ]
+                           ],
+                  "name":  "sales",
+                  "columns":  [
+                                  "shop",
+                                  "amount"
+                              ]
+              },
+    "code":  "SELECT shop, SUM(amount)\nFROM sales\nGROUP BY shop\nORDER BY shop;",
+    "options":  [
+                    "Север 70, Юг 30",
+                    "Север 170, Юг 80",
+                    "Север 250"
+                ],
+    "correct":  1,
+    "explain":  "Суммы считаются отдельно: Север 100+70=170, Юг 50+30=80.",
+    "check":  {
+                  "answer":  "Север 170, Юг 80",
+                  "sql":  "SELECT string_agg(shop||\u0027 \u0027||s, \u0027, \u0027 ORDER BY shop) FROM (SELECT shop, SUM(amount) s FROM sales GROUP BY shop) t"
+              },
+    "caption":  "Сумма по группам 💰\n\nA, B или C — пиши в комментах 👇\n\nGROUP BY + SUM — итог для каждой группы отдельно. Сохрани 💾\n\n➕ Подпишись @seniorsql — новая SQL-задача каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #sqlдляначинающих #sqlснуля #аналитикданных #айти #программирование #обучение #postgresql"
+}
