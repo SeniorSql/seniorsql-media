@@ -1,0 +1,42 @@
+﻿{
+    "ready":  true,
+    "series":  "SQL-задачка",
+    "emoji":  "📧",
+    "hook":  "Кто **оставил** почту?",
+    "badge":  "Для новичков",
+    "question":  "Что выведет запрос?",
+    "table":  {
+                  "rows":  [
+                               [
+                                   "Ира",
+                                   "ira@mail.ru"
+                               ],
+                               [
+                                   "Олег",
+                                   null
+                               ],
+                               [
+                                   "Яна",
+                                   "yana@mail.ru"
+                               ]
+                           ],
+                  "name":  "users",
+                  "columns":  [
+                                  "name",
+                                  "email"
+                              ]
+              },
+    "code":  "SELECT name\nFROM users\nWHERE email IS NOT NULL;",
+    "options":  [
+                    "Олег",
+                    "Ира, Яна",
+                    "Ира, Олег, Яна"
+                ],
+    "correct":  1,
+    "explain":  "IS NOT NULL — «не пусто». У Иры и Яны почта есть, у Олега ячейка пустая.",
+    "check":  {
+                  "answer":  "Ира, Яна",
+                  "sql":  "SELECT string_agg(name, \u0027, \u0027) FROM users WHERE email IS NOT NULL"
+              },
+    "caption":  "Найти строки, где всё заполнено 📧\n\nA, B или C — пиши в комментах 👇\n\nIS NOT NULL — противоположность IS NULL. Сохрани 💾\n\n➕ Подпишись @seniorsql — новая SQL-задача каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #sqlдляначинающих #sqlснуля #аналитикданных #айти #программирование #обучение #postgresql"
+}
