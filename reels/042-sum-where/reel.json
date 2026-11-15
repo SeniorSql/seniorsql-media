@@ -1,0 +1,46 @@
+﻿{
+    "ready":  true,
+    "series":  "SQL-задачка",
+    "emoji":  "💳",
+    "hook":  "**SUM** только больших платежей",
+    "badge":  "Для новичков",
+    "question":  "Что выведет запрос?",
+    "table":  {
+                  "rows":  [
+                               [
+                                   "Аня",
+                                   100
+                               ],
+                               [
+                                   "Боря",
+                                   200
+                               ],
+                               [
+                                   "Аня",
+                                   50
+                               ],
+                               [
+                                   "Вика",
+                                   300
+                               ]
+                           ],
+                  "name":  "payments",
+                  "columns":  [
+                                  "client",
+                                  "amount"
+                              ]
+              },
+    "code":  "SELECT SUM(amount)\nFROM payments\nWHERE amount \u003e 100;",
+    "options":  [
+                    "650",
+                    "300",
+                    "500"
+                ],
+    "correct":  2,
+    "explain":  "Платежи больше 100: это 200 и 300. Их сумма — 500.",
+    "check":  {
+                  "answer":  "500",
+                  "sql":  "SELECT SUM(amount) FROM payments WHERE amount \u003e 100"
+              },
+    "caption":  "Сумма с условием 💳\n\nA, B или C — пиши в комментах 👇\n\nWHERE отбирает строки, SUM складывает только их. Сохрани 💾\n\n➕ Подпишись @seniorsql — новая SQL-задача каждый день\n✍️ Тренажёр с автопроверкой — ссылка в профиле\n\n#sql #sqlдляначинающих #sqlснуля #аналитикданных #айти #программирование #обучение #postgresql"
+}
