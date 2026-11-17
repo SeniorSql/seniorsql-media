@@ -13,3 +13,4 @@
 019-count
 020-limit
 021-and
+022-sum
