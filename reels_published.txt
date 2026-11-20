@@ -19,3 +19,4 @@
 025-ne-ravno
 026-or
 027-distinct
+028-avg
