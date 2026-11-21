@@ -20,3 +20,4 @@
 026-or
 027-distinct
 028-avg
+029-min
