@@ -3,587 +3,3710 @@
   "_start": "Раздел «Старт с нуля» (section: start) — для тех, кто ни разу не писал запрос. lesson — мини-урок перед задачей, example — пример на другой таблице, starter — с чего начинается поле ввода, hints — подсказки по шагам, names: true — проверять ещё и названия столбцов.",
   "tasks": [
     {
-      "id": "s01", "section": "start", "topic": "SELECT *", "level": 0,
+      "id": "s35",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Кому доступен сервис?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "status"
+          ],
+          "rows": [
+            [
+              "Анна",
+              "active"
+            ],
+            [
+              "Олег",
+              "blocked"
+            ],
+            [
+              "Ирина",
+              "active"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имена пользователей со статусом active в алфавитном порядке.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Анна"
+          ],
+          [
+            "Ирина"
+          ]
+        ]
+      },
+      "solution": "SELECT name\nFROM users\nWHERE status = 'active'\nORDER BY name;",
+      "hint": "WHERE оставляет строки со статусом active. ORDER BY задаёт порядок имён.",
+      "explain": "WHERE оставляет строки со статусом active. ORDER BY задаёт порядок имён."
+    },
+    {
+      "id": "s36",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Кому доступен сервис?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "status"
+          ],
+          "rows": [
+            [
+              "Вера",
+              "active"
+            ],
+            [
+              "Павел",
+              "blocked"
+            ],
+            [
+              "Лена",
+              "active"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имена пользователей со статусом active в алфавитном порядке.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Вера"
+          ],
+          [
+            "Лена"
+          ]
+        ]
+      },
+      "solution": "SELECT name\nFROM users\nWHERE status = 'active'\nORDER BY name;",
+      "hint": "WHERE оставляет строки со статусом active. ORDER BY задаёт порядок имён.",
+      "explain": "WHERE оставляет строки со статусом active. ORDER BY задаёт порядок имён."
+    },
+    {
+      "id": "s37",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Услуги дешевле 500 ₽",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Интернет",
+              600
+            ],
+            [
+              "Хранилище",
+              250
+            ],
+            [
+              "Поддержка",
+              400
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи название и цену услуг дешевле 500, от дешёвых к дорогим.",
+      "expected": {
+        "columns": [
+          "name",
+          "price"
+        ],
+        "rows": [
+          [
+            "Хранилище",
+            250
+          ],
+          [
+            "Поддержка",
+            400
+          ]
+        ]
+      },
+      "solution": "SELECT name, price\nFROM services\nWHERE price < 500\nORDER BY price;",
+      "hint": "Знак < не включает 500. Сортировка по цене идёт по возрастанию.",
+      "explain": "Знак < не включает 500. Сортировка по цене идёт по возрастанию."
+    },
+    {
+      "id": "s38",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Услуги дешевле 500 ₽",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Интернет",
+              700
+            ],
+            [
+              "Хранилище",
+              350
+            ],
+            [
+              "Поддержка",
+              500
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи название и цену услуг дешевле 500, от дешёвых к дорогим.",
+      "expected": {
+        "columns": [
+          "name",
+          "price"
+        ],
+        "rows": [
+          [
+            "Хранилище",
+            350
+          ]
+        ]
+      },
+      "solution": "SELECT name, price\nFROM services\nWHERE price < 500\nORDER BY price;",
+      "hint": "Знак < не включает 500. Сортировка по цене идёт по возрастанию.",
+      "explain": "Знак < не включает 500. Сортировка по цене идёт по возрастанию."
+    },
+    {
+      "id": "s39",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Какие контракты действуют?",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "status"
+          ],
+          "rows": [
+            [
+              101,
+              "active"
+            ],
+            [
+              102,
+              "closed"
+            ],
+            [
+              103,
+              "active"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи номера действующих контрактов: status = active. Отсортируй по id.",
+      "expected": {
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            101
+          ],
+          [
+            103
+          ]
+        ]
+      },
+      "solution": "SELECT id\nFROM contracts\nWHERE status = 'active'\nORDER BY id;",
+      "hint": "Текст active пишется в одинарных кавычках. SELECT id оставляет только номер.",
+      "explain": "Текст active пишется в одинарных кавычках. SELECT id оставляет только номер."
+    },
+    {
+      "id": "s40",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Какие контракты действуют?",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "status"
+          ],
+          "rows": [
+            [
+              151,
+              "active"
+            ],
+            [
+              152,
+              "closed"
+            ],
+            [
+              153,
+              "active"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи номера действующих контрактов: status = active. Отсортируй по id.",
+      "expected": {
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            151
+          ],
+          [
+            153
+          ]
+        ]
+      },
+      "solution": "SELECT id\nFROM contracts\nWHERE status = 'active'\nORDER BY id;",
+      "hint": "Текст active пишется в одинарных кавычках. SELECT id оставляет только номер.",
+      "explain": "Текст active пишется в одинарных кавычках. SELECT id оставляет только номер."
+    },
+    {
+      "id": "s41",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Поставщики из Москвы",
+      "tables": [
+        {
+          "name": "providers",
+          "columns": [
+            "name",
+            "city"
+          ],
+          "rows": [
+            [
+              "Вектор",
+              "Москва"
+            ],
+            [
+              "Орбита",
+              "Тула"
+            ],
+            [
+              "Спектр",
+              "Москва"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи названия поставщиков из Москвы в алфавитном порядке.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Вектор"
+          ],
+          [
+            "Спектр"
+          ]
+        ]
+      },
+      "solution": "SELECT name\nFROM providers\nWHERE city = 'Москва'\nORDER BY name;",
+      "hint": "Фильтруем по city, а показываем name. Столбец фильтра не обязан входить в SELECT.",
+      "explain": "Фильтруем по city, а показываем name. Столбец фильтра не обязан входить в SELECT."
+    },
+    {
+      "id": "s42",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Поставщики из Москвы",
+      "tables": [
+        {
+          "name": "providers",
+          "columns": [
+            "name",
+            "city"
+          ],
+          "rows": [
+            [
+              "Вектор",
+              "Москва"
+            ],
+            [
+              "Орбита",
+              "Тула"
+            ],
+            [
+              "Спектр",
+              "Москва"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи названия поставщиков из Москвы в алфавитном порядке.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Вектор"
+          ],
+          [
+            "Спектр"
+          ]
+        ]
+      },
+      "solution": "SELECT name\nFROM providers\nWHERE city = 'Москва'\nORDER BY name;",
+      "hint": "Фильтруем по city, а показываем name. Столбец фильтра не обязан входить в SELECT.",
+      "explain": "Фильтруем по city, а показываем name. Столбец фильтра не обязан входить в SELECT."
+    },
+    {
+      "id": "s43",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Кому нужно уточнить телефон?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "phone"
+          ],
+          "rows": [
+            [
+              "Анна",
+              "101"
+            ],
+            [
+              "Олег",
+              null
+            ],
+            [
+              "Ирина",
+              null
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имена пользователей без телефона в алфавитном порядке.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Ирина"
+          ],
+          [
+            "Олег"
+          ]
+        ]
+      },
+      "solution": "SELECT name\nFROM users\nWHERE phone IS NULL\nORDER BY name;",
+      "hint": "NULL означает отсутствие значения. Для проверки нужен IS NULL.",
+      "explain": "NULL означает отсутствие значения. Для проверки нужен IS NULL."
+    },
+    {
+      "id": "s44",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Кому нужно уточнить телефон?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "phone"
+          ],
+          "rows": [
+            [
+              "Вера",
+              "101"
+            ],
+            [
+              "Павел",
+              null
+            ],
+            [
+              "Лена",
+              null
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имена пользователей без телефона в алфавитном порядке.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Лена"
+          ],
+          [
+            "Павел"
+          ]
+        ]
+      },
+      "solution": "SELECT name\nFROM users\nWHERE phone IS NULL\nORDER BY name;",
+      "hint": "NULL означает отсутствие значения. Для проверки нужен IS NULL.",
+      "explain": "NULL означает отсутствие значения. Для проверки нужен IS NULL."
+    },
+    {
+      "id": "s45",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Две самые дорогие услуги",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Интернет",
+              600
+            ],
+            [
+              "Хранилище",
+              250
+            ],
+            [
+              "Поддержка",
+              400
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи две самые дорогие услуги и их цены.",
+      "expected": {
+        "columns": [
+          "name",
+          "price"
+        ],
+        "rows": [
+          [
+            "Интернет",
+            600
+          ],
+          [
+            "Поддержка",
+            400
+          ]
+        ]
+      },
+      "solution": "SELECT name, price\nFROM services\nORDER BY price DESC\nLIMIT 2;",
+      "hint": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки.",
+      "explain": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки."
+    },
+    {
+      "id": "s46",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Две самые дорогие услуги",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Интернет",
+              700
+            ],
+            [
+              "Хранилище",
+              350
+            ],
+            [
+              "Поддержка",
+              500
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи две самые дорогие услуги и их цены.",
+      "expected": {
+        "columns": [
+          "name",
+          "price"
+        ],
+        "rows": [
+          [
+            "Интернет",
+            700
+          ],
+          [
+            "Поддержка",
+            500
+          ]
+        ]
+      },
+      "solution": "SELECT name, price\nFROM services\nORDER BY price DESC\nLIMIT 2;",
+      "hint": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки.",
+      "explain": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки."
+    },
+    {
+      "id": "s47",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Контракты от 500 ₽",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "amount"
+          ],
+          "rows": [
+            [
+              101,
+              300
+            ],
+            [
+              102,
+              500
+            ],
+            [
+              103,
+              800
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи контракты на сумму от 500 включительно, по возрастанию id.",
+      "expected": {
+        "columns": [
+          "id",
+          "amount"
+        ],
+        "rows": [
+          [
+            102,
+            500
+          ],
+          [
+            103,
+            800
+          ]
+        ]
+      },
+      "solution": "SELECT id, amount\nFROM contracts\nWHERE amount >= 500\nORDER BY id;",
+      "hint": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит.",
+      "explain": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит."
+    },
+    {
+      "id": "s48",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Контракты от 500 ₽",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "amount"
+          ],
+          "rows": [
+            [
+              151,
+              350
+            ],
+            [
+              152,
+              550
+            ],
+            [
+              153,
+              850
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи контракты на сумму от 500 включительно, по возрастанию id.",
+      "expected": {
+        "columns": [
+          "id",
+          "amount"
+        ],
+        "rows": [
+          [
+            152,
+            550
+          ],
+          [
+            153,
+            850
+          ]
+        ]
+      },
+      "solution": "SELECT id, amount\nFROM contracts\nWHERE amount >= 500\nORDER BY id;",
+      "hint": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит.",
+      "explain": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит."
+    },
+    {
+      "id": "s01",
+      "section": "start",
+      "topic": "SELECT *",
+      "level": 0,
       "title": "Покажи всю таблицу",
       "lesson": "Таблица — как лист Excel: сверху названия **столбцов**, ниже **строки** с данными. Чтобы посмотреть таблицу целиком, пиши `SELECT * FROM название;` Звёздочка `*` значит «все столбцы».",
       "example": "SELECT *\nFROM users;",
-      "tables": [{"name": "books", "columns": ["title", "author", "price"], "rows": [["Мастер и Маргарита", "Булгаков", 450], ["Война и мир", "Толстой", 700], ["Онегин", "Пушкин", 300]]}],
+      "tables": [
+        {
+          "name": "books",
+          "columns": [
+            "title",
+            "author",
+            "price"
+          ],
+          "rows": [
+            [
+              "Мастер и Маргарита",
+              "Булгаков",
+              450
+            ],
+            [
+              "Война и мир",
+              "Толстой",
+              700
+            ],
+            [
+              "Онегин",
+              "Пушкин",
+              300
+            ]
+          ]
+        }
+      ],
       "question": "Выведи **всю** таблицу `books`.",
-      "expected": {"columns": ["title", "author", "price"], "rows": [["Мастер и Маргарита", "Булгаков", 450], ["Война и мир", "Толстой", 700], ["Онегин", "Пушкин", 300]]},
+      "expected": {
+        "columns": [
+          "title",
+          "author",
+          "price"
+        ],
+        "rows": [
+          [
+            "Мастер и Маргарита",
+            "Булгаков",
+            450
+          ],
+          [
+            "Война и мир",
+            "Толстой",
+            700
+          ],
+          [
+            "Онегин",
+            "Пушкин",
+            300
+          ]
+        ]
+      },
       "starter": "SELECT ",
       "solution": "SELECT *\nFROM books;",
-      "hints": ["Запрос начинается со слова SELECT.", "После SELECT поставь звёздочку * — это «все столбцы».", "Дальше FROM и название таблицы: SELECT * FROM books;"],
+      "hints": [
+        "Запрос начинается со слова SELECT.",
+        "После SELECT поставь звёздочку * — это «все столбцы».",
+        "Дальше FROM и название таблицы: SELECT * FROM books;"
+      ],
       "explain": "SELECT * FROM books — «выбери все столбцы из таблицы books». Это самый первый запрос, с которого всё начинается."
     },
     {
-      "id": "s02", "section": "start", "topic": "Один столбец", "level": 0,
+      "id": "s02",
+      "section": "start",
+      "topic": "Один столбец",
+      "level": 0,
       "title": "Только названия книг",
       "lesson": "Вместо `*` можно написать **название столбца** — тогда в ответе будет только он. Так делают почти всегда: берут только то, что нужно.",
       "example": "SELECT name\nFROM users;",
-      "tables": [{"name": "books", "columns": ["title", "author", "price"], "rows": [["Мастер и Маргарита", "Булгаков", 450], ["Война и мир", "Толстой", 700], ["Онегин", "Пушкин", 300]]}],
+      "tables": [
+        {
+          "name": "books",
+          "columns": [
+            "title",
+            "author",
+            "price"
+          ],
+          "rows": [
+            [
+              "Мастер и Маргарита",
+              "Булгаков",
+              450
+            ],
+            [
+              "Война и мир",
+              "Толстой",
+              700
+            ],
+            [
+              "Онегин",
+              "Пушкин",
+              300
+            ]
+          ]
+        }
+      ],
       "question": "Выведи только **названия** книг (столбец `title`).",
-      "expected": {"columns": ["title"], "rows": [["Мастер и Маргарита"], ["Война и мир"], ["Онегин"]]},
+      "expected": {
+        "columns": [
+          "title"
+        ],
+        "rows": [
+          [
+            "Мастер и Маргарита"
+          ],
+          [
+            "Война и мир"
+          ],
+          [
+            "Онегин"
+          ]
+        ]
+      },
       "starter": "SELECT ",
       "solution": "SELECT title\nFROM books;",
-      "hints": ["Возьми запрос SELECT * FROM books и замени звёздочку.", "Вместо * напиши название столбца: title."],
+      "hints": [
+        "Возьми запрос SELECT * FROM books и замени звёздочку.",
+        "Вместо * напиши название столбца: title."
+      ],
       "explain": "После SELECT пишем, какие столбцы нужны. Здесь нужен один — title."
     },
     {
-      "id": "s03", "section": "start", "topic": "Два столбца", "level": 0,
+      "id": "s03",
+      "section": "start",
+      "topic": "Два столбца",
+      "level": 0,
       "title": "Название и цена",
       "lesson": "Нужно несколько столбцов? Перечисли их **через запятую**: `SELECT a, b FROM ...` Порядок в ответе будет такой же, как ты написал.",
       "example": "SELECT name, age\nFROM users;",
-      "tables": [{"name": "books", "columns": ["title", "author", "price"], "rows": [["Мастер и Маргарита", "Булгаков", 450], ["Война и мир", "Толстой", 700], ["Онегин", "Пушкин", 300]]}],
+      "tables": [
+        {
+          "name": "books",
+          "columns": [
+            "title",
+            "author",
+            "price"
+          ],
+          "rows": [
+            [
+              "Мастер и Маргарита",
+              "Булгаков",
+              450
+            ],
+            [
+              "Война и мир",
+              "Толстой",
+              700
+            ],
+            [
+              "Онегин",
+              "Пушкин",
+              300
+            ]
+          ]
+        }
+      ],
       "question": "Выведи **название и цену** каждой книги (столбцы `title` и `price`).",
-      "expected": {"columns": ["title", "price"], "rows": [["Мастер и Маргарита", 450], ["Война и мир", 700], ["Онегин", 300]]},
+      "expected": {
+        "columns": [
+          "title",
+          "price"
+        ],
+        "rows": [
+          [
+            "Мастер и Маргарита",
+            450
+          ],
+          [
+            "Война и мир",
+            700
+          ],
+          [
+            "Онегин",
+            300
+          ]
+        ]
+      },
       "starter": "SELECT ",
       "solution": "SELECT title, price\nFROM books;",
-      "hints": ["Нужны два столбца: title и price.", "Перечисли их через запятую: SELECT title, price", "Не забудь FROM books в конце."],
+      "hints": [
+        "Нужны два столбца: title и price.",
+        "Перечисли их через запятую: SELECT title, price",
+        "Не забудь FROM books в конце."
+      ],
       "explain": "Столбцы перечисляются через запятую. После последнего столбца запятая не нужна."
     },
     {
-      "id": "s04", "section": "start", "topic": "WHERE и текст", "level": 0,
+      "id": "s04",
+      "section": "start",
+      "topic": "WHERE и текст",
+      "level": 0,
       "title": "Клиенты из Москвы",
       "lesson": "`WHERE` — это **фильтр**: оставляет только строки, где условие верно. Текст пишем в **одинарных кавычках**: `'Москва'`. Без кавычек база решит, что это название столбца.",
       "example": "SELECT name\nFROM users\nWHERE city = 'Казань';",
-      "tables": [{"name": "clients", "columns": ["name", "city"], "rows": [["Аня", "Москва"], ["Борис", "Казань"], ["Вика", "Москва"], ["Глеб", "Сочи"]]}],
+      "tables": [
+        {
+          "name": "clients",
+          "columns": [
+            "name",
+            "city"
+          ],
+          "rows": [
+            [
+              "Аня",
+              "Москва"
+            ],
+            [
+              "Борис",
+              "Казань"
+            ],
+            [
+              "Вика",
+              "Москва"
+            ],
+            [
+              "Глеб",
+              "Сочи"
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имена клиентов из **Москвы**.",
-      "expected": {"columns": ["name"], "rows": [["Аня"], ["Вика"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Аня"
+          ],
+          [
+            "Вика"
+          ]
+        ]
+      },
       "starter": "SELECT name\nFROM clients\n",
       "solution": "SELECT name\nFROM clients\nWHERE city = 'Москва';",
-      "hints": ["После FROM clients добавь строку с WHERE.", "Условие: город равен Москве — city = 'Москва'.", "Москва — это текст, поэтому в одинарных кавычках."],
+      "hints": [
+        "После FROM clients добавь строку с WHERE.",
+        "Условие: город равен Москве — city = 'Москва'.",
+        "Москва — это текст, поэтому в одинарных кавычках."
+      ],
       "explain": "WHERE city = 'Москва' оставляет только строки, где в столбце city написано Москва."
     },
     {
-      "id": "s05", "section": "start", "topic": "WHERE и числа", "level": 0,
+      "id": "s05",
+      "section": "start",
+      "topic": "WHERE и числа",
+      "level": 0,
       "title": "Товары дороже 500",
       "lesson": "Числа сравниваем знаками: `>` больше, `<` меньше, `=` равно. Числа пишем **без кавычек**.",
       "example": "SELECT name\nFROM users\nWHERE age > 30;",
-      "tables": [{"name": "products", "columns": ["name", "price"], "rows": [["Чай", 150], ["Кофе", 600], ["Сок", 90], ["Торт", 900], ["Хлеб", 60]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Чай",
+              150
+            ],
+            [
+              "Кофе",
+              600
+            ],
+            [
+              "Сок",
+              90
+            ],
+            [
+              "Торт",
+              900
+            ],
+            [
+              "Хлеб",
+              60
+            ]
+          ]
+        }
+      ],
       "question": "Выведи названия товаров, которые стоят **больше 500**.",
-      "expected": {"columns": ["name"], "rows": [["Кофе"], ["Торт"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Кофе"
+          ],
+          [
+            "Торт"
+          ]
+        ]
+      },
       "starter": "SELECT name\nFROM products\n",
       "solution": "SELECT name\nFROM products\nWHERE price > 500;",
-      "hints": ["Нужен фильтр WHERE по столбцу price.", "«Больше» — это знак >.", "WHERE price > 500"],
+      "hints": [
+        "Нужен фильтр WHERE по столбцу price.",
+        "«Больше» — это знак >.",
+        "WHERE price > 500"
+      ],
       "explain": "price > 500 — цена строго больше 500. Кофе (600) и Торт (900) подходят."
     },
     {
-      "id": "s06", "section": "start", "topic": "Не больше", "level": 0,
+      "id": "s06",
+      "section": "start",
+      "topic": "Не больше",
+      "level": 0,
       "title": "Товары до 100 ₽",
       "lesson": "«Не больше» — это `<=` (меньше или равно). «Не меньше» — `>=`. Граница тоже попадает в результат.",
       "example": "SELECT name\nFROM users\nWHERE age >= 18;",
-      "tables": [{"name": "products", "columns": ["name", "price"], "rows": [["Чай", 150], ["Кофе", 600], ["Сок", 90], ["Торт", 900], ["Хлеб", 60]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Чай",
+              150
+            ],
+            [
+              "Кофе",
+              600
+            ],
+            [
+              "Сок",
+              90
+            ],
+            [
+              "Торт",
+              900
+            ],
+            [
+              "Хлеб",
+              60
+            ]
+          ]
+        }
+      ],
       "question": "Выведи названия товаров, которые стоят **не больше 100**.",
-      "expected": {"columns": ["name"], "rows": [["Сок"], ["Хлеб"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Сок"
+          ],
+          [
+            "Хлеб"
+          ]
+        ]
+      },
       "starter": "SELECT name\nFROM products\n",
       "solution": "SELECT name\nFROM products\nWHERE price <= 100;",
-      "hints": ["«Не больше 100» значит «100 или меньше».", "Знак — <= (сначала <, потом =)."],
+      "hints": [
+        "«Не больше 100» значит «100 или меньше».",
+        "Знак — <= (сначала <, потом =)."
+      ],
       "explain": "price <= 100 берёт всё, что дешевле 100, и ровно 100 тоже."
     },
     {
-      "id": "s07", "section": "start", "topic": "Не равно", "level": 0,
+      "id": "s07",
+      "section": "start",
+      "topic": "Не равно",
+      "level": 0,
       "title": "Все, кроме Москвы",
       "lesson": "«Не равно» в SQL пишется так: `<>`. Например, `city <> 'Москва'` — все города, кроме Москвы.",
       "example": "SELECT name\nFROM users\nWHERE city <> 'Сочи';",
-      "tables": [{"name": "clients", "columns": ["name", "city"], "rows": [["Аня", "Москва"], ["Борис", "Казань"], ["Вика", "Москва"], ["Глеб", "Сочи"]]}],
+      "tables": [
+        {
+          "name": "clients",
+          "columns": [
+            "name",
+            "city"
+          ],
+          "rows": [
+            [
+              "Аня",
+              "Москва"
+            ],
+            [
+              "Борис",
+              "Казань"
+            ],
+            [
+              "Вика",
+              "Москва"
+            ],
+            [
+              "Глеб",
+              "Сочи"
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имена клиентов **не из Москвы**.",
-      "expected": {"columns": ["name"], "rows": [["Борис"], ["Глеб"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Борис"
+          ],
+          [
+            "Глеб"
+          ]
+        ]
+      },
       "starter": "SELECT name\nFROM clients\n",
       "solution": "SELECT name\nFROM clients\nWHERE city <> 'Москва';",
-      "hints": ["Нужен WHERE по столбцу city.", "Знак «не равно» — <>", "WHERE city <> 'Москва'"],
+      "hints": [
+        "Нужен WHERE по столбцу city.",
+        "Знак «не равно» — <>",
+        "WHERE city <> 'Москва'"
+      ],
       "explain": "<> значит «не равно». Остались Борис из Казани и Глеб из Сочи."
     },
     {
-      "id": "s08", "section": "start", "topic": "AND", "level": 0,
+      "id": "s08",
+      "section": "start",
+      "topic": "AND",
+      "level": 0,
       "title": "Взрослые из Москвы",
       "lesson": "`AND` (и) соединяет два условия: строка попадёт в ответ, только если **оба** верны.",
       "example": "SELECT name\nFROM users\nWHERE city = 'Сочи'\n  AND age > 20;",
-      "tables": [{"name": "users", "columns": ["name", "city", "age"], "rows": [["Аня", "Москва", 17], ["Борис", "Москва", 25], ["Вика", "Казань", 30], ["Глеб", "Москва", 40]]}],
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "city",
+            "age"
+          ],
+          "rows": [
+            [
+              "Аня",
+              "Москва",
+              17
+            ],
+            [
+              "Борис",
+              "Москва",
+              25
+            ],
+            [
+              "Вика",
+              "Казань",
+              30
+            ],
+            [
+              "Глеб",
+              "Москва",
+              40
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имена тех, кто живёт в **Москве** и кому **18 лет или больше**.",
-      "expected": {"columns": ["name"], "rows": [["Борис"], ["Глеб"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Борис"
+          ],
+          [
+            "Глеб"
+          ]
+        ]
+      },
       "starter": "SELECT name\nFROM users\nWHERE ",
       "solution": "SELECT name\nFROM users\nWHERE city = 'Москва'\n  AND age >= 18;",
-      "hints": ["Первое условие: city = 'Москва'.", "Второе условие: age >= 18.", "Соедини их словом AND."],
+      "hints": [
+        "Первое условие: city = 'Москва'.",
+        "Второе условие: age >= 18.",
+        "Соедини их словом AND."
+      ],
       "explain": "Аня из Москвы, но ей 17 — второе условие не выполнено. Остались Борис и Глеб."
     },
     {
-      "id": "s09", "section": "start", "topic": "OR", "level": 0,
+      "id": "s09",
+      "section": "start",
+      "topic": "OR",
+      "level": 0,
       "title": "Из Казани или младше 18",
       "lesson": "`OR` (или) — строка попадёт в ответ, если верно **хотя бы одно** из условий.",
       "example": "SELECT name\nFROM users\nWHERE city = 'Сочи'\n   OR city = 'Омск';",
-      "tables": [{"name": "users", "columns": ["name", "city", "age"], "rows": [["Аня", "Москва", 17], ["Борис", "Москва", 25], ["Вика", "Казань", 30], ["Глеб", "Москва", 40]]}],
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "city",
+            "age"
+          ],
+          "rows": [
+            [
+              "Аня",
+              "Москва",
+              17
+            ],
+            [
+              "Борис",
+              "Москва",
+              25
+            ],
+            [
+              "Вика",
+              "Казань",
+              30
+            ],
+            [
+              "Глеб",
+              "Москва",
+              40
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имена тех, кто живёт в **Казани** или кому **меньше 18**.",
-      "expected": {"columns": ["name"], "rows": [["Аня"], ["Вика"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Аня"
+          ],
+          [
+            "Вика"
+          ]
+        ]
+      },
       "starter": "SELECT name\nFROM users\nWHERE ",
       "solution": "SELECT name\nFROM users\nWHERE city = 'Казань'\n   OR age < 18;",
-      "hints": ["Первое условие: city = 'Казань'.", "Второе: age < 18.", "Соедини их словом OR."],
+      "hints": [
+        "Первое условие: city = 'Казань'.",
+        "Второе: age < 18.",
+        "Соедини их словом OR."
+      ],
       "explain": "Вика подошла по городу, Аня — по возрасту. Хватает одного верного условия."
     },
     {
-      "id": "s10", "section": "start", "topic": "ORDER BY", "level": 0,
+      "id": "s10",
+      "section": "start",
+      "topic": "ORDER BY",
+      "level": 0,
       "title": "От дешёвых к дорогим",
       "lesson": "`ORDER BY столбец` **сортирует** строки: числа — от меньшего к большему, текст — от А до Я. Пишется в самом конце запроса.",
       "example": "SELECT name, age\nFROM users\nORDER BY age;",
-      "tables": [{"name": "products", "columns": ["name", "price"], "rows": [["Чай", 150], ["Кофе", 600], ["Сок", 90], ["Торт", 900], ["Хлеб", 60]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Чай",
+              150
+            ],
+            [
+              "Кофе",
+              600
+            ],
+            [
+              "Сок",
+              90
+            ],
+            [
+              "Торт",
+              900
+            ],
+            [
+              "Хлеб",
+              60
+            ]
+          ]
+        }
+      ],
       "question": "Выведи название и цену товаров, **от самого дешёвого к самому дорогому**.",
-      "expected": {"columns": ["name", "price"], "rows": [["Хлеб", 60], ["Сок", 90], ["Чай", 150], ["Кофе", 600], ["Торт", 900]]},
+      "expected": {
+        "columns": [
+          "name",
+          "price"
+        ],
+        "rows": [
+          [
+            "Хлеб",
+            60
+          ],
+          [
+            "Сок",
+            90
+          ],
+          [
+            "Чай",
+            150
+          ],
+          [
+            "Кофе",
+            600
+          ],
+          [
+            "Торт",
+            900
+          ]
+        ]
+      },
       "ordered": true,
       "starter": "SELECT name, price\nFROM products\n",
       "solution": "SELECT name, price\nFROM products\nORDER BY price;",
-      "hints": ["Сортировка — ORDER BY.", "Сортируем по цене: ORDER BY price."],
+      "hints": [
+        "Сортировка — ORDER BY.",
+        "Сортируем по цене: ORDER BY price."
+      ],
       "explain": "ORDER BY price расставляет строки по возрастанию цены."
     },
     {
-      "id": "s11", "section": "start", "topic": "ORDER BY DESC", "level": 0,
+      "id": "s11",
+      "section": "start",
+      "topic": "ORDER BY DESC",
+      "level": 0,
       "title": "Сначала самые дорогие",
       "lesson": "Чтобы отсортировать **наоборот** (от большего к меньшему), добавь `DESC` после столбца: `ORDER BY price DESC`.",
       "example": "SELECT name\nFROM users\nORDER BY age DESC;",
-      "tables": [{"name": "products", "columns": ["name", "price"], "rows": [["Чай", 150], ["Кофе", 600], ["Сок", 90], ["Торт", 900], ["Хлеб", 60]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Чай",
+              150
+            ],
+            [
+              "Кофе",
+              600
+            ],
+            [
+              "Сок",
+              90
+            ],
+            [
+              "Торт",
+              900
+            ],
+            [
+              "Хлеб",
+              60
+            ]
+          ]
+        }
+      ],
       "question": "Выведи названия товаров, **от самого дорогого к самому дешёвому**.",
-      "expected": {"columns": ["name"], "rows": [["Торт"], ["Кофе"], ["Чай"], ["Сок"], ["Хлеб"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Торт"
+          ],
+          [
+            "Кофе"
+          ],
+          [
+            "Чай"
+          ],
+          [
+            "Сок"
+          ],
+          [
+            "Хлеб"
+          ]
+        ]
+      },
       "ordered": true,
       "starter": "SELECT name\nFROM products\n",
       "solution": "SELECT name\nFROM products\nORDER BY price DESC;",
-      "hints": ["Сортируем по цене: ORDER BY price.", "Чтобы сначала были дорогие, добавь DESC."],
+      "hints": [
+        "Сортируем по цене: ORDER BY price.",
+        "Чтобы сначала были дорогие, добавь DESC."
+      ],
       "explain": "DESC — «по убыванию». Без него сортировка идёт по возрастанию."
     },
     {
-      "id": "s12", "section": "start", "topic": "LIMIT", "level": 0,
+      "id": "s12",
+      "section": "start",
+      "topic": "LIMIT",
+      "level": 0,
       "title": "Два самых дешёвых",
       "lesson": "`LIMIT n` оставляет только **первые n строк**. Вместе с ORDER BY получается «топ»: самые дешёвые, самые новые и т. д.",
       "example": "SELECT name\nFROM users\nORDER BY age\nLIMIT 3;",
-      "tables": [{"name": "products", "columns": ["name", "price"], "rows": [["Чай", 150], ["Кофе", 600], ["Сок", 90], ["Торт", 900], ["Хлеб", 60]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Чай",
+              150
+            ],
+            [
+              "Кофе",
+              600
+            ],
+            [
+              "Сок",
+              90
+            ],
+            [
+              "Торт",
+              900
+            ],
+            [
+              "Хлеб",
+              60
+            ]
+          ]
+        }
+      ],
       "question": "Выведи названия **двух самых дешёвых** товаров.",
-      "expected": {"columns": ["name"], "rows": [["Хлеб"], ["Сок"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Хлеб"
+          ],
+          [
+            "Сок"
+          ]
+        ]
+      },
       "ordered": true,
       "starter": "SELECT name\nFROM products\n",
       "solution": "SELECT name\nFROM products\nORDER BY price\nLIMIT 2;",
-      "hints": ["Сначала отсортируй от дешёвых: ORDER BY price.", "Потом оставь 2 строки: LIMIT 2."],
+      "hints": [
+        "Сначала отсортируй от дешёвых: ORDER BY price.",
+        "Потом оставь 2 строки: LIMIT 2."
+      ],
       "explain": "Сначала ORDER BY ставит дешёвые наверх, потом LIMIT 2 берёт две верхние строки."
     },
     {
-      "id": "s13", "section": "start", "topic": "COUNT", "level": 0,
+      "id": "s13",
+      "section": "start",
+      "topic": "COUNT",
+      "level": 0,
       "title": "Сколько всего заказов",
       "lesson": "`COUNT(*)` **считает строки**. Ответ — одно число.",
       "example": "SELECT COUNT(*)\nFROM users;",
-      "tables": [{"name": "orders", "columns": ["id", "client", "amount"], "rows": [[1, "Аня", 300], [2, "Борис", 500], [3, "Аня", 200], [4, "Вика", 1000], [5, "Аня", 100]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "client",
+            "amount"
+          ],
+          "rows": [
+            [
+              1,
+              "Аня",
+              300
+            ],
+            [
+              2,
+              "Борис",
+              500
+            ],
+            [
+              3,
+              "Аня",
+              200
+            ],
+            [
+              4,
+              "Вика",
+              1000
+            ],
+            [
+              5,
+              "Аня",
+              100
+            ]
+          ]
+        }
+      ],
       "question": "Посчитай, сколько **всего заказов** в таблице `orders`.",
-      "expected": {"columns": ["count"], "rows": [[5]]},
+      "expected": {
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            5
+          ]
+        ]
+      },
       "starter": "SELECT ",
       "solution": "SELECT COUNT(*)\nFROM orders;",
-      "hints": ["После SELECT напиши COUNT(*).", "Дальше FROM orders."],
+      "hints": [
+        "После SELECT напиши COUNT(*).",
+        "Дальше FROM orders."
+      ],
       "explain": "COUNT(*) посчитал все 5 строк таблицы."
     },
     {
-      "id": "s14", "section": "start", "topic": "COUNT + WHERE", "level": 0,
+      "id": "s14",
+      "section": "start",
+      "topic": "COUNT + WHERE",
+      "level": 0,
       "title": "Сколько заказов у Ани",
       "lesson": "COUNT можно совместить с WHERE: сначала WHERE отбирает строки, потом COUNT их считает.",
       "example": "SELECT COUNT(*)\nFROM users\nWHERE city = 'Сочи';",
-      "tables": [{"name": "orders", "columns": ["id", "client", "amount"], "rows": [[1, "Аня", 300], [2, "Борис", 500], [3, "Аня", 200], [4, "Вика", 1000], [5, "Аня", 100]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "client",
+            "amount"
+          ],
+          "rows": [
+            [
+              1,
+              "Аня",
+              300
+            ],
+            [
+              2,
+              "Борис",
+              500
+            ],
+            [
+              3,
+              "Аня",
+              200
+            ],
+            [
+              4,
+              "Вика",
+              1000
+            ],
+            [
+              5,
+              "Аня",
+              100
+            ]
+          ]
+        }
+      ],
       "question": "Посчитай, сколько заказов сделала **Аня**.",
-      "expected": {"columns": ["count"], "rows": [[3]]},
+      "expected": {
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ]
+      },
       "starter": "SELECT COUNT(*)\nFROM orders\n",
       "solution": "SELECT COUNT(*)\nFROM orders\nWHERE client = 'Аня';",
-      "hints": ["Добавь фильтр WHERE по столбцу client.", "WHERE client = 'Аня' — имя в одинарных кавычках."],
+      "hints": [
+        "Добавь фильтр WHERE по столбцу client.",
+        "WHERE client = 'Аня' — имя в одинарных кавычках."
+      ],
       "explain": "WHERE оставил 3 заказа Ани, COUNT(*) их посчитал."
     },
     {
-      "id": "s15", "section": "start", "topic": "SUM", "level": 0,
+      "id": "s15",
+      "section": "start",
+      "topic": "SUM",
+      "level": 0,
       "title": "Общая выручка",
       "lesson": "`SUM(столбец)` **складывает** все числа в столбце.",
       "example": "SELECT SUM(price)\nFROM products;",
-      "tables": [{"name": "orders", "columns": ["id", "client", "amount"], "rows": [[1, "Аня", 300], [2, "Борис", 500], [3, "Аня", 200], [4, "Вика", 1000], [5, "Аня", 100]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "client",
+            "amount"
+          ],
+          "rows": [
+            [
+              1,
+              "Аня",
+              300
+            ],
+            [
+              2,
+              "Борис",
+              500
+            ],
+            [
+              3,
+              "Аня",
+              200
+            ],
+            [
+              4,
+              "Вика",
+              1000
+            ],
+            [
+              5,
+              "Аня",
+              100
+            ]
+          ]
+        }
+      ],
       "question": "Посчитай **сумму всех заказов** (столбец `amount`).",
-      "expected": {"columns": ["sum"], "rows": [[2100]]},
+      "expected": {
+        "columns": [
+          "sum"
+        ],
+        "rows": [
+          [
+            2100
+          ]
+        ]
+      },
       "starter": "SELECT ",
       "solution": "SELECT SUM(amount)\nFROM orders;",
-      "hints": ["Нужна функция SUM.", "В скобках — столбец, который складываем: SUM(amount)."],
+      "hints": [
+        "Нужна функция SUM.",
+        "В скобках — столбец, который складываем: SUM(amount)."
+      ],
       "explain": "300 + 500 + 200 + 1000 + 100 = 2100."
     },
     {
-      "id": "s16", "section": "start", "topic": "AVG", "level": 0,
+      "id": "s16",
+      "section": "start",
+      "topic": "AVG",
+      "level": 0,
       "title": "Средний чек",
       "lesson": "`AVG(столбец)` считает **среднее**: складывает числа и делит на их количество.",
       "example": "SELECT AVG(age)\nFROM users;",
-      "tables": [{"name": "orders", "columns": ["id", "client", "amount"], "rows": [[1, "Аня", 300], [2, "Борис", 500], [3, "Аня", 200], [4, "Вика", 1000], [5, "Аня", 100]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "client",
+            "amount"
+          ],
+          "rows": [
+            [
+              1,
+              "Аня",
+              300
+            ],
+            [
+              2,
+              "Борис",
+              500
+            ],
+            [
+              3,
+              "Аня",
+              200
+            ],
+            [
+              4,
+              "Вика",
+              1000
+            ],
+            [
+              5,
+              "Аня",
+              100
+            ]
+          ]
+        }
+      ],
       "question": "Посчитай **среднюю сумму** заказа.",
-      "expected": {"columns": ["avg"], "rows": [[420]]},
+      "expected": {
+        "columns": [
+          "avg"
+        ],
+        "rows": [
+          [
+            420
+          ]
+        ]
+      },
       "starter": "SELECT ",
       "solution": "SELECT AVG(amount)\nFROM orders;",
-      "hints": ["Среднее — функция AVG.", "SELECT AVG(amount) FROM orders;"],
+      "hints": [
+        "Среднее — функция AVG.",
+        "SELECT AVG(amount) FROM orders;"
+      ],
       "explain": "2100 / 5 = 420. PostgreSQL может показать 420.0000 — это то же число."
     },
     {
-      "id": "s17", "section": "start", "topic": "MAX", "level": 0,
+      "id": "s17",
+      "section": "start",
+      "topic": "MAX",
+      "level": 0,
       "title": "Самый большой заказ",
       "lesson": "`MAX(столбец)` — самое **большое** значение, `MIN(столбец)` — самое **маленькое**.",
       "example": "SELECT MIN(age)\nFROM users;",
-      "tables": [{"name": "orders", "columns": ["id", "client", "amount"], "rows": [[1, "Аня", 300], [2, "Борис", 500], [3, "Аня", 200], [4, "Вика", 1000], [5, "Аня", 100]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "client",
+            "amount"
+          ],
+          "rows": [
+            [
+              1,
+              "Аня",
+              300
+            ],
+            [
+              2,
+              "Борис",
+              500
+            ],
+            [
+              3,
+              "Аня",
+              200
+            ],
+            [
+              4,
+              "Вика",
+              1000
+            ],
+            [
+              5,
+              "Аня",
+              100
+            ]
+          ]
+        }
+      ],
       "question": "Найди сумму **самого большого** заказа.",
-      "expected": {"columns": ["max"], "rows": [[1000]]},
+      "expected": {
+        "columns": [
+          "max"
+        ],
+        "rows": [
+          [
+            1000
+          ]
+        ]
+      },
       "starter": "SELECT ",
       "solution": "SELECT MAX(amount)\nFROM orders;",
-      "hints": ["Самое большое — функция MAX.", "SELECT MAX(amount) FROM orders;"],
+      "hints": [
+        "Самое большое — функция MAX.",
+        "SELECT MAX(amount) FROM orders;"
+      ],
       "explain": "MAX нашёл самое большое число в столбце amount — 1000."
     },
     {
-      "id": "s18", "section": "start", "topic": "AS", "level": 0,
+      "id": "s18",
+      "section": "start",
+      "topic": "AS",
+      "level": 0,
       "title": "Цена с доставкой",
       "lesson": "В SELECT можно **считать**: `price + 50`. А `AS имя` даёт новому столбцу понятное название.",
       "example": "SELECT name, age + 1 AS next_age\nFROM users;",
-      "tables": [{"name": "products", "columns": ["name", "price"], "rows": [["Чай", 150], ["Кофе", 600], ["Сок", 90], ["Торт", 900], ["Хлеб", 60]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Чай",
+              150
+            ],
+            [
+              "Кофе",
+              600
+            ],
+            [
+              "Сок",
+              90
+            ],
+            [
+              "Торт",
+              900
+            ],
+            [
+              "Хлеб",
+              60
+            ]
+          ]
+        }
+      ],
       "question": "Доставка стоит 50 ₽. Выведи название товара и цену с доставкой в столбце с именем **total**.",
-      "expected": {"columns": ["name", "total"], "rows": [["Чай", 200], ["Кофе", 650], ["Сок", 140], ["Торт", 950], ["Хлеб", 110]]},
+      "expected": {
+        "columns": [
+          "name",
+          "total"
+        ],
+        "rows": [
+          [
+            "Чай",
+            200
+          ],
+          [
+            "Кофе",
+            650
+          ],
+          [
+            "Сок",
+            140
+          ],
+          [
+            "Торт",
+            950
+          ],
+          [
+            "Хлеб",
+            110
+          ]
+        ]
+      },
       "names": true,
       "starter": "SELECT name, ",
       "solution": "SELECT name, price + 50 AS total\nFROM products;",
-      "hints": ["Цена с доставкой — это price + 50.", "Чтобы столбец назывался total, допиши AS total.", "SELECT name, price + 50 AS total FROM products;"],
+      "hints": [
+        "Цена с доставкой — это price + 50.",
+        "Чтобы столбец назывался total, допиши AS total.",
+        "SELECT name, price + 50 AS total FROM products;"
+      ],
       "explain": "price + 50 считается для каждой строки, а AS total задаёт название столбца."
     },
     {
-      "id": "s19", "section": "start", "topic": "DISTINCT", "level": 0,
+      "id": "s19",
+      "section": "start",
+      "topic": "DISTINCT",
+      "level": 0,
       "title": "Города без повторов",
       "lesson": "`DISTINCT` убирает **повторы**: одинаковые строки останутся по одному разу. Пишется сразу после SELECT.",
       "example": "SELECT DISTINCT age\nFROM users;",
-      "tables": [{"name": "clients", "columns": ["name", "city"], "rows": [["Аня", "Москва"], ["Борис", "Казань"], ["Вика", "Москва"], ["Глеб", "Сочи"]]}],
+      "tables": [
+        {
+          "name": "clients",
+          "columns": [
+            "name",
+            "city"
+          ],
+          "rows": [
+            [
+              "Аня",
+              "Москва"
+            ],
+            [
+              "Борис",
+              "Казань"
+            ],
+            [
+              "Вика",
+              "Москва"
+            ],
+            [
+              "Глеб",
+              "Сочи"
+            ]
+          ]
+        }
+      ],
       "question": "Выведи список городов **без повторов**.",
-      "expected": {"columns": ["city"], "rows": [["Москва"], ["Казань"], ["Сочи"]]},
+      "expected": {
+        "columns": [
+          "city"
+        ],
+        "rows": [
+          [
+            "Москва"
+          ],
+          [
+            "Казань"
+          ],
+          [
+            "Сочи"
+          ]
+        ]
+      },
       "starter": "SELECT ",
       "solution": "SELECT DISTINCT city\nFROM clients;",
-      "hints": ["Нужен столбец city.", "Чтобы убрать повторы, после SELECT напиши DISTINCT."],
+      "hints": [
+        "Нужен столбец city.",
+        "Чтобы убрать повторы, после SELECT напиши DISTINCT."
+      ],
       "explain": "Москва встречалась дважды, а DISTINCT оставил её один раз."
     },
     {
-      "id": "s20", "section": "start", "topic": "IS NULL", "level": 0,
+      "id": "s20",
+      "section": "start",
+      "topic": "IS NULL",
+      "level": 0,
       "title": "Клиенты без телефона",
       "lesson": "`NULL` — это **пустая ячейка**, «значение неизвестно». Найти пустые ячейки можно только так: `IS NULL`. Запись `= NULL` не работает.",
       "example": "SELECT name\nFROM users\nWHERE email IS NULL;",
-      "tables": [{"name": "contacts", "columns": ["name", "phone"], "rows": [["Аня", "+7 900 111-22-33"], ["Борис", null], ["Вика", "+7 900 444-55-66"], ["Глеб", null]]}],
+      "tables": [
+        {
+          "name": "contacts",
+          "columns": [
+            "name",
+            "phone"
+          ],
+          "rows": [
+            [
+              "Аня",
+              "+7 900 111-22-33"
+            ],
+            [
+              "Борис",
+              null
+            ],
+            [
+              "Вика",
+              "+7 900 444-55-66"
+            ],
+            [
+              "Глеб",
+              null
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имена клиентов, у которых **нет телефона**.",
-      "expected": {"columns": ["name"], "rows": [["Борис"], ["Глеб"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Борис"
+          ],
+          [
+            "Глеб"
+          ]
+        ]
+      },
       "starter": "SELECT name\nFROM contacts\n",
       "solution": "SELECT name\nFROM contacts\nWHERE phone IS NULL;",
-      "hints": ["Пустой телефон — это NULL.", "Для NULL пишут не =, а IS NULL: WHERE phone IS NULL."],
+      "hints": [
+        "Пустой телефон — это NULL.",
+        "Для NULL пишут не =, а IS NULL: WHERE phone IS NULL."
+      ],
       "explain": "IS NULL находит пустые ячейки. С = NULL запрос вернул бы ноль строк."
     },
     {
-      "id": "s21", "section": "start", "topic": "LIKE", "level": 0,
+      "id": "s21",
+      "section": "start",
+      "topic": "LIKE",
+      "level": 0,
       "title": "Книги про SQL",
       "lesson": "`LIKE` ищет **кусочек текста**. Знак `%` значит «любые символы». `'%SQL%'` — слово SQL в любом месте.",
       "example": "SELECT name\nFROM cities\nWHERE name LIKE '%град%';",
-      "tables": [{"name": "books", "columns": ["title", "price"], "rows": [["SQL для всех", 500], ["Python с нуля", 450], ["Основы SQL", 300], ["Excel быстро", 350]]}],
+      "tables": [
+        {
+          "name": "books",
+          "columns": [
+            "title",
+            "price"
+          ],
+          "rows": [
+            [
+              "SQL для всех",
+              500
+            ],
+            [
+              "Python с нуля",
+              450
+            ],
+            [
+              "Основы SQL",
+              300
+            ],
+            [
+              "Excel быстро",
+              350
+            ]
+          ]
+        }
+      ],
       "question": "Выведи названия книг, в которых есть слово **SQL**.",
-      "expected": {"columns": ["title"], "rows": [["SQL для всех"], ["Основы SQL"]]},
+      "expected": {
+        "columns": [
+          "title"
+        ],
+        "rows": [
+          [
+            "SQL для всех"
+          ],
+          [
+            "Основы SQL"
+          ]
+        ]
+      },
       "starter": "SELECT title\nFROM books\n",
       "solution": "SELECT title\nFROM books\nWHERE title LIKE '%SQL%';",
-      "hints": ["Нужен фильтр WHERE и слово LIKE.", "Шаблон со словом SQL внутри: '%SQL%'.", "WHERE title LIKE '%SQL%';"],
+      "hints": [
+        "Нужен фильтр WHERE и слово LIKE.",
+        "Шаблон со словом SQL внутри: '%SQL%'.",
+        "WHERE title LIKE '%SQL%';"
+      ],
       "explain": "%SQL% значит: до слова и после него может быть что угодно."
     },
     {
-      "id": "s22", "section": "start", "topic": "IN", "level": 0,
+      "id": "s22",
+      "section": "start",
+      "topic": "IN",
+      "level": 0,
       "title": "Клиенты из двух городов",
       "lesson": "`IN (...)` — короткая замена нескольким `OR`. Условие верно, если значение есть в списке.",
       "example": "SELECT name\nFROM users\nWHERE age IN (18, 20, 25);",
-      "tables": [{"name": "clients", "columns": ["name", "city"], "rows": [["Аня", "Москва"], ["Борис", "Казань"], ["Вика", "Сочи"], ["Глеб", "Москва"], ["Дина", "Омск"]]}],
+      "tables": [
+        {
+          "name": "clients",
+          "columns": [
+            "name",
+            "city"
+          ],
+          "rows": [
+            [
+              "Аня",
+              "Москва"
+            ],
+            [
+              "Борис",
+              "Казань"
+            ],
+            [
+              "Вика",
+              "Сочи"
+            ],
+            [
+              "Глеб",
+              "Москва"
+            ],
+            [
+              "Дина",
+              "Омск"
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имена клиентов из городов **Москва** или **Сочи**.",
-      "expected": {"columns": ["name"], "rows": [["Аня"], ["Вика"], ["Глеб"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Аня"
+          ],
+          [
+            "Вика"
+          ],
+          [
+            "Глеб"
+          ]
+        ]
+      },
       "starter": "SELECT name\nFROM clients\n",
       "solution": "SELECT name\nFROM clients\nWHERE city IN ('Москва', 'Сочи');",
-      "hints": ["Нужен WHERE по городу.", "Города перечисли в скобках после IN, текст — в кавычках.", "WHERE city IN ('Москва', 'Сочи');"],
+      "hints": [
+        "Нужен WHERE по городу.",
+        "Города перечисли в скобках после IN, текст — в кавычках.",
+        "WHERE city IN ('Москва', 'Сочи');"
+      ],
       "explain": "IN проверяет, есть ли город в списке. Строки Казани и Омска не подошли."
     },
     {
-      "id": "s23", "section": "start", "topic": "BETWEEN", "level": 0,
+      "id": "s23",
+      "section": "start",
+      "topic": "BETWEEN",
+      "level": 0,
       "title": "Цена от 100 до 500",
       "lesson": "`BETWEEN 100 AND 500` — «от 100 до 500». **Обе границы входят** в результат.",
       "example": "SELECT name\nFROM users\nWHERE age BETWEEN 18 AND 30;",
-      "tables": [{"name": "products", "columns": ["title", "price"], "rows": [["Ручка", 50], ["Тетрадь", 120], ["Кружка", 350], ["Лампа", 800], ["Чайник", 1200]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "title",
+            "price"
+          ],
+          "rows": [
+            [
+              "Ручка",
+              50
+            ],
+            [
+              "Тетрадь",
+              120
+            ],
+            [
+              "Кружка",
+              350
+            ],
+            [
+              "Лампа",
+              800
+            ],
+            [
+              "Чайник",
+              1200
+            ]
+          ]
+        }
+      ],
       "question": "Выведи названия товаров с ценой **от 100 до 500**.",
-      "expected": {"columns": ["title"], "rows": [["Тетрадь"], ["Кружка"]]},
+      "expected": {
+        "columns": [
+          "title"
+        ],
+        "rows": [
+          [
+            "Тетрадь"
+          ],
+          [
+            "Кружка"
+          ]
+        ]
+      },
       "starter": "SELECT title\nFROM products\n",
       "solution": "SELECT title\nFROM products\nWHERE price BETWEEN 100 AND 500;",
-      "hints": ["Нужен фильтр WHERE по цене.", "Диапазон: BETWEEN 100 AND 500.", "WHERE price BETWEEN 100 AND 500;"],
+      "hints": [
+        "Нужен фильтр WHERE по цене.",
+        "Диапазон: BETWEEN 100 AND 500.",
+        "WHERE price BETWEEN 100 AND 500;"
+      ],
       "explain": "BETWEEN оставил цены от 100 до 500. Ручка слишком дешёвая, лампа и чайник дорогие."
     },
     {
-      "id": "s24", "section": "start", "topic": "GROUP BY", "level": 0,
+      "id": "s24",
+      "section": "start",
+      "topic": "GROUP BY",
+      "level": 0,
       "title": "Клиенты по городам",
       "lesson": "`GROUP BY` собирает строки в **группы**, а `COUNT(*)` считает строки в каждой группе.",
       "example": "SELECT dept, COUNT(*)\nFROM staff\nGROUP BY dept;",
-      "tables": [{"name": "clients", "columns": ["name", "city"], "rows": [["Аня", "Москва"], ["Борис", "Казань"], ["Вика", "Москва"], ["Глеб", "Москва"], ["Дина", "Казань"]]}],
+      "tables": [
+        {
+          "name": "clients",
+          "columns": [
+            "name",
+            "city"
+          ],
+          "rows": [
+            [
+              "Аня",
+              "Москва"
+            ],
+            [
+              "Борис",
+              "Казань"
+            ],
+            [
+              "Вика",
+              "Москва"
+            ],
+            [
+              "Глеб",
+              "Москва"
+            ],
+            [
+              "Дина",
+              "Казань"
+            ]
+          ]
+        }
+      ],
       "question": "Посчитай, сколько клиентов в каждом городе. Столбцы: **city** и **cnt**.",
-      "expected": {"columns": ["city", "cnt"], "rows": [["Москва", 3], ["Казань", 2]]},
+      "expected": {
+        "columns": [
+          "city",
+          "cnt"
+        ],
+        "rows": [
+          [
+            "Москва",
+            3
+          ],
+          [
+            "Казань",
+            2
+          ]
+        ]
+      },
       "names": true,
       "starter": "SELECT city, ",
       "solution": "SELECT city, COUNT(*) AS cnt\nFROM clients\nGROUP BY city;",
-      "hints": ["Считать строки умеет COUNT(*).", "Группировать нужно по городу: GROUP BY city.", "SELECT city, COUNT(*) AS cnt FROM clients GROUP BY city;"],
+      "hints": [
+        "Считать строки умеет COUNT(*).",
+        "Группировать нужно по городу: GROUP BY city.",
+        "SELECT city, COUNT(*) AS cnt FROM clients GROUP BY city;"
+      ],
       "explain": "Строки сгруппировались по городу, и COUNT посчитал их: Москва — 3, Казань — 2."
     },
     {
-      "id": "s25", "section": "start", "topic": "GROUP BY", "level": 0,
+      "id": "s25",
+      "section": "start",
+      "topic": "GROUP BY",
+      "level": 0,
       "title": "Продажи по магазинам",
       "lesson": "`GROUP BY` работает и с `SUM`: сумма считается **отдельно для каждой группы**.",
       "example": "SELECT dept, SUM(salary)\nFROM staff\nGROUP BY dept;",
-      "tables": [{"name": "sales", "columns": ["shop", "amount"], "rows": [["Север", 100], ["Юг", 200], ["Север", 150], ["Юг", 60], ["Центр", 300]]}],
+      "tables": [
+        {
+          "name": "sales",
+          "columns": [
+            "shop",
+            "amount"
+          ],
+          "rows": [
+            [
+              "Север",
+              100
+            ],
+            [
+              "Юг",
+              200
+            ],
+            [
+              "Север",
+              150
+            ],
+            [
+              "Юг",
+              60
+            ],
+            [
+              "Центр",
+              300
+            ]
+          ]
+        }
+      ],
       "question": "Посчитай сумму продаж по каждому магазину. Столбцы: **shop** и **total**.",
-      "expected": {"columns": ["shop", "total"], "rows": [["Север", 250], ["Юг", 260], ["Центр", 300]]},
+      "expected": {
+        "columns": [
+          "shop",
+          "total"
+        ],
+        "rows": [
+          [
+            "Север",
+            250
+          ],
+          [
+            "Юг",
+            260
+          ],
+          [
+            "Центр",
+            300
+          ]
+        ]
+      },
       "names": true,
       "starter": "SELECT shop, ",
       "solution": "SELECT shop, SUM(amount) AS total\nFROM sales\nGROUP BY shop;",
-      "hints": ["Сумму считает SUM(amount).", "Группировать нужно по магазину: GROUP BY shop.", "SELECT shop, SUM(amount) AS total FROM sales GROUP BY shop;"],
+      "hints": [
+        "Сумму считает SUM(amount).",
+        "Группировать нужно по магазину: GROUP BY shop.",
+        "SELECT shop, SUM(amount) AS total FROM sales GROUP BY shop;"
+      ],
       "explain": "Для каждого магазина сложились его продажи: Север 100+150, Юг 200+60."
     },
     {
-      "id": "s26", "section": "start", "topic": "ORDER BY", "level": 0,
+      "id": "s26",
+      "section": "start",
+      "topic": "ORDER BY",
+      "level": 0,
       "title": "Сортировка по двум столбцам",
       "lesson": "В `ORDER BY` можно указать **два столбца** через запятую. Сначала сортируется по первому, а при равенстве — по второму.",
       "example": "SELECT name, age\nFROM users\nORDER BY age DESC, name;",
-      "tables": [{"name": "players", "columns": ["team", "name", "points"], "rows": [["Синие", "Глеб", 7], ["Красные", "Аня", 10], ["Синие", "Дина", 9], ["Красные", "Борис", 12]]}],
+      "tables": [
+        {
+          "name": "players",
+          "columns": [
+            "team",
+            "name",
+            "points"
+          ],
+          "rows": [
+            [
+              "Синие",
+              "Глеб",
+              7
+            ],
+            [
+              "Красные",
+              "Аня",
+              10
+            ],
+            [
+              "Синие",
+              "Дина",
+              9
+            ],
+            [
+              "Красные",
+              "Борис",
+              12
+            ]
+          ]
+        }
+      ],
       "question": "Выведи всё из таблицы: сначала по команде (по алфавиту), а внутри команды — по очкам **от большего к меньшему**.",
-      "expected": {"columns": ["team", "name", "points"], "rows": [["Красные", "Борис", 12], ["Красные", "Аня", 10], ["Синие", "Дина", 9], ["Синие", "Глеб", 7]]},
+      "expected": {
+        "columns": [
+          "team",
+          "name",
+          "points"
+        ],
+        "rows": [
+          [
+            "Красные",
+            "Борис",
+            12
+          ],
+          [
+            "Красные",
+            "Аня",
+            10
+          ],
+          [
+            "Синие",
+            "Дина",
+            9
+          ],
+          [
+            "Синие",
+            "Глеб",
+            7
+          ]
+        ]
+      },
       "ordered": true,
       "starter": "SELECT team, name, points\nFROM players\n",
       "solution": "SELECT team, name, points\nFROM players\nORDER BY team, points DESC;",
-      "hints": ["Нужен ORDER BY.", "Перечисли два столбца: сначала team, потом points.", "ORDER BY team, points DESC;"],
+      "hints": [
+        "Нужен ORDER BY.",
+        "Перечисли два столбца: сначала team, потом points.",
+        "ORDER BY team, points DESC;"
+      ],
       "explain": "Сначала команды по алфавиту, а внутри каждой — очки от большего к меньшему."
     },
     {
-      "id": "s27", "section": "start", "topic": "MIN", "level": 0,
+      "id": "s27",
+      "section": "start",
+      "topic": "MIN",
+      "level": 0,
       "title": "Самая низкая цена",
       "lesson": "`MIN` находит **самое маленькое** значение в столбце. Это брат функции `MAX`.",
       "example": "SELECT MIN(age)\nFROM users;",
-      "tables": [{"name": "products", "columns": ["title", "price"], "rows": [["Ручка", 50], ["Книга", 900], ["Кружка", 350], ["Блокнот", 120]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "title",
+            "price"
+          ],
+          "rows": [
+            [
+              "Ручка",
+              50
+            ],
+            [
+              "Книга",
+              900
+            ],
+            [
+              "Кружка",
+              350
+            ],
+            [
+              "Блокнот",
+              120
+            ]
+          ]
+        }
+      ],
       "question": "Найди самую низкую цену. Назови столбец **min_price**.",
-      "expected": {"columns": ["min_price"], "rows": [[50]]},
+      "expected": {
+        "columns": [
+          "min_price"
+        ],
+        "rows": [
+          [
+            50
+          ]
+        ]
+      },
       "names": true,
       "starter": "SELECT ",
       "solution": "SELECT MIN(price) AS min_price\nFROM products;",
-      "hints": ["Самое маленькое значение находит MIN.", "SELECT MIN(price) AS min_price FROM products;"],
+      "hints": [
+        "Самое маленькое значение находит MIN.",
+        "SELECT MIN(price) AS min_price FROM products;"
+      ],
       "explain": "MIN просмотрел все цены и вернул самую маленькую — 50."
     },
     {
-      "id": "s28", "section": "start", "topic": "ROUND", "level": 0,
+      "id": "s28",
+      "section": "start",
+      "topic": "ROUND",
+      "level": 0,
       "title": "Округли цену",
       "lesson": "`ROUND(число, 1)` округляет число до **одного знака** после запятой. `ROUND(число, 0)` — до целого.",
       "example": "SELECT ROUND(rating, 1)\nFROM films;",
-      "tables": [{"name": "prices", "columns": ["title", "price"], "rows": [["Чай", 120.456], ["Кофе", 250.789], ["Сахар", 60.123]]}],
+      "tables": [
+        {
+          "name": "prices",
+          "columns": [
+            "title",
+            "price"
+          ],
+          "rows": [
+            [
+              "Чай",
+              120.456
+            ],
+            [
+              "Кофе",
+              250.789
+            ],
+            [
+              "Сахар",
+              60.123
+            ]
+          ]
+        }
+      ],
       "question": "Выведи название и цену, округлённую до **1 знака** после запятой. Назови столбец **rounded**.",
-      "expected": {"columns": ["title", "rounded"], "rows": [["Чай", 120.5], ["Кофе", 250.8], ["Сахар", 60.1]]},
+      "expected": {
+        "columns": [
+          "title",
+          "rounded"
+        ],
+        "rows": [
+          [
+            "Чай",
+            120.5
+          ],
+          [
+            "Кофе",
+            250.8
+          ],
+          [
+            "Сахар",
+            60.1
+          ]
+        ]
+      },
       "names": true,
       "starter": "SELECT title, ",
       "solution": "SELECT title, ROUND(price, 1) AS rounded\nFROM prices;",
-      "hints": ["Округляет функция ROUND.", "В скобках: столбец и число знаков — ROUND(price, 1).", "SELECT title, ROUND(price, 1) AS rounded FROM prices;"],
+      "hints": [
+        "Округляет функция ROUND.",
+        "В скобках: столбец и число знаков — ROUND(price, 1).",
+        "SELECT title, ROUND(price, 1) AS rounded FROM prices;"
+      ],
       "explain": "ROUND(price, 1) оставил один знак: 120.456 стало 120.5."
     },
     {
-      "id": "s29", "section": "start", "topic": "Склейка текста", "level": 0,
+      "id": "s29",
+      "section": "start",
+      "topic": "Склейка текста",
+      "level": 0,
       "title": "Имя и фамилия вместе",
       "lesson": "Знак `||` **склеивает** текст. Между словами не забудь пробел: `' '`.",
       "example": "SELECT city || ', ' || street AS address\nFROM places;",
-      "tables": [{"name": "users", "columns": ["first_name", "last_name"], "rows": [["Анна", "Иванова"], ["Олег", "Петров"], ["Мария", "Сидорова"]]}],
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "first_name",
+            "last_name"
+          ],
+          "rows": [
+            [
+              "Анна",
+              "Иванова"
+            ],
+            [
+              "Олег",
+              "Петров"
+            ],
+            [
+              "Мария",
+              "Сидорова"
+            ]
+          ]
+        }
+      ],
       "question": "Склей имя и фамилию через пробел в один столбец **full_name**.",
-      "expected": {"columns": ["full_name"], "rows": [["Анна Иванова"], ["Олег Петров"], ["Мария Сидорова"]]},
+      "expected": {
+        "columns": [
+          "full_name"
+        ],
+        "rows": [
+          [
+            "Анна Иванова"
+          ],
+          [
+            "Олег Петров"
+          ],
+          [
+            "Мария Сидорова"
+          ]
+        ]
+      },
       "names": true,
       "starter": "SELECT ",
       "solution": "SELECT first_name || ' ' || last_name AS full_name\nFROM users;",
-      "hints": ["Склеивать текст можно знаком ||.", "Между именем и фамилией вставь пробел в кавычках: ' '.", "SELECT first_name || ' ' || last_name AS full_name FROM users;"],
+      "hints": [
+        "Склеивать текст можно знаком ||.",
+        "Между именем и фамилией вставь пробел в кавычках: ' '.",
+        "SELECT first_name || ' ' || last_name AS full_name FROM users;"
+      ],
       "explain": "Имя, пробел и фамилия склеились в одну строку для каждого человека."
     },
     {
-      "id": "s30", "section": "start", "topic": "CASE", "level": 0,
+      "id": "s30",
+      "section": "start",
+      "topic": "CASE",
+      "level": 0,
       "title": "Дорогой или дешёвый",
       "lesson": "`CASE WHEN условие THEN значение ELSE другое END` — это «если… то… иначе…» прямо в запросе.",
       "example": "SELECT name,\n  CASE WHEN age >= 18 THEN 'взрослый' ELSE 'ребёнок' END AS kind\nFROM users;",
-      "tables": [{"name": "products", "columns": ["title", "price"], "rows": [["Ручка", 50], ["Книга", 900], ["Кружка", 350]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "title",
+            "price"
+          ],
+          "rows": [
+            [
+              "Ручка",
+              50
+            ],
+            [
+              "Книга",
+              900
+            ],
+            [
+              "Кружка",
+              350
+            ]
+          ]
+        }
+      ],
       "question": "Для каждого товара выведи название и столбец **kind**: «дорогой», если цена от 500, иначе «дешёвый».",
-      "expected": {"columns": ["title", "kind"], "rows": [["Ручка", "дешёвый"], ["Книга", "дорогой"], ["Кружка", "дешёвый"]]},
+      "expected": {
+        "columns": [
+          "title",
+          "kind"
+        ],
+        "rows": [
+          [
+            "Ручка",
+            "дешёвый"
+          ],
+          [
+            "Книга",
+            "дорогой"
+          ],
+          [
+            "Кружка",
+            "дешёвый"
+          ]
+        ]
+      },
       "names": true,
       "starter": "SELECT title,\n  ",
       "solution": "SELECT title,\n  CASE WHEN price >= 500 THEN 'дорогой' ELSE 'дешёвый' END AS kind\nFROM products;",
-      "hints": ["Нужен CASE WHEN … THEN … ELSE … END.", "Условие: price >= 500.", "CASE WHEN price >= 500 THEN 'дорогой' ELSE 'дешёвый' END AS kind"],
+      "hints": [
+        "Нужен CASE WHEN … THEN … ELSE … END.",
+        "Условие: price >= 500.",
+        "CASE WHEN price >= 500 THEN 'дорогой' ELSE 'дешёвый' END AS kind"
+      ],
       "explain": "Если цена от 500 — «дорогой», иначе «дешёвый». Так вышло для каждой строки."
     },
     {
-      "id": "s31", "section": "start", "topic": "JOIN", "level": 0,
+      "id": "s31",
+      "section": "start",
+      "topic": "JOIN",
+      "level": 0,
       "title": "Кто что заказал",
       "lesson": "`JOIN` **соединяет две таблицы** по общему значению. После `ON` пишем, какие столбцы совпадают.",
       "example": "SELECT users.name, cities.title\nFROM users\nJOIN cities ON users.city_id = cities.id;",
-      "tables": [{"name": "customers", "columns": ["id", "name"], "rows": [[1, "Аня"], [2, "Борис"], [3, "Вика"]]}, {"name": "orders", "columns": ["id", "customer_id", "item"], "rows": [[1, 1, "Книга"], [2, 3, "Кружка"], [3, 1, "Ручка"]]}],
+      "tables": [
+        {
+          "name": "customers",
+          "columns": [
+            "id",
+            "name"
+          ],
+          "rows": [
+            [
+              1,
+              "Аня"
+            ],
+            [
+              2,
+              "Борис"
+            ],
+            [
+              3,
+              "Вика"
+            ]
+          ]
+        },
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "customer_id",
+            "item"
+          ],
+          "rows": [
+            [
+              1,
+              1,
+              "Книга"
+            ],
+            [
+              2,
+              3,
+              "Кружка"
+            ],
+            [
+              3,
+              1,
+              "Ручка"
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имя клиента и товар, который он заказал.",
-      "expected": {"columns": ["name", "item"], "rows": [["Аня", "Книга"], ["Вика", "Кружка"], ["Аня", "Ручка"]]},
+      "expected": {
+        "columns": [
+          "name",
+          "item"
+        ],
+        "rows": [
+          [
+            "Аня",
+            "Книга"
+          ],
+          [
+            "Вика",
+            "Кружка"
+          ],
+          [
+            "Аня",
+            "Ручка"
+          ]
+        ]
+      },
       "starter": "SELECT customers.name, orders.item\nFROM customers\n",
       "solution": "SELECT customers.name, orders.item\nFROM customers\nJOIN orders ON orders.customer_id = customers.id;",
-      "hints": ["Таблицы соединяются словом JOIN.", "Совпадают customers.id и orders.customer_id.", "JOIN orders ON orders.customer_id = customers.id;"],
+      "hints": [
+        "Таблицы соединяются словом JOIN.",
+        "Совпадают customers.id и orders.customer_id.",
+        "JOIN orders ON orders.customer_id = customers.id;"
+      ],
       "explain": "JOIN сопоставил клиента и его заказы. Борис ничего не заказывал, поэтому его нет."
     },
     {
-      "id": "s32", "section": "start", "topic": "LEFT JOIN", "level": 0,
+      "id": "s32",
+      "section": "start",
+      "topic": "LEFT JOIN",
+      "level": 0,
       "title": "Все клиенты, даже без заказов",
       "lesson": "`LEFT JOIN` оставляет **все строки левой таблицы**. Если пары справа нет, там будет `NULL`.",
       "example": "SELECT users.name, pets.title\nFROM users\nLEFT JOIN pets ON pets.user_id = users.id;",
-      "tables": [{"name": "customers", "columns": ["id", "name"], "rows": [[1, "Аня"], [2, "Борис"], [3, "Вика"]]}, {"name": "orders", "columns": ["customer_id", "item"], "rows": [[1, "Книга"], [3, "Кружка"]]}],
+      "tables": [
+        {
+          "name": "customers",
+          "columns": [
+            "id",
+            "name"
+          ],
+          "rows": [
+            [
+              1,
+              "Аня"
+            ],
+            [
+              2,
+              "Борис"
+            ],
+            [
+              3,
+              "Вика"
+            ]
+          ]
+        },
+        {
+          "name": "orders",
+          "columns": [
+            "customer_id",
+            "item"
+          ],
+          "rows": [
+            [
+              1,
+              "Книга"
+            ],
+            [
+              3,
+              "Кружка"
+            ]
+          ]
+        }
+      ],
       "question": "Выведи **всех** клиентов и их товары, даже если заказа нет.",
-      "expected": {"columns": ["name", "item"], "rows": [["Аня", "Книга"], ["Борис", null], ["Вика", "Кружка"]]},
+      "expected": {
+        "columns": [
+          "name",
+          "item"
+        ],
+        "rows": [
+          [
+            "Аня",
+            "Книга"
+          ],
+          [
+            "Борис",
+            null
+          ],
+          [
+            "Вика",
+            "Кружка"
+          ]
+        ]
+      },
       "starter": "SELECT customers.name, orders.item\nFROM customers\n",
       "solution": "SELECT customers.name, orders.item\nFROM customers\nLEFT JOIN orders ON orders.customer_id = customers.id;",
-      "hints": ["Обычный JOIN теряет клиентов без заказа. Нужен LEFT JOIN.", "Совпадают customers.id и orders.customer_id.", "LEFT JOIN orders ON orders.customer_id = customers.id;"],
+      "hints": [
+        "Обычный JOIN теряет клиентов без заказа. Нужен LEFT JOIN.",
+        "Совпадают customers.id и orders.customer_id.",
+        "LEFT JOIN orders ON orders.customer_id = customers.id;"
+      ],
       "explain": "LEFT JOIN сохранил Бориса. Заказа у него нет, поэтому в item стоит NULL."
     },
     {
-      "id": "s33", "section": "start", "topic": "ORDER BY + LIMIT", "level": 0,
+      "id": "s33",
+      "section": "start",
+      "topic": "ORDER BY + LIMIT",
+      "level": 0,
       "title": "Кто набрал больше всех",
       "lesson": "`ORDER BY … DESC` ставит большее сверху, а `LIMIT 1` оставляет **только первую строку**. Вместе они находят лидера.",
       "example": "SELECT name\nFROM users\nORDER BY age DESC\nLIMIT 1;",
-      "tables": [{"name": "scores", "columns": ["name", "points"], "rows": [["Аня", 80], ["Борис", 95], ["Вика", 70], ["Глеб", 88]]}],
+      "tables": [
+        {
+          "name": "scores",
+          "columns": [
+            "name",
+            "points"
+          ],
+          "rows": [
+            [
+              "Аня",
+              80
+            ],
+            [
+              "Борис",
+              95
+            ],
+            [
+              "Вика",
+              70
+            ],
+            [
+              "Глеб",
+              88
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имя того, у кого **больше всего очков**.",
-      "expected": {"columns": ["name"], "rows": [["Борис"]]},
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Борис"
+          ]
+        ]
+      },
       "starter": "SELECT name\nFROM scores\n",
       "solution": "SELECT name\nFROM scores\nORDER BY points DESC\nLIMIT 1;",
-      "hints": ["Сначала отсортируй по очкам от большего.", "ORDER BY points DESC.", "Добавь в конце LIMIT 1."],
+      "hints": [
+        "Сначала отсортируй по очкам от большего.",
+        "ORDER BY points DESC.",
+        "Добавь в конце LIMIT 1."
+      ],
       "explain": "После сортировки наверху оказался Борис с 95 очками, а LIMIT 1 оставил только его."
     },
     {
-      "id": "s34", "section": "start", "topic": "DISTINCT", "level": 0,
+      "id": "s34",
+      "section": "start",
+      "topic": "DISTINCT",
+      "level": 0,
       "title": "Сколько разных городов",
       "lesson": "`COUNT(DISTINCT столбец)` считает только **разные** значения, повторы не учитывает.",
       "example": "SELECT COUNT(DISTINCT color)\nFROM cars;",
-      "tables": [{"name": "clients", "columns": ["name", "city"], "rows": [["Аня", "Москва"], ["Борис", "Казань"], ["Вика", "Москва"], ["Глеб", "Сочи"]]}],
+      "tables": [
+        {
+          "name": "clients",
+          "columns": [
+            "name",
+            "city"
+          ],
+          "rows": [
+            [
+              "Аня",
+              "Москва"
+            ],
+            [
+              "Борис",
+              "Казань"
+            ],
+            [
+              "Вика",
+              "Москва"
+            ],
+            [
+              "Глеб",
+              "Сочи"
+            ]
+          ]
+        }
+      ],
       "question": "Посчитай, сколько **разных городов** в таблице. Назови столбец **cities**.",
-      "expected": {"columns": ["cities"], "rows": [[3]]},
+      "expected": {
+        "columns": [
+          "cities"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ]
+      },
       "names": true,
       "starter": "SELECT ",
       "solution": "SELECT COUNT(DISTINCT city) AS cities\nFROM clients;",
-      "hints": ["Считать умеет COUNT.", "Чтобы не считать повторы, добавь DISTINCT внутри скобок.", "SELECT COUNT(DISTINCT city) AS cities FROM clients;"],
+      "hints": [
+        "Считать умеет COUNT.",
+        "Чтобы не считать повторы, добавь DISTINCT внутри скобок.",
+        "SELECT COUNT(DISTINCT city) AS cities FROM clients;"
+      ],
       "explain": "Москва встречается дважды, но считается один раз. Разных городов три."
     },
     {
-      "id": "002", "topic": "SELECT", "level": 1,
+      "id": "002",
+      "topic": "SELECT",
+      "level": 1,
       "title": "Название и цена",
-      "tables": [{"name": "products", "columns": ["id", "title", "price", "category"], "rows": [[1, "Ручка", 50, "office"], [2, "Книга SQL", 900, "books"], [3, "Кружка", 350, "home"], [4, "Блокнот", 120, "office"]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "id",
+            "title",
+            "price",
+            "category"
+          ],
+          "rows": [
+            [
+              1,
+              "Ручка",
+              50,
+              "office"
+            ],
+            [
+              2,
+              "Книга SQL",
+              900,
+              "books"
+            ],
+            [
+              3,
+              "Кружка",
+              350,
+              "home"
+            ],
+            [
+              4,
+              "Блокнот",
+              120,
+              "office"
+            ]
+          ]
+        }
+      ],
       "question": "Выведи только название и цену всех товаров.",
-      "expected": {"columns": ["title", "price"], "rows": [["Ручка", 50], ["Книга SQL", 900], ["Кружка", 350], ["Блокнот", 120]]},
+      "expected": {
+        "columns": [
+          "title",
+          "price"
+        ],
+        "rows": [
+          [
+            "Ручка",
+            50
+          ],
+          [
+            "Книга SQL",
+            900
+          ],
+          [
+            "Кружка",
+            350
+          ],
+          [
+            "Блокнот",
+            120
+          ]
+        ]
+      },
       "solution": "SELECT title, price\nFROM products;",
       "hint": "После SELECT перечисли нужные столбцы через запятую.",
       "explain": "SELECT выбирает столбцы, FROM — таблицу. Лишние столбцы не берём."
     },
     {
-      "id": "003", "topic": "WHERE", "level": 1,
+      "id": "003",
+      "topic": "WHERE",
+      "level": 1,
       "title": "Не из IT, зарплата 80–100 тыс.",
-      "tables": [{"name": "employees", "columns": ["id", "name", "dept", "salary"], "rows": [[1, "Анна", "IT", 120000], [2, "Олег", "Sales", 90000], [3, "Мария", "IT", 150000], [4, "Иван", "HR", 80000], [5, "Ольга", "Sales", 105000]]}],
+      "tables": [
+        {
+          "name": "employees",
+          "columns": [
+            "id",
+            "name",
+            "dept",
+            "salary"
+          ],
+          "rows": [
+            [
+              1,
+              "Анна",
+              "IT",
+              120000
+            ],
+            [
+              2,
+              "Олег",
+              "Sales",
+              90000
+            ],
+            [
+              3,
+              "Мария",
+              "IT",
+              150000
+            ],
+            [
+              4,
+              "Иван",
+              "HR",
+              80000
+            ],
+            [
+              5,
+              "Ольга",
+              "Sales",
+              105000
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имя и зарплату сотрудников **не из IT** с зарплатой от 80 000 до 100 000 включительно.",
-      "expected": {"columns": ["name", "salary"], "rows": [["Олег", 90000], ["Иван", 80000]]},
+      "expected": {
+        "columns": [
+          "name",
+          "salary"
+        ],
+        "rows": [
+          [
+            "Олег",
+            90000
+          ],
+          [
+            "Иван",
+            80000
+          ]
+        ]
+      },
       "solution": "SELECT name, salary\nFROM employees\nWHERE dept <> 'IT'\n  AND salary BETWEEN 80000 AND 100000;",
       "hint": "Два условия соединяются через AND. «Не равно» — это <>. Диапазон — BETWEEN.",
       "explain": "BETWEEN включает обе границы, поэтому Иван с 80 000 попал в результат."
     },
     {
-      "id": "004", "topic": "NULL", "level": 1,
+      "id": "004",
+      "topic": "NULL",
+      "level": 1,
       "title": "Заказы не с SALE10",
-      "tables": [{"name": "orders", "columns": ["id", "client", "promo"], "rows": [[1, "Анна", "SALE10"], [2, "Олег", null], [3, "Мария", "WINTER"], [4, "Иван", "SALE10"], [5, "Ольга", null]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "client",
+            "promo"
+          ],
+          "rows": [
+            [
+              1,
+              "Анна",
+              "SALE10"
+            ],
+            [
+              2,
+              "Олег",
+              null
+            ],
+            [
+              3,
+              "Мария",
+              "WINTER"
+            ],
+            [
+              4,
+              "Иван",
+              "SALE10"
+            ],
+            [
+              5,
+              "Ольга",
+              null
+            ]
+          ]
+        }
+      ],
       "question": "Выведи id и клиента для заказов, где промокод **не SALE10**. Заказы без промокода (NULL) тоже нужны.",
-      "expected": {"columns": ["id", "client"], "rows": [[2, "Олег"], [3, "Мария"], [5, "Ольга"]]},
+      "expected": {
+        "columns": [
+          "id",
+          "client"
+        ],
+        "rows": [
+          [
+            2,
+            "Олег"
+          ],
+          [
+            3,
+            "Мария"
+          ],
+          [
+            5,
+            "Ольга"
+          ]
+        ]
+      },
       "solution": "SELECT id, client\nFROM orders\nWHERE promo <> 'SALE10'\n   OR promo IS NULL;",
       "hint": "Условие promo <> 'SALE10' не находит строки, где promo = NULL. Их нужно добавить отдельно.",
       "explain": "Любое сравнение с NULL даёт «неизвестно», и WHERE такую строку отбрасывает. Поэтому добавляем OR promo IS NULL."
     },
     {
-      "id": "005", "topic": "ORDER BY", "level": 1,
+      "id": "005",
+      "topic": "ORDER BY",
+      "level": 1,
       "title": "Две самые дешёвые книги",
-      "tables": [{"name": "products", "columns": ["title", "price", "category"], "rows": [["Ручка", 50, "office"], ["Детектив", 400, "books"], ["Словарь", 300, "books"], ["Азбука", 300, "books"], ["Кружка", 350, "home"], ["Роман", 500, "books"]]}],
+      "tables": [
+        {
+          "name": "products",
+          "columns": [
+            "title",
+            "price",
+            "category"
+          ],
+          "rows": [
+            [
+              "Ручка",
+              50,
+              "office"
+            ],
+            [
+              "Детектив",
+              400,
+              "books"
+            ],
+            [
+              "Словарь",
+              300,
+              "books"
+            ],
+            [
+              "Азбука",
+              300,
+              "books"
+            ],
+            [
+              "Кружка",
+              350,
+              "home"
+            ],
+            [
+              "Роман",
+              500,
+              "books"
+            ]
+          ]
+        }
+      ],
       "question": "Выведи название и цену **двух самых дешёвых** книг (category = 'books'). Если цена одинаковая — по названию от А до Я.",
-      "expected": {"columns": ["title", "price"], "rows": [["Азбука", 300], ["Словарь", 300]]},
+      "expected": {
+        "columns": [
+          "title",
+          "price"
+        ],
+        "rows": [
+          [
+            "Азбука",
+            300
+          ],
+          [
+            "Словарь",
+            300
+          ]
+        ]
+      },
       "ordered": true,
       "solution": "SELECT title, price\nFROM products\nWHERE category = 'books'\nORDER BY price, title\nLIMIT 2;",
       "hint": "Сначала отфильтруй книги, потом отсортируй по двум столбцам и возьми 2 строки через LIMIT.",
       "explain": "ORDER BY price, title: сначала по цене, а при равной цене — по названию. LIMIT 2 оставляет первые две строки."
     },
     {
-      "id": "006", "topic": "Порядок выполнения", "level": 1,
+      "id": "006",
+      "topic": "Порядок выполнения",
+      "level": 1,
       "title": "Годовая зарплата",
-      "tables": [{"name": "employees", "columns": ["id", "name", "dept", "salary"], "rows": [[1, "Анна", "IT", 120000], [2, "Олег", "Sales", 90000], [3, "Мария", "IT", 150000], [4, "Иван", "HR", 80000], [5, "Ольга", "Sales", 105000]]}],
+      "tables": [
+        {
+          "name": "employees",
+          "columns": [
+            "id",
+            "name",
+            "dept",
+            "salary"
+          ],
+          "rows": [
+            [
+              1,
+              "Анна",
+              "IT",
+              120000
+            ],
+            [
+              2,
+              "Олег",
+              "Sales",
+              90000
+            ],
+            [
+              3,
+              "Мария",
+              "IT",
+              150000
+            ],
+            [
+              4,
+              "Иван",
+              "HR",
+              80000
+            ],
+            [
+              5,
+              "Ольга",
+              "Sales",
+              105000
+            ]
+          ]
+        }
+      ],
       "question": "Выведи имя и годовую зарплату (salary × 12) сотрудников, у которых годовая зарплата **больше 1 300 000**.",
-      "expected": {"columns": ["name", "year_salary"], "rows": [["Анна", 1440000], ["Мария", 1800000]]},
+      "expected": {
+        "columns": [
+          "name",
+          "year_salary"
+        ],
+        "rows": [
+          [
+            "Анна",
+            1440000
+          ],
+          [
+            "Мария",
+            1800000
+          ]
+        ]
+      },
       "solution": "SELECT name, salary * 12 AS year_salary\nFROM employees\nWHERE salary * 12 > 1300000;",
       "hint": "Псевдоним из SELECT нельзя использовать в WHERE: WHERE выполняется раньше SELECT. Повтори выражение salary * 12.",
       "explain": "Порядок выполнения: FROM → WHERE → SELECT. Когда работает WHERE, псевдонима year_salary ещё не существует."
     },
     {
-      "id": "007", "topic": "COUNT", "level": 2,
+      "id": "007",
+      "topic": "COUNT",
+      "level": 2,
       "title": "Клиенты с промокодом",
-      "tables": [{"name": "orders", "columns": ["id", "client", "promo"], "rows": [[1, "Анна", "SALE10"], [2, "Олег", null], [3, "Анна", "SALE10"], [4, "Мария", "NEW"], [5, "Олег", null]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "client",
+            "promo"
+          ],
+          "rows": [
+            [
+              1,
+              "Анна",
+              "SALE10"
+            ],
+            [
+              2,
+              "Олег",
+              null
+            ],
+            [
+              3,
+              "Анна",
+              "SALE10"
+            ],
+            [
+              4,
+              "Мария",
+              "NEW"
+            ],
+            [
+              5,
+              "Олег",
+              null
+            ]
+          ]
+        }
+      ],
       "question": "Посчитай, сколько **разных клиентов** хотя бы раз использовали промокод.",
-      "expected": {"columns": ["count"], "rows": [[2]]},
+      "expected": {
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            2
+          ]
+        ]
+      },
       "solution": "SELECT COUNT(DISTINCT client)\nFROM orders\nWHERE promo IS NOT NULL;",
       "hint": "Оставь только заказы с промокодом (IS NOT NULL) и посчитай уникальных клиентов: COUNT(DISTINCT ...).",
       "explain": "Анна и Мария — 2 клиента. Без WHERE получилось бы 3: посчитался бы и Олег."
     },
     {
-      "id": "008", "topic": "GROUP BY", "level": 2,
+      "id": "008",
+      "topic": "GROUP BY",
+      "level": 2,
       "title": "Отделы, где больше одного человека",
-      "tables": [{"name": "employees", "columns": ["id", "name", "dept", "salary"], "rows": [[1, "Анна", "IT", 120000], [2, "Олег", "Sales", 90000], [3, "Мария", "IT", 150000], [4, "Иван", "HR", 80000], [5, "Ольга", "Sales", 105000]]}],
+      "tables": [
+        {
+          "name": "employees",
+          "columns": [
+            "id",
+            "name",
+            "dept",
+            "salary"
+          ],
+          "rows": [
+            [
+              1,
+              "Анна",
+              "IT",
+              120000
+            ],
+            [
+              2,
+              "Олег",
+              "Sales",
+              90000
+            ],
+            [
+              3,
+              "Мария",
+              "IT",
+              150000
+            ],
+            [
+              4,
+              "Иван",
+              "HR",
+              80000
+            ],
+            [
+              5,
+              "Ольга",
+              "Sales",
+              105000
+            ]
+          ]
+        }
+      ],
       "question": "Выведи отдел и число сотрудников в нём. Только отделы, где сотрудников **больше одного**.",
-      "expected": {"columns": ["dept", "count"], "rows": [["IT", 2], ["Sales", 2]]},
+      "expected": {
+        "columns": [
+          "dept",
+          "count"
+        ],
+        "rows": [
+          [
+            "IT",
+            2
+          ],
+          [
+            "Sales",
+            2
+          ]
+        ]
+      },
       "solution": "SELECT dept, COUNT(*)\nFROM employees\nGROUP BY dept\nHAVING COUNT(*) > 1;",
       "hint": "Сгруппируй по отделу (GROUP BY). Фильтр по количеству — в HAVING, а не в WHERE.",
       "explain": "WHERE фильтрует строки до группировки, HAVING — готовые группы. Условие на COUNT(*) возможно только в HAVING."
     },
     {
-      "id": "009", "topic": "DELETE", "level": 2,
+      "id": "009",
+      "topic": "DELETE",
+      "level": 2,
       "title": "Удали тестовые заказы",
-      "tables": [{"name": "orders", "columns": ["id", "client", "amount"], "rows": [[1, "Анна", 500], [2, "test", 1], [3, "Олег", 700], [4, "test", 1], [5, "Мария", 300]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "client",
+            "amount"
+          ],
+          "rows": [
+            [
+              1,
+              "Анна",
+              500
+            ],
+            [
+              2,
+              "test",
+              1
+            ],
+            [
+              3,
+              "Олег",
+              700
+            ],
+            [
+              4,
+              "test",
+              1
+            ],
+            [
+              5,
+              "Мария",
+              300
+            ]
+          ]
+        }
+      ],
       "question": "Удали из таблицы orders все тестовые заказы (client = 'test'). Остальные заказы не трогай.",
       "check": "SELECT id, client FROM orders ORDER BY id;",
-      "expected": {"label": "orders после удаления", "columns": ["id", "client"], "rows": [[1, "Анна"], [3, "Олег"], [5, "Мария"]]},
+      "expected": {
+        "label": "orders после удаления",
+        "columns": [
+          "id",
+          "client"
+        ],
+        "rows": [
+          [
+            1,
+            "Анна"
+          ],
+          [
+            3,
+            "Олег"
+          ],
+          [
+            5,
+            "Мария"
+          ]
+        ]
+      },
       "solution": "DELETE FROM orders\nWHERE client = 'test';",
       "hint": "Нужен DELETE с условием WHERE. У TRUNCATE условия нет — он удалит всё.",
       "explain": "В жизни перед DELETE сначала запусти SELECT с тем же WHERE и проверь, что удалишь именно эти строки."
     },
     {
-      "id": "010", "topic": "DISTINCT", "level": 2,
+      "id": "010",
+      "topic": "DISTINCT",
+      "level": 2,
       "title": "Страницы без повторов",
-      "tables": [{"name": "visits", "columns": ["user_id", "page"], "rows": [[1, "home"], [1, "home"], [1, "cart"], [2, "home"], [3, null]]}],
+      "tables": [
+        {
+          "name": "visits",
+          "columns": [
+            "user_id",
+            "page"
+          ],
+          "rows": [
+            [
+              1,
+              "home"
+            ],
+            [
+              1,
+              "home"
+            ],
+            [
+              1,
+              "cart"
+            ],
+            [
+              2,
+              "home"
+            ],
+            [
+              3,
+              null
+            ]
+          ]
+        }
+      ],
       "question": "Выведи список страниц, которые посещали, **без повторов**. Пустые значения (NULL) не нужны.",
-      "expected": {"columns": ["page"], "rows": [["cart"], ["home"]]},
+      "expected": {
+        "columns": [
+          "page"
+        ],
+        "rows": [
+          [
+            "cart"
+          ],
+          [
+            "home"
+          ]
+        ]
+      },
       "solution": "SELECT DISTINCT page\nFROM visits\nWHERE page IS NOT NULL;",
       "hint": "DISTINCT убирает повторы. NULL отсекаем через WHERE ... IS NOT NULL.",
       "explain": "Без WHERE в ответе была бы ещё строка NULL: для DISTINCT это отдельное значение."
     },
     {
-      "id": "011", "topic": "CASE", "level": 2,
+      "id": "011",
+      "topic": "CASE",
+      "level": 2,
       "title": "Размер заказа",
-      "tables": [{"name": "orders", "columns": ["id", "amount"], "rows": [[1, 500], [2, 1500], [3, 3000], [4, null]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "amount"
+          ],
+          "rows": [
+            [
+              1,
+              500
+            ],
+            [
+              2,
+              1500
+            ],
+            [
+              3,
+              3000
+            ],
+            [
+              4,
+              null
+            ]
+          ]
+        }
+      ],
       "question": "Выведи id и размер заказа: меньше 1 000 — 'мелкий', от 1 000 до 2 999 — 'средний', от 3 000 — 'крупный'. Если суммы нет — 'нет суммы'.",
-      "expected": {"columns": ["id", "size"], "rows": [[1, "мелкий"], [2, "средний"], [3, "крупный"], [4, "нет суммы"]]},
+      "expected": {
+        "columns": [
+          "id",
+          "size"
+        ],
+        "rows": [
+          [
+            1,
+            "мелкий"
+          ],
+          [
+            2,
+            "средний"
+          ],
+          [
+            3,
+            "крупный"
+          ],
+          [
+            4,
+            "нет суммы"
+          ]
+        ]
+      },
       "solution": "SELECT id,\n  CASE\n    WHEN amount IS NULL THEN 'нет суммы'\n    WHEN amount >= 3000 THEN 'крупный'\n    WHEN amount >= 1000 THEN 'средний'\n    ELSE 'мелкий'\n  END AS size\nFROM orders;",
       "hint": "CASE проверяет WHEN сверху вниз и берёт первое подходящее. Проверку на NULL поставь первой.",
       "explain": "Если NULL не проверить отдельно, заказ 4 попадёт в ELSE и станет «мелким» — это ошибка."
     },
     {
-      "id": "012", "topic": "Найди ошибку", "level": 2,
+      "id": "012",
+      "topic": "Найди ошибку",
+      "level": 2,
       "title": "Процент богатых по отделам",
-      "tables": [{"name": "employees", "columns": ["name", "dept", "salary"], "rows": [["Анна", "IT", 120000], ["Мария", "IT", 150000], ["Пётр", "IT", 90000], ["Олег", "Sales", 90000], ["Ольга", "Sales", 105000], ["Иван", "HR", 80000]]}],
+      "tables": [
+        {
+          "name": "employees",
+          "columns": [
+            "name",
+            "dept",
+            "salary"
+          ],
+          "rows": [
+            [
+              "Анна",
+              "IT",
+              120000
+            ],
+            [
+              "Мария",
+              "IT",
+              150000
+            ],
+            [
+              "Пётр",
+              "IT",
+              90000
+            ],
+            [
+              "Олег",
+              "Sales",
+              90000
+            ],
+            [
+              "Ольга",
+              "Sales",
+              105000
+            ],
+            [
+              "Иван",
+              "HR",
+              80000
+            ]
+          ]
+        }
+      ],
       "question": "Для каждого отдела выведи, сколько **процентов** сотрудников получают больше 100 000. Округли до целого.",
-      "expected": {"columns": ["dept", "pct"], "rows": [["HR", 0], ["IT", 67], ["Sales", 50]]},
+      "expected": {
+        "columns": [
+          "dept",
+          "pct"
+        ],
+        "rows": [
+          [
+            "HR",
+            0
+          ],
+          [
+            "IT",
+            67
+          ],
+          [
+            "Sales",
+            50
+          ]
+        ]
+      },
       "solution": "SELECT dept,\n  ROUND(100.0 * SUM(CASE WHEN salary > 100000 THEN 1 ELSE 0 END) / COUNT(*)) AS pct\nFROM employees\nGROUP BY dept;",
       "hint": "В PostgreSQL целое делится на целое без остатка: 2 / 3 = 0. Умножай на 100.0, а не на 100. И не забудь ELSE 0.",
       "explain": "Без ELSE 0 у отдела HR получится NULL вместо 0. А без 100.0 доли превратятся в 0."
     },
     {
-      "id": "013", "topic": "Даты", "level": 2,
+      "id": "013",
+      "topic": "Даты",
+      "level": 2,
       "title": "Выручка за февраль",
-      "tables": [{"name": "orders", "columns": ["id", "created_at", "amount"], "rows": [[1, "2024-01-31 23:10", 500], [2, "2024-02-01 09:00", 700], [3, "2024-02-29 18:45", 300], [4, "2024-03-01 00:00", 900]]}],
+      "tables": [
+        {
+          "name": "orders",
+          "columns": [
+            "id",
+            "created_at",
+            "amount"
+          ],
+          "rows": [
+            [
+              1,
+              "2024-01-31 23:10",
+              500
+            ],
+            [
+              2,
+              "2024-02-01 09:00",
+              700
+            ],
+            [
+              3,
+              "2024-02-29 18:45",
+              300
+            ],
+            [
+              4,
+              "2024-03-01 00:00",
+              900
+            ]
+          ]
+        }
+      ],
       "question": "Посчитай выручку (сумму amount) за **февраль 2024**.",
-      "expected": {"columns": ["sum"], "rows": [[1000]]},
+      "expected": {
+        "columns": [
+          "sum"
+        ],
+        "rows": [
+          [
+            1000
+          ]
+        ]
+      },
       "solution": "SELECT SUM(amount)\nFROM orders\nWHERE created_at >= '2024-02-01'\n  AND created_at < '2024-03-01';",
       "hint": "Бери диапазон «от 1 февраля включительно до 1 марта не включая». BETWEEN с датами здесь опасен.",
       "explain": "BETWEEN '2024-02-01' AND '2024-02-29' потеряет заказ 3: он в 18:45, а граница — 29 февраля в 00:00."
     },
     {
-      "id": "014", "topic": "Дубликаты", "level": 2,
+      "id": "014",
+      "topic": "Дубликаты",
+      "level": 2,
       "title": "Повторяющиеся email",
-      "tables": [{"name": "users", "columns": ["id", "email"], "rows": [[1, "anna@mail.ru"], [2, "oleg@mail.ru"], [3, "anna@mail.ru"], [4, "ivan@mail.ru"], [5, "oleg@mail.ru"], [6, "anna@mail.ru"]]}],
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "id",
+            "email"
+          ],
+          "rows": [
+            [
+              1,
+              "anna@mail.ru"
+            ],
+            [
+              2,
+              "oleg@mail.ru"
+            ],
+            [
+              3,
+              "anna@mail.ru"
+            ],
+            [
+              4,
+              "ivan@mail.ru"
+            ],
+            [
+              5,
+              "oleg@mail.ru"
+            ],
+            [
+              6,
+              "anna@mail.ru"
+            ]
+          ]
+        }
+      ],
       "question": "Выведи email, которые встречаются **больше одного раза**, и сколько раз каждый встречается.",
-      "expected": {"columns": ["email", "count"], "rows": [["anna@mail.ru", 3], ["oleg@mail.ru", 2]]},
+      "expected": {
+        "columns": [
+          "email",
+          "count"
+        ],
+        "rows": [
+          [
+            "anna@mail.ru",
+            3
+          ],
+          [
+            "oleg@mail.ru",
+            2
+          ]
+        ]
+      },
       "solution": "SELECT email, COUNT(*)\nFROM users\nGROUP BY email\nHAVING COUNT(*) > 1;",
       "hint": "Сгруппируй по email и оставь группы, где COUNT(*) > 1.",
       "explain": "Это задача №1 на собеседованиях аналитиков. Следующий вопрос обычно: «А теперь удали дубли»."

@@ -156,6 +156,10 @@ if BUFFER and os.environ.get("REEL_SLOT") == "true" and reels_root.exists():
     if not ready:
         print("Reels: очередь пуста")
     else:
+        priority_path = pathlib.Path("reels_priority.json")
+        priority = json.loads(priority_path.read_text(encoding="utf-8")) if priority_path.exists() else []
+        rank = {name: i for i, name in enumerate(priority)}
+        ready.sort(key=lambda r: (rank.get(r.name, len(rank)), r.name))
         try:
             print(f"Reels: опубликовано {ready[0].name} {buffer_reel(ready[0])}")
             mark(reels_file, ready[0].name)
