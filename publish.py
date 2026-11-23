@@ -153,6 +153,8 @@ if BUFFER and os.environ.get("REEL_SLOT") == "true" and reels_root.exists():
     sent = done(reels_file)
     ready = [r for r in sorted(reels_root.iterdir()) if r.is_dir() and r.name not in sent and (r / "reel.json").exists()
              and json.loads((r / "reel.json").read_text(encoding="utf-8")).get("ready")]
+    # The November static pilot was withdrawn after viewer feedback.
+    ready = [r for r in ready if r.name not in {f"{i:03d}-service-select" for i in range(45, 59)}]
     if not ready:
         print("Reels: очередь пуста")
     else:
