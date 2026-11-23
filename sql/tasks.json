@@ -50,51 +50,131 @@
       "explain": "WHERE оставляет строки со статусом active. ORDER BY задаёт порядок имён."
     },
     {
-      "id": "s36",
+      "id": "s49",
       "section": "start",
       "topic": "SELECT",
       "level": 1,
-      "title": "Кому доступен сервис?",
+      "title": "Что входит в каталог?",
       "tables": [
         {
-          "name": "users",
+          "name": "services",
           "columns": [
             "name",
-            "status"
+            "price",
+            "days"
           ],
           "rows": [
             [
-              "Вера",
-              "active"
+              "Аудит",
+              800,
+              2
             ],
             [
-              "Павел",
-              "blocked"
+              "Монтаж",
+              1200,
+              3
             ],
             [
-              "Лена",
-              "active"
+              "Настройка",
+              400,
+              1
+            ],
+            [
+              "Осмотр",
+              400,
+              2
             ]
           ]
         }
       ],
-      "question": "Выведи имена пользователей со статусом active в алфавитном порядке.",
+      "question": "Выведи только названия всех услуг.",
       "expected": {
         "columns": [
           "name"
         ],
         "rows": [
           [
-            "Вера"
+            "Аудит"
           ],
           [
-            "Лена"
+            "Монтаж"
+          ],
+          [
+            "Настройка"
+          ],
+          [
+            "Осмотр"
           ]
         ]
       },
-      "solution": "SELECT name\nFROM users\nWHERE status = 'active'\nORDER BY name;",
-      "hint": "WHERE оставляет строки со статусом active. ORDER BY задаёт порядок имён.",
-      "explain": "WHERE оставляет строки со статусом active. ORDER BY задаёт порядок имён."
+      "solution": "SELECT name FROM services;",
+      "hint": "Перечисли после SELECT только те столбцы, которые нужны.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s50",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "Кому начислили баллы?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "plan",
+            "points"
+          ],
+          "rows": [
+            [
+              "Лев",
+              "pro",
+              80
+            ],
+            [
+              "Ира",
+              "free",
+              20
+            ],
+            [
+              "Мила",
+              "pro",
+              40
+            ],
+            [
+              "Вера",
+              "free",
+              0
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имена и баллы пользователей, у которых больше нуля баллов.",
+      "expected": {
+        "columns": [
+          "name",
+          "points"
+        ],
+        "rows": [
+          [
+            "Лев",
+            80
+          ],
+          [
+            "Ира",
+            20
+          ],
+          [
+            "Мила",
+            40
+          ]
+        ]
+      },
+      "solution": "SELECT name, points FROM users WHERE points > 0;",
+      "hint": "Сравни points с нулём.",
+      "ordered": false,
+      "names": false
     },
     {
       "id": "s37",
@@ -147,50 +227,112 @@
       "explain": "Знак < не включает 500. Сортировка по цене идёт по возрастанию."
     },
     {
-      "id": "s38",
+      "id": "s51",
       "section": "start",
-      "topic": "SELECT",
+      "topic": "SUM",
       "level": 1,
-      "title": "Услуги дешевле 500 ₽",
+      "title": "Сколько мест в пятницу?",
       "tables": [
         {
-          "name": "services",
+          "name": "slots",
           "columns": [
-            "name",
-            "price"
+            "id",
+            "day",
+            "seats"
           ],
           "rows": [
             [
-              "Интернет",
+              24,
+              "пт",
+              2
+            ],
+            [
+              21,
+              "пн",
+              0
+            ],
+            [
+              25,
+              "пт",
+              4
+            ],
+            [
+              22,
+              "ср",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Найди сумму свободных мест за пятницу. Назови столбец seats_total.",
+      "expected": {
+        "columns": [
+          "seats_total"
+        ],
+        "rows": [
+          [
+            6
+          ]
+        ]
+      },
+      "solution": "SELECT SUM(seats) AS seats_total FROM slots WHERE day = 'пт';",
+      "hint": "Сначала отфильтруй день, затем сложи seats.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s52",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "Какие договоры в черновиках?",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "status",
+            "fee"
+          ],
+          "rows": [
+            [
+              104,
+              "active",
               700
             ],
             [
-              "Хранилище",
-              350
+              101,
+              "draft",
+              400
             ],
             [
-              "Поддержка",
+              108,
+              "active",
+              900
+            ],
+            [
+              103,
+              "closed",
               500
             ]
           ]
         }
       ],
-      "question": "Выведи название и цену услуг дешевле 500, от дешёвых к дорогим.",
+      "question": "Выведи номера договоров со статусом draft.",
       "expected": {
         "columns": [
-          "name",
-          "price"
+          "id"
         ],
         "rows": [
           [
-            "Хранилище",
-            350
+            101
           ]
         ]
       },
-      "solution": "SELECT name, price\nFROM services\nWHERE price < 500\nORDER BY price;",
-      "hint": "Знак < не включает 500. Сортировка по цене идёт по возрастанию.",
-      "explain": "Знак < не включает 500. Сортировка по цене идёт по возрастанию."
+      "solution": "SELECT id FROM contracts WHERE status = 'draft';",
+      "hint": "Текстовое значение в SQL заключают в одинарные кавычки.",
+      "ordered": false,
+      "names": false
     },
     {
       "id": "s39",
@@ -240,51 +382,72 @@
       "explain": "Текст active пишется в одинарных кавычках. SELECT id оставляет только номер."
     },
     {
-      "id": "s40",
+      "id": "s53",
       "section": "start",
-      "topic": "SELECT",
+      "topic": "ORDER BY",
       "level": 1,
-      "title": "Какие контракты действуют?",
+      "title": "Рейтинг поставщика в списке",
       "tables": [
         {
-          "name": "contracts",
+          "name": "providers",
           "columns": [
-            "id",
-            "status"
+            "name",
+            "city",
+            "rating"
           ],
           "rows": [
             [
-              151,
-              "active"
+              "Маяк",
+              "Тула",
+              4
             ],
             [
-              152,
-              "closed"
+              "Сфера",
+              "Омск",
+              5
             ],
             [
-              153,
-              "active"
+              "Вектор",
+              "Тула",
+              5
+            ],
+            [
+              "Луч",
+              "Пермь",
+              3
             ]
           ]
         }
       ],
-      "question": "Выведи номера действующих контрактов: status = active. Отсортируй по id.",
+      "question": "Покажи название и рейтинг каждого поставщика. Сначала выведи больший рейтинг, при равенстве — название по алфавиту.",
       "expected": {
         "columns": [
-          "id"
+          "name",
+          "rating"
         ],
         "rows": [
           [
-            151
+            "Вектор",
+            5
           ],
           [
-            153
+            "Сфера",
+            5
+          ],
+          [
+            "Маяк",
+            4
+          ],
+          [
+            "Луч",
+            3
           ]
         ]
       },
-      "solution": "SELECT id\nFROM contracts\nWHERE status = 'active'\nORDER BY id;",
-      "hint": "Текст active пишется в одинарных кавычках. SELECT id оставляет только номер.",
-      "explain": "Текст active пишется в одинарных кавычках. SELECT id оставляет только номер."
+      "solution": "SELECT name, rating FROM providers ORDER BY rating DESC, name;",
+      "hint": "У каждого столбца сортировки своё направление.",
+      "ordered": true,
+      "names": false
     },
     {
       "id": "s41",
@@ -334,51 +497,112 @@
       "explain": "Фильтруем по city, а показываем name. Столбец фильтра не обязан входить в SELECT."
     },
     {
-      "id": "s42",
+      "id": "s54",
       "section": "start",
       "topic": "SELECT",
       "level": 1,
-      "title": "Поставщики из Москвы",
+      "title": "Как оплатили заявку?",
       "tables": [
         {
-          "name": "providers",
+          "name": "payments",
           "columns": [
-            "name",
-            "city"
+            "id",
+            "amount",
+            "method"
           ],
           "rows": [
             [
-              "Вектор",
-              "Москва"
+              31,
+              600,
+              "card"
             ],
             [
-              "Орбита",
-              "Тула"
+              35,
+              350,
+              "cash"
             ],
             [
-              "Спектр",
-              "Москва"
+              32,
+              250,
+              "card"
+            ],
+            [
+              38,
+              800,
+              "card"
             ]
           ]
         }
       ],
-      "question": "Выведи названия поставщиков из Москвы в алфавитном порядке.",
+      "question": "Для платежа № 35 выведи только способ оплаты.",
       "expected": {
         "columns": [
-          "name"
+          "method"
         ],
         "rows": [
           [
-            "Вектор"
-          ],
-          [
-            "Спектр"
+            "cash"
           ]
         ]
       },
-      "solution": "SELECT name\nFROM providers\nWHERE city = 'Москва'\nORDER BY name;",
-      "hint": "Фильтруем по city, а показываем name. Столбец фильтра не обязан входить в SELECT.",
-      "explain": "Фильтруем по city, а показываем name. Столбец фильтра не обязан входить в SELECT."
+      "solution": "SELECT method FROM payments WHERE id = 35;",
+      "hint": "Номер нужен для отбора, а method — для вывода.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s55",
+      "section": "start",
+      "topic": "IS NULL",
+      "level": 1,
+      "title": "Заявки без оценки времени",
+      "tables": [
+        {
+          "name": "tickets",
+          "columns": [
+            "id",
+            "status",
+            "hours"
+          ],
+          "rows": [
+            [
+              12,
+              "new",
+              null
+            ],
+            [
+              15,
+              "done",
+              3
+            ],
+            [
+              11,
+              "open",
+              2
+            ],
+            [
+              18,
+              "done",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи номера заявок, для которых время hours ещё не указано.",
+      "expected": {
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            12
+          ]
+        ]
+      },
+      "solution": "SELECT id FROM tickets WHERE hours IS NULL;",
+      "hint": "Пустое значение проверяется через IS NULL.",
+      "ordered": false,
+      "names": false
     },
     {
       "id": "s43",
@@ -428,51 +652,58 @@
       "explain": "NULL означает отсутствие значения. Для проверки нужен IS NULL."
     },
     {
-      "id": "s44",
+      "id": "s56",
       "section": "start",
-      "topic": "SELECT",
+      "topic": "Вычисления",
       "level": 1,
-      "title": "Кому нужно уточнить телефон?",
+      "title": "Сколько стоит год тарифа?",
       "tables": [
         {
-          "name": "users",
+          "name": "plans",
           "columns": [
             "name",
-            "phone"
+            "fee",
+            "seats"
           ],
           "rows": [
             [
-              "Вера",
-              "101"
+              "Старт",
+              300,
+              1
             ],
             [
-              "Павел",
-              null
+              "Команда",
+              900,
+              5
             ],
             [
-              "Лена",
-              null
+              "Бизнес",
+              1500,
+              10
+            ],
+            [
+              "Проба",
+              0,
+              1
             ]
           ]
         }
       ],
-      "question": "Выведи имена пользователей без телефона в алфавитном порядке.",
+      "question": "Для тарифа «Команда» умножь месячную плату на 12. Назови результат per_year.",
       "expected": {
         "columns": [
-          "name"
+          "per_year"
         ],
         "rows": [
           [
-            "Лена"
-          ],
-          [
-            "Павел"
+            10800
           ]
         ]
       },
-      "solution": "SELECT name\nFROM users\nWHERE phone IS NULL\nORDER BY name;",
-      "hint": "NULL означает отсутствие значения. Для проверки нужен IS NULL.",
-      "explain": "NULL означает отсутствие значения. Для проверки нужен IS NULL."
+      "solution": "SELECT fee * 12 AS per_year FROM plans WHERE name = 'Команда';",
+      "hint": "Умножение можно написать прямо после SELECT.",
+      "ordered": false,
+      "names": true
     },
     {
       "id": "s45",
@@ -523,156 +754,6 @@
       "solution": "SELECT name, price\nFROM services\nORDER BY price DESC\nLIMIT 2;",
       "hint": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки.",
       "explain": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки."
-    },
-    {
-      "id": "s46",
-      "section": "start",
-      "topic": "SELECT",
-      "level": 1,
-      "title": "Две самые дорогие услуги",
-      "tables": [
-        {
-          "name": "services",
-          "columns": [
-            "name",
-            "price"
-          ],
-          "rows": [
-            [
-              "Интернет",
-              700
-            ],
-            [
-              "Хранилище",
-              350
-            ],
-            [
-              "Поддержка",
-              500
-            ]
-          ]
-        }
-      ],
-      "question": "Выведи две самые дорогие услуги и их цены.",
-      "expected": {
-        "columns": [
-          "name",
-          "price"
-        ],
-        "rows": [
-          [
-            "Интернет",
-            700
-          ],
-          [
-            "Поддержка",
-            500
-          ]
-        ]
-      },
-      "solution": "SELECT name, price\nFROM services\nORDER BY price DESC\nLIMIT 2;",
-      "hint": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки.",
-      "explain": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки."
-    },
-    {
-      "id": "s47",
-      "section": "start",
-      "topic": "SELECT",
-      "level": 1,
-      "title": "Контракты от 500 ₽",
-      "tables": [
-        {
-          "name": "contracts",
-          "columns": [
-            "id",
-            "amount"
-          ],
-          "rows": [
-            [
-              101,
-              300
-            ],
-            [
-              102,
-              500
-            ],
-            [
-              103,
-              800
-            ]
-          ]
-        }
-      ],
-      "question": "Выведи контракты на сумму от 500 включительно, по возрастанию id.",
-      "expected": {
-        "columns": [
-          "id",
-          "amount"
-        ],
-        "rows": [
-          [
-            102,
-            500
-          ],
-          [
-            103,
-            800
-          ]
-        ]
-      },
-      "solution": "SELECT id, amount\nFROM contracts\nWHERE amount >= 500\nORDER BY id;",
-      "hint": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит.",
-      "explain": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит."
-    },
-    {
-      "id": "s48",
-      "section": "start",
-      "topic": "SELECT",
-      "level": 1,
-      "title": "Контракты от 500 ₽",
-      "tables": [
-        {
-          "name": "contracts",
-          "columns": [
-            "id",
-            "amount"
-          ],
-          "rows": [
-            [
-              151,
-              350
-            ],
-            [
-              152,
-              550
-            ],
-            [
-              153,
-              850
-            ]
-          ]
-        }
-      ],
-      "question": "Выведи контракты на сумму от 500 включительно, по возрастанию id.",
-      "expected": {
-        "columns": [
-          "id",
-          "amount"
-        ],
-        "rows": [
-          [
-            152,
-            550
-          ],
-          [
-            153,
-            850
-          ]
-        ]
-      },
-      "solution": "SELECT id, amount\nFROM contracts\nWHERE amount >= 500\nORDER BY id;",
-      "hint": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит.",
-      "explain": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит."
     },
     {
       "id": "s01",
@@ -1764,6 +1845,232 @@
       "explain": "MAX нашёл самое большое число в столбце amount — 1000."
     },
     {
+      "id": "s57",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "Услуга за один день",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price",
+            "days"
+          ],
+          "rows": [
+            [
+              "Аудит",
+              800,
+              2
+            ],
+            [
+              "Монтаж",
+              1200,
+              3
+            ],
+            [
+              "Настройка",
+              400,
+              1
+            ],
+            [
+              "Осмотр",
+              400,
+              2
+            ]
+          ]
+        }
+      ],
+      "question": "Покажи название и цену услуг со сроком ровно один день.",
+      "expected": {
+        "columns": [
+          "name",
+          "price"
+        ],
+        "rows": [
+          [
+            "Настройка",
+            400
+          ]
+        ]
+      },
+      "solution": "SELECT name, price FROM services WHERE days = 1;",
+      "hint": "Срок хранится в days.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s58",
+      "section": "start",
+      "topic": "DISTINCT",
+      "level": 1,
+      "title": "Поставщики на карте",
+      "tables": [
+        {
+          "name": "providers",
+          "columns": [
+            "name",
+            "city",
+            "rating"
+          ],
+          "rows": [
+            [
+              "Маяк",
+              "Тула",
+              4
+            ],
+            [
+              "Сфера",
+              "Омск",
+              5
+            ],
+            [
+              "Вектор",
+              "Тула",
+              5
+            ],
+            [
+              "Луч",
+              "Пермь",
+              3
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи каждый город поставщиков один раз.",
+      "expected": {
+        "columns": [
+          "city"
+        ],
+        "rows": [
+          [
+            "Тула"
+          ],
+          [
+            "Омск"
+          ],
+          [
+            "Пермь"
+          ]
+        ]
+      },
+      "solution": "SELECT DISTINCT city FROM providers;",
+      "hint": "Один город встречается у двух поставщиков.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s47",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Контракты от 500 ₽",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "amount"
+          ],
+          "rows": [
+            [
+              101,
+              300
+            ],
+            [
+              102,
+              500
+            ],
+            [
+              103,
+              800
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи контракты на сумму от 500 включительно, по возрастанию id.",
+      "expected": {
+        "columns": [
+          "id",
+          "amount"
+        ],
+        "rows": [
+          [
+            102,
+            500
+          ],
+          [
+            103,
+            800
+          ]
+        ]
+      },
+      "solution": "SELECT id, amount\nFROM contracts\nWHERE amount >= 500\nORDER BY id;",
+      "hint": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит.",
+      "explain": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит."
+    },
+    {
+      "id": "s59",
+      "section": "start",
+      "topic": "BETWEEN",
+      "level": 1,
+      "title": "На какой договор хватит бюджета?",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "status",
+            "fee"
+          ],
+          "rows": [
+            [
+              104,
+              "active",
+              700
+            ],
+            [
+              101,
+              "draft",
+              400
+            ],
+            [
+              108,
+              "active",
+              900
+            ],
+            [
+              103,
+              "closed",
+              500
+            ]
+          ]
+        }
+      ],
+      "question": "Покажи номера договоров с платой от 400 до 700 включительно, от меньшего номера к большему.",
+      "expected": {
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            101
+          ],
+          [
+            103
+          ],
+          [
+            104
+          ]
+        ]
+      },
+      "solution": "SELECT id FROM contracts WHERE fee BETWEEN 400 AND 700 ORDER BY id;",
+      "hint": "BETWEEN включает обе границы.",
+      "ordered": true,
+      "names": false
+    },
+    {
       "id": "s18",
       "section": "start",
       "topic": "AS",
@@ -1842,6 +2149,114 @@
       "explain": "price + 50 считается для каждой строки, а AS total задаёт название столбца."
     },
     {
+      "id": "s60",
+      "section": "start",
+      "topic": "COUNT",
+      "level": 1,
+      "title": "Сколько заявок закрыто?",
+      "tables": [
+        {
+          "name": "tickets",
+          "columns": [
+            "id",
+            "status",
+            "hours"
+          ],
+          "rows": [
+            [
+              12,
+              "new",
+              null
+            ],
+            [
+              15,
+              "done",
+              3
+            ],
+            [
+              11,
+              "open",
+              2
+            ],
+            [
+              18,
+              "done",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Посчитай заявки со статусом done. Назови результат done_count.",
+      "expected": {
+        "columns": [
+          "done_count"
+        ],
+        "rows": [
+          [
+            2
+          ]
+        ]
+      },
+      "solution": "SELECT COUNT(*) AS done_count FROM tickets WHERE status = 'done';",
+      "hint": "COUNT(*) считает строки после фильтра.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s61",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "У кого меньше 60 баллов на pro?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "plan",
+            "points"
+          ],
+          "rows": [
+            [
+              "Лев",
+              "pro",
+              80
+            ],
+            [
+              "Ира",
+              "free",
+              20
+            ],
+            [
+              "Мила",
+              "pro",
+              40
+            ],
+            [
+              "Вера",
+              "free",
+              0
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имена пользователей тарифа pro, у которых меньше 60 баллов.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Мила"
+          ]
+        ]
+      },
+      "solution": "SELECT name FROM users WHERE plan = 'pro' AND points < 60;",
+      "hint": "Обе проверки должны быть истинны одновременно.",
+      "ordered": false,
+      "names": false
+    },
+    {
       "id": "s19",
       "section": "start",
       "topic": "DISTINCT",
@@ -1902,6 +2317,60 @@
       "explain": "Москва встречалась дважды, а DISTINCT оставил её один раз."
     },
     {
+      "id": "s62",
+      "section": "start",
+      "topic": "MAX",
+      "level": 1,
+      "title": "Самый крупный платёж",
+      "tables": [
+        {
+          "name": "payments",
+          "columns": [
+            "id",
+            "amount",
+            "method"
+          ],
+          "rows": [
+            [
+              31,
+              600,
+              "card"
+            ],
+            [
+              35,
+              350,
+              "cash"
+            ],
+            [
+              32,
+              250,
+              "card"
+            ],
+            [
+              38,
+              800,
+              "card"
+            ]
+          ]
+        }
+      ],
+      "question": "Найди наибольшую сумму платежа и назови столбец largest.",
+      "expected": {
+        "columns": [
+          "largest"
+        ],
+        "rows": [
+          [
+            800
+          ]
+        ]
+      },
+      "solution": "SELECT MAX(amount) AS largest FROM payments;",
+      "hint": "Для экстремума по одному столбцу подойдёт MAX.",
+      "ordered": false,
+      "names": true
+    },
+    {
       "id": "s20",
       "section": "start",
       "topic": "IS NULL",
@@ -1957,6 +2426,124 @@
         "Для NULL пишут не =, а IS NULL: WHERE phone IS NULL."
       ],
       "explain": "IS NULL находит пустые ячейки. С = NULL запрос вернул бы ноль строк."
+    },
+    {
+      "id": "s63",
+      "section": "start",
+      "topic": "ORDER BY",
+      "level": 1,
+      "title": "Какие слоты можно бронировать?",
+      "tables": [
+        {
+          "name": "slots",
+          "columns": [
+            "id",
+            "day",
+            "seats"
+          ],
+          "rows": [
+            [
+              24,
+              "пт",
+              2
+            ],
+            [
+              21,
+              "пн",
+              0
+            ],
+            [
+              25,
+              "пт",
+              4
+            ],
+            [
+              22,
+              "ср",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи номера и свободные места слотов, где ещё есть места. Начни со слота с наибольшим остатком.",
+      "expected": {
+        "columns": [
+          "id",
+          "seats"
+        ],
+        "rows": [
+          [
+            25,
+            4
+          ],
+          [
+            24,
+            2
+          ],
+          [
+            22,
+            1
+          ]
+        ]
+      },
+      "solution": "SELECT id, seats FROM slots WHERE seats > 0 ORDER BY seats DESC;",
+      "hint": "Сначала отсеки нулевой остаток.",
+      "ordered": true,
+      "names": false
+    },
+    {
+      "id": "s64",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "Тариф на пять человек",
+      "tables": [
+        {
+          "name": "plans",
+          "columns": [
+            "name",
+            "fee",
+            "seats"
+          ],
+          "rows": [
+            [
+              "Старт",
+              300,
+              1
+            ],
+            [
+              "Команда",
+              900,
+              5
+            ],
+            [
+              "Бизнес",
+              1500,
+              10
+            ],
+            [
+              "Проба",
+              0,
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Покажи названия тарифов, рассчитанных ровно на пять мест.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Команда"
+          ]
+        ]
+      },
+      "solution": "SELECT name FROM plans WHERE seats = 5;",
+      "hint": "Число мест хранится в seats.",
+      "ordered": false,
+      "names": false
     },
     {
       "id": "s21",
@@ -2015,6 +2602,120 @@
         "WHERE title LIKE '%SQL%';"
       ],
       "explain": "%SQL% значит: до слова и после него может быть что угодно."
+    },
+    {
+      "id": "s65",
+      "section": "start",
+      "topic": "COUNT",
+      "level": 1,
+      "title": "Две услуги по одной цене",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price",
+            "days"
+          ],
+          "rows": [
+            [
+              "Аудит",
+              800,
+              2
+            ],
+            [
+              "Монтаж",
+              1200,
+              3
+            ],
+            [
+              "Настройка",
+              400,
+              1
+            ],
+            [
+              "Осмотр",
+              400,
+              2
+            ]
+          ]
+        }
+      ],
+      "question": "Сколько услуг стоят ровно 400 рублей? Назови столбец offers.",
+      "expected": {
+        "columns": [
+          "offers"
+        ],
+        "rows": [
+          [
+            2
+          ]
+        ]
+      },
+      "solution": "SELECT COUNT(*) AS offers FROM services WHERE price = 400;",
+      "hint": "Каждая подходящая строка — одна услуга.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s66",
+      "section": "start",
+      "topic": "IN",
+      "level": 1,
+      "title": "Поставщики для двух городов",
+      "tables": [
+        {
+          "name": "providers",
+          "columns": [
+            "name",
+            "city",
+            "rating"
+          ],
+          "rows": [
+            [
+              "Маяк",
+              "Тула",
+              4
+            ],
+            [
+              "Сфера",
+              "Омск",
+              5
+            ],
+            [
+              "Вектор",
+              "Тула",
+              5
+            ],
+            [
+              "Луч",
+              "Пермь",
+              3
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи название и город поставщиков из Омска или Перми.",
+      "expected": {
+        "columns": [
+          "name",
+          "city"
+        ],
+        "rows": [
+          [
+            "Сфера",
+            "Омск"
+          ],
+          [
+            "Луч",
+            "Пермь"
+          ]
+        ]
+      },
+      "solution": "SELECT name, city FROM providers WHERE city IN ('Омск','Пермь');",
+      "hint": "IN проверяет, есть ли значение в списке.",
+      "ordered": false,
+      "names": false
     },
     {
       "id": "s22",
@@ -2082,6 +2783,60 @@
       "explain": "IN проверяет, есть ли город в списке. Строки Казани и Омска не подошли."
     },
     {
+      "id": "s67",
+      "section": "start",
+      "topic": "SUM",
+      "level": 1,
+      "title": "Сколько приносят действующие договоры?",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "status",
+            "fee"
+          ],
+          "rows": [
+            [
+              104,
+              "active",
+              700
+            ],
+            [
+              101,
+              "draft",
+              400
+            ],
+            [
+              108,
+              "active",
+              900
+            ],
+            [
+              103,
+              "closed",
+              500
+            ]
+          ]
+        }
+      ],
+      "question": "Сложи плату по договорам со статусом active. Назови сумму total_fee.",
+      "expected": {
+        "columns": [
+          "total_fee"
+        ],
+        "rows": [
+          [
+            1600
+          ]
+        ]
+      },
+      "solution": "SELECT SUM(fee) AS total_fee FROM contracts WHERE status = 'active';",
+      "hint": "Черновики и закрытые договоры не участвуют.",
+      "ordered": false,
+      "names": true
+    },
+    {
       "id": "s23",
       "section": "start",
       "topic": "BETWEEN",
@@ -2142,6 +2897,131 @@
         "WHERE price BETWEEN 100 AND 500;"
       ],
       "explain": "BETWEEN оставил цены от 100 до 500. Ручка слишком дешёвая, лампа и чайник дорогие."
+    },
+    {
+      "id": "s68",
+      "section": "start",
+      "topic": "IN",
+      "level": 1,
+      "title": "Какие заявки ещё в работе?",
+      "tables": [
+        {
+          "name": "tickets",
+          "columns": [
+            "id",
+            "status",
+            "hours"
+          ],
+          "rows": [
+            [
+              12,
+              "new",
+              null
+            ],
+            [
+              15,
+              "done",
+              3
+            ],
+            [
+              11,
+              "open",
+              2
+            ],
+            [
+              18,
+              "done",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Покажи номера заявок со статусом new или open. Расположи номера по возрастанию.",
+      "expected": {
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            11
+          ],
+          [
+            12
+          ]
+        ]
+      },
+      "solution": "SELECT id FROM tickets WHERE status IN ('new','open') ORDER BY id;",
+      "hint": "После фильтра отсортируй по id.",
+      "ordered": true,
+      "names": false
+    },
+    {
+      "id": "s69",
+      "section": "start",
+      "topic": "Вычисления",
+      "level": 1,
+      "title": "Сколько баллов у каждого после бонуса?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "plan",
+            "points"
+          ],
+          "rows": [
+            [
+              "Лев",
+              "pro",
+              80
+            ],
+            [
+              "Ира",
+              "free",
+              20
+            ],
+            [
+              "Мила",
+              "pro",
+              40
+            ],
+            [
+              "Вера",
+              "free",
+              0
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имя и количество баллов после прибавления 10. Назови второй столбец after_bonus.",
+      "expected": {
+        "columns": [
+          "name",
+          "after_bonus"
+        ],
+        "rows": [
+          [
+            "Лев",
+            90
+          ],
+          [
+            "Ира",
+            30
+          ],
+          [
+            "Мила",
+            50
+          ],
+          [
+            "Вера",
+            10
+          ]
+        ]
+      },
+      "solution": "SELECT name, points + 10 AS after_bonus FROM users;",
+      "hint": "Сложение внутри SELECT показывает рассчитанное значение.",
+      "ordered": false,
+      "names": true
     },
     {
       "id": "s24",
@@ -2208,6 +3088,62 @@
         "SELECT city, COUNT(*) AS cnt FROM clients GROUP BY city;"
       ],
       "explain": "Строки сгруппировались по городу, и COUNT посчитал их: Москва — 3, Казань — 2."
+    },
+    {
+      "id": "s70",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "Наличные отдельной строкой",
+      "tables": [
+        {
+          "name": "payments",
+          "columns": [
+            "id",
+            "amount",
+            "method"
+          ],
+          "rows": [
+            [
+              31,
+              600,
+              "card"
+            ],
+            [
+              35,
+              350,
+              "cash"
+            ],
+            [
+              32,
+              250,
+              "card"
+            ],
+            [
+              38,
+              800,
+              "card"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи номер и сумму платежей наличными. Способ оплаты наличными обозначен cash.",
+      "expected": {
+        "columns": [
+          "id",
+          "amount"
+        ],
+        "rows": [
+          [
+            35,
+            350
+          ]
+        ]
+      },
+      "solution": "SELECT id, amount FROM payments WHERE method = 'cash';",
+      "hint": "Условие относится к method.",
+      "ordered": false,
+      "names": false
     },
     {
       "id": "s25",
@@ -2278,6 +3214,118 @@
         "SELECT shop, SUM(amount) AS total FROM sales GROUP BY shop;"
       ],
       "explain": "Для каждого магазина сложились его продажи: Север 100+150, Юг 200+60."
+    },
+    {
+      "id": "s71",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "Когда все места заняты?",
+      "tables": [
+        {
+          "name": "slots",
+          "columns": [
+            "id",
+            "day",
+            "seats"
+          ],
+          "rows": [
+            [
+              24,
+              "пт",
+              2
+            ],
+            [
+              21,
+              "пн",
+              0
+            ],
+            [
+              25,
+              "пт",
+              4
+            ],
+            [
+              22,
+              "ср",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи день и номер слота, в котором осталось ноль мест. Столбцы нужны в таком порядке.",
+      "expected": {
+        "columns": [
+          "day",
+          "id"
+        ],
+        "rows": [
+          [
+            "пн",
+            21
+          ]
+        ]
+      },
+      "solution": "SELECT day, id FROM slots WHERE seats = 0;",
+      "hint": "Ноль — число, поэтому здесь подходит знак равенства.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s72",
+      "section": "start",
+      "topic": "ORDER BY",
+      "level": 1,
+      "title": "Самый дешёвый платный тариф",
+      "tables": [
+        {
+          "name": "plans",
+          "columns": [
+            "name",
+            "fee",
+            "seats"
+          ],
+          "rows": [
+            [
+              "Старт",
+              300,
+              1
+            ],
+            [
+              "Команда",
+              900,
+              5
+            ],
+            [
+              "Бизнес",
+              1500,
+              10
+            ],
+            [
+              "Проба",
+              0,
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи название и плату самого дешёвого тарифа с платой больше нуля.",
+      "expected": {
+        "columns": [
+          "name",
+          "fee"
+        ],
+        "rows": [
+          [
+            "Старт",
+            300
+          ]
+        ]
+      },
+      "solution": "SELECT name, fee FROM plans WHERE fee > 0 ORDER BY fee LIMIT 1;",
+      "hint": "После сортировки по цене достаточно первой строки.",
+      "ordered": true,
+      "names": false
     },
     {
       "id": "s26",
@@ -2360,6 +3408,63 @@
       "explain": "Сначала команды по алфавиту, а внутри каждой — очки от большего к меньшему."
     },
     {
+      "id": "s73",
+      "section": "start",
+      "topic": "AND",
+      "level": 1,
+      "title": "Короткие услуги в бюджете",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price",
+            "days"
+          ],
+          "rows": [
+            [
+              "Аудит",
+              800,
+              2
+            ],
+            [
+              "Монтаж",
+              1200,
+              3
+            ],
+            [
+              "Настройка",
+              400,
+              1
+            ],
+            [
+              "Осмотр",
+              400,
+              2
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи названия услуг до 800 рублей включительно, которые занимают ровно два дня.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Аудит"
+          ],
+          [
+            "Осмотр"
+          ]
+        ]
+      },
+      "solution": "SELECT name FROM services WHERE price <= 800 AND days = 2;",
+      "hint": "Ограничение цены и срок применяются к одной строке.",
+      "ordered": false,
+      "names": false
+    },
+    {
       "id": "s27",
       "section": "start",
       "topic": "MIN",
@@ -2413,6 +3518,124 @@
         "SELECT MIN(price) AS min_price FROM products;"
       ],
       "explain": "MIN просмотрел все цены и вернул самую маленькую — 50."
+    },
+    {
+      "id": "s74",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "В каком городе работает «Луч»?",
+      "tables": [
+        {
+          "name": "providers",
+          "columns": [
+            "name",
+            "city",
+            "rating"
+          ],
+          "rows": [
+            [
+              "Маяк",
+              "Тула",
+              4
+            ],
+            [
+              "Сфера",
+              "Омск",
+              5
+            ],
+            [
+              "Вектор",
+              "Тула",
+              5
+            ],
+            [
+              "Луч",
+              "Пермь",
+              3
+            ]
+          ]
+        }
+      ],
+      "question": "Найди город поставщика с названием «Луч». Верни только city.",
+      "expected": {
+        "columns": [
+          "city"
+        ],
+        "rows": [
+          [
+            "Пермь"
+          ]
+        ]
+      },
+      "solution": "SELECT city FROM providers WHERE name = 'Луч';",
+      "hint": "Название проверяется в WHERE.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s75",
+      "section": "start",
+      "topic": "Сравнение",
+      "level": 1,
+      "title": "Договоры без черновиков",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "status",
+            "fee"
+          ],
+          "rows": [
+            [
+              104,
+              "active",
+              700
+            ],
+            [
+              101,
+              "draft",
+              400
+            ],
+            [
+              108,
+              "active",
+              900
+            ],
+            [
+              103,
+              "closed",
+              500
+            ]
+          ]
+        }
+      ],
+      "question": "Покажи номер и статус всех договоров, кроме draft, по возрастанию номера.",
+      "expected": {
+        "columns": [
+          "id",
+          "status"
+        ],
+        "rows": [
+          [
+            103,
+            "closed"
+          ],
+          [
+            104,
+            "active"
+          ],
+          [
+            108,
+            "active"
+          ]
+        ]
+      },
+      "solution": "SELECT id, status FROM contracts WHERE status <> 'draft' ORDER BY id;",
+      "hint": "Оператор <> означает «не равно».",
+      "ordered": true,
+      "names": false
     },
     {
       "id": "s28",
@@ -2477,6 +3700,60 @@
       "explain": "ROUND(price, 1) оставил один знак: 120.456 стало 120.5."
     },
     {
+      "id": "s76",
+      "section": "start",
+      "topic": "COUNT",
+      "level": 1,
+      "title": "Сколько заявок получили оценку?",
+      "tables": [
+        {
+          "name": "tickets",
+          "columns": [
+            "id",
+            "status",
+            "hours"
+          ],
+          "rows": [
+            [
+              12,
+              "new",
+              null
+            ],
+            [
+              15,
+              "done",
+              3
+            ],
+            [
+              11,
+              "open",
+              2
+            ],
+            [
+              18,
+              "done",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Посчитай строки с заполненным hours. Назови результат estimated.",
+      "expected": {
+        "columns": [
+          "estimated"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ]
+      },
+      "solution": "SELECT COUNT(hours) AS estimated FROM tickets;",
+      "hint": "COUNT по столбцу пропускает NULL.",
+      "ordered": false,
+      "names": true
+    },
+    {
       "id": "s29",
       "section": "start",
       "topic": "Склейка текста",
@@ -2533,6 +3810,123 @@
         "SELECT first_name || ' ' || last_name AS full_name FROM users;"
       ],
       "explain": "Имя, пробел и фамилия склеились в одну строку для каждого человека."
+    },
+    {
+      "id": "s77",
+      "section": "start",
+      "topic": "GROUP BY",
+      "level": 1,
+      "title": "Тарифы пользователей",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "plan",
+            "points"
+          ],
+          "rows": [
+            [
+              "Лев",
+              "pro",
+              80
+            ],
+            [
+              "Ира",
+              "free",
+              20
+            ],
+            [
+              "Мила",
+              "pro",
+              40
+            ],
+            [
+              "Вера",
+              "free",
+              0
+            ]
+          ]
+        }
+      ],
+      "question": "Для каждого тарифа выведи его код и число пользователей. Назови число people.",
+      "expected": {
+        "columns": [
+          "plan",
+          "people"
+        ],
+        "rows": [
+          [
+            "free",
+            2
+          ],
+          [
+            "pro",
+            2
+          ]
+        ]
+      },
+      "solution": "SELECT plan, COUNT(*) AS people FROM users GROUP BY plan;",
+      "hint": "Одна группа соответствует одному тарифу.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s78",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "Платежи до 500 ₽",
+      "tables": [
+        {
+          "name": "payments",
+          "columns": [
+            "id",
+            "amount",
+            "method"
+          ],
+          "rows": [
+            [
+              31,
+              600,
+              "card"
+            ],
+            [
+              35,
+              350,
+              "cash"
+            ],
+            [
+              32,
+              250,
+              "card"
+            ],
+            [
+              38,
+              800,
+              "card"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи суммы меньше 500 рублей, от меньшей к большей.",
+      "expected": {
+        "columns": [
+          "amount"
+        ],
+        "rows": [
+          [
+            250
+          ],
+          [
+            350
+          ]
+        ]
+      },
+      "solution": "SELECT amount FROM payments WHERE amount < 500 ORDER BY amount;",
+      "hint": "Строгое неравенство исключило бы ровно 500.",
+      "ordered": true,
+      "names": false
     },
     {
       "id": "s30",
@@ -2595,6 +3989,60 @@
         "CASE WHEN price >= 500 THEN 'дорогой' ELSE 'дешёвый' END AS kind"
       ],
       "explain": "Если цена от 500 — «дорогой», иначе «дешёвый». Так вышло для каждой строки."
+    },
+    {
+      "id": "s79",
+      "section": "start",
+      "topic": "MAX",
+      "level": 1,
+      "title": "Максимум мест за раз",
+      "tables": [
+        {
+          "name": "slots",
+          "columns": [
+            "id",
+            "day",
+            "seats"
+          ],
+          "rows": [
+            [
+              24,
+              "пт",
+              2
+            ],
+            [
+              21,
+              "пн",
+              0
+            ],
+            [
+              25,
+              "пт",
+              4
+            ],
+            [
+              22,
+              "ср",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Найди максимальное число мест в одном слоте. Назови столбец biggest_slot.",
+      "expected": {
+        "columns": [
+          "biggest_slot"
+        ],
+        "rows": [
+          [
+            4
+          ]
+        ]
+      },
+      "solution": "SELECT MAX(seats) AS biggest_slot FROM slots;",
+      "hint": "Нужен максимум, суммировать места не требуется.",
+      "ordered": false,
+      "names": true
     },
     {
       "id": "s31",
@@ -2683,6 +4131,126 @@
       "explain": "JOIN сопоставил клиента и его заказы. Борис ничего не заказывал, поэтому его нет."
     },
     {
+      "id": "s80",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "Какие тарифы одноместные?",
+      "tables": [
+        {
+          "name": "plans",
+          "columns": [
+            "name",
+            "fee",
+            "seats"
+          ],
+          "rows": [
+            [
+              "Старт",
+              300,
+              1
+            ],
+            [
+              "Команда",
+              900,
+              5
+            ],
+            [
+              "Бизнес",
+              1500,
+              10
+            ],
+            [
+              "Проба",
+              0,
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи названия одноместных тарифов и их плату. Начни с бесплатного.",
+      "expected": {
+        "columns": [
+          "name",
+          "fee"
+        ],
+        "rows": [
+          [
+            "Проба",
+            0
+          ],
+          [
+            "Старт",
+            300
+          ]
+        ]
+      },
+      "solution": "SELECT name, fee FROM plans WHERE seats = 1 ORDER BY fee;",
+      "hint": "Сначала проверь seats, затем отсортируй fee.",
+      "ordered": true,
+      "names": false
+    },
+    {
+      "id": "s81",
+      "section": "start",
+      "topic": "DISTINCT",
+      "level": 1,
+      "title": "Какие цены есть в каталоге?",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price",
+            "days"
+          ],
+          "rows": [
+            [
+              "Аудит",
+              800,
+              2
+            ],
+            [
+              "Монтаж",
+              1200,
+              3
+            ],
+            [
+              "Настройка",
+              400,
+              1
+            ],
+            [
+              "Осмотр",
+              400,
+              2
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи разные цены услуг в порядке убывания.",
+      "expected": {
+        "columns": [
+          "price"
+        ],
+        "rows": [
+          [
+            1200
+          ],
+          [
+            800
+          ],
+          [
+            400
+          ]
+        ]
+      },
+      "solution": "SELECT DISTINCT price FROM services ORDER BY price DESC;",
+      "hint": "DISTINCT уберёт повтор цены 400.",
+      "ordered": true,
+      "names": false
+    },
+    {
       "id": "s32",
       "section": "start",
       "topic": "LEFT JOIN",
@@ -2761,6 +4329,124 @@
       "explain": "LEFT JOIN сохранил Бориса. Заказа у него нет, поэтому в item стоит NULL."
     },
     {
+      "id": "s82",
+      "section": "start",
+      "topic": "MAX",
+      "level": 1,
+      "title": "Лучший рейтинг в Туле",
+      "tables": [
+        {
+          "name": "providers",
+          "columns": [
+            "name",
+            "city",
+            "rating"
+          ],
+          "rows": [
+            [
+              "Маяк",
+              "Тула",
+              4
+            ],
+            [
+              "Сфера",
+              "Омск",
+              5
+            ],
+            [
+              "Вектор",
+              "Тула",
+              5
+            ],
+            [
+              "Луч",
+              "Пермь",
+              3
+            ]
+          ]
+        }
+      ],
+      "question": "Найди самый высокий рейтинг среди поставщиков Тулы. Назови результат best_rating.",
+      "expected": {
+        "columns": [
+          "best_rating"
+        ],
+        "rows": [
+          [
+            5
+          ]
+        ]
+      },
+      "solution": "SELECT MAX(rating) AS best_rating FROM providers WHERE city = 'Тула';",
+      "hint": "Ограничь выборку городом до вычисления максимума.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s83",
+      "section": "start",
+      "topic": "GROUP BY",
+      "level": 1,
+      "title": "Счёт по каждому статусу договора",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "status",
+            "fee"
+          ],
+          "rows": [
+            [
+              104,
+              "active",
+              700
+            ],
+            [
+              101,
+              "draft",
+              400
+            ],
+            [
+              108,
+              "active",
+              900
+            ],
+            [
+              103,
+              "closed",
+              500
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи статус договора и общую плату для этого статуса. Назови сумму total.",
+      "expected": {
+        "columns": [
+          "status",
+          "total"
+        ],
+        "rows": [
+          [
+            "active",
+            1600
+          ],
+          [
+            "closed",
+            500
+          ],
+          [
+            "draft",
+            400
+          ]
+        ]
+      },
+      "solution": "SELECT status, SUM(fee) AS total FROM contracts GROUP BY status;",
+      "hint": "Внутри каждой группы сложи fee.",
+      "ordered": false,
+      "names": true
+    },
+    {
       "id": "s33",
       "section": "start",
       "topic": "ORDER BY + LIMIT",
@@ -2814,6 +4500,60 @@
         "Добавь в конце LIMIT 1."
       ],
       "explain": "После сортировки наверху оказался Борис с 95 очками, а LIMIT 1 оставил только его."
+    },
+    {
+      "id": "s84",
+      "section": "start",
+      "topic": "SUM",
+      "level": 1,
+      "title": "Сколько часов ушло на закрытые заявки?",
+      "tables": [
+        {
+          "name": "tickets",
+          "columns": [
+            "id",
+            "status",
+            "hours"
+          ],
+          "rows": [
+            [
+              12,
+              "new",
+              null
+            ],
+            [
+              15,
+              "done",
+              3
+            ],
+            [
+              11,
+              "open",
+              2
+            ],
+            [
+              18,
+              "done",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Сложи часы по заявкам со статусом done. Назови результат spent.",
+      "expected": {
+        "columns": [
+          "spent"
+        ],
+        "rows": [
+          [
+            4
+          ]
+        ]
+      },
+      "solution": "SELECT SUM(hours) AS spent FROM tickets WHERE status = 'done';",
+      "hint": "Возьми только завершённые заявки.",
+      "ordered": false,
+      "names": true
     },
     {
       "id": "s34",
@@ -2870,6 +4610,964 @@
         "SELECT COUNT(DISTINCT city) AS cities FROM clients;"
       ],
       "explain": "Москва встречается дважды, но считается один раз. Разных городов три."
+    },
+    {
+      "id": "s85",
+      "section": "start",
+      "topic": "LIMIT",
+      "level": 1,
+      "title": "Первый в рейтинге баллов",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "plan",
+            "points"
+          ],
+          "rows": [
+            [
+              "Лев",
+              "pro",
+              80
+            ],
+            [
+              "Ира",
+              "free",
+              20
+            ],
+            [
+              "Мила",
+              "pro",
+              40
+            ],
+            [
+              "Вера",
+              "free",
+              0
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имя и баллы пользователя с самым большим количеством баллов.",
+      "expected": {
+        "columns": [
+          "name",
+          "points"
+        ],
+        "rows": [
+          [
+            "Лев",
+            80
+          ]
+        ]
+      },
+      "solution": "SELECT name, points FROM users ORDER BY points DESC LIMIT 1;",
+      "hint": "DESC ставит наибольшее значение первым.",
+      "ordered": true,
+      "names": false
+    },
+    {
+      "id": "s86",
+      "section": "start",
+      "topic": "DISTINCT",
+      "level": 1,
+      "title": "Какие способы оплаты использовали?",
+      "tables": [
+        {
+          "name": "payments",
+          "columns": [
+            "id",
+            "amount",
+            "method"
+          ],
+          "rows": [
+            [
+              31,
+              600,
+              "card"
+            ],
+            [
+              35,
+              350,
+              "cash"
+            ],
+            [
+              32,
+              250,
+              "card"
+            ],
+            [
+              38,
+              800,
+              "card"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи все способы оплаты без повторов.",
+      "expected": {
+        "columns": [
+          "method"
+        ],
+        "rows": [
+          [
+            "card"
+          ],
+          [
+            "cash"
+          ]
+        ]
+      },
+      "solution": "SELECT DISTINCT method FROM payments;",
+      "hint": "Повторяющиеся значения method дадут одну строку.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s36",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Кому доступен сервис?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "status"
+          ],
+          "rows": [
+            [
+              "Вера",
+              "active"
+            ],
+            [
+              "Павел",
+              "blocked"
+            ],
+            [
+              "Лена",
+              "active"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имена пользователей со статусом active в алфавитном порядке.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Вера"
+          ],
+          [
+            "Лена"
+          ]
+        ]
+      },
+      "solution": "SELECT name\nFROM users\nWHERE status = 'active'\nORDER BY name;",
+      "hint": "WHERE оставляет строки со статусом active. ORDER BY задаёт порядок имён.",
+      "explain": "WHERE оставляет строки со статусом active. ORDER BY задаёт порядок имён."
+    },
+    {
+      "id": "s87",
+      "section": "start",
+      "topic": "GROUP BY",
+      "level": 1,
+      "title": "Сколько слотов в каждый день?",
+      "tables": [
+        {
+          "name": "slots",
+          "columns": [
+            "id",
+            "day",
+            "seats"
+          ],
+          "rows": [
+            [
+              24,
+              "пт",
+              2
+            ],
+            [
+              21,
+              "пн",
+              0
+            ],
+            [
+              25,
+              "пт",
+              4
+            ],
+            [
+              22,
+              "ср",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи день и количество слотов на этот день. Назови количество slot_count.",
+      "expected": {
+        "columns": [
+          "day",
+          "slot_count"
+        ],
+        "rows": [
+          [
+            "пн",
+            1
+          ],
+          [
+            "пт",
+            2
+          ],
+          [
+            "ср",
+            1
+          ]
+        ]
+      },
+      "solution": "SELECT day, COUNT(*) AS slot_count FROM slots GROUP BY day;",
+      "hint": "Считай строки, даже когда в слоте ноль свободных мест.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s38",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Услуги дешевле 500 ₽",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Интернет",
+              700
+            ],
+            [
+              "Хранилище",
+              350
+            ],
+            [
+              "Поддержка",
+              500
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи название и цену услуг дешевле 500, от дешёвых к дорогим.",
+      "expected": {
+        "columns": [
+          "name",
+          "price"
+        ],
+        "rows": [
+          [
+            "Хранилище",
+            350
+          ]
+        ]
+      },
+      "solution": "SELECT name, price\nFROM services\nWHERE price < 500\nORDER BY price;",
+      "hint": "Знак < не включает 500. Сортировка по цене идёт по возрастанию.",
+      "explain": "Знак < не включает 500. Сортировка по цене идёт по возрастанию."
+    },
+    {
+      "id": "s88",
+      "section": "start",
+      "topic": "Вычисления",
+      "level": 1,
+      "title": "Сколько стоит место в «Бизнесе»?",
+      "tables": [
+        {
+          "name": "plans",
+          "columns": [
+            "name",
+            "fee",
+            "seats"
+          ],
+          "rows": [
+            [
+              "Старт",
+              300,
+              1
+            ],
+            [
+              "Команда",
+              900,
+              5
+            ],
+            [
+              "Бизнес",
+              1500,
+              10
+            ],
+            [
+              "Проба",
+              0,
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Раздели плату тарифа «Бизнес» на число мест. Назови результат per_seat.",
+      "expected": {
+        "columns": [
+          "per_seat"
+        ],
+        "rows": [
+          [
+            150
+          ]
+        ]
+      },
+      "solution": "SELECT fee / seats AS per_seat FROM plans WHERE name = 'Бизнес';",
+      "hint": "Оба числа бери из одной строки.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s89",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Как долго ждать монтаж?",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price",
+            "days"
+          ],
+          "rows": [
+            [
+              "Аудит",
+              800,
+              2
+            ],
+            [
+              "Монтаж",
+              1200,
+              3
+            ],
+            [
+              "Настройка",
+              400,
+              1
+            ],
+            [
+              "Осмотр",
+              400,
+              2
+            ]
+          ]
+        }
+      ],
+      "question": "Найди срок услуги «Монтаж». Верни только число дней.",
+      "expected": {
+        "columns": [
+          "days"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ]
+      },
+      "solution": "SELECT days FROM services WHERE name = 'Монтаж';",
+      "hint": "Нужный столбец называется days.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s40",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Какие контракты действуют?",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "status"
+          ],
+          "rows": [
+            [
+              151,
+              "active"
+            ],
+            [
+              152,
+              "closed"
+            ],
+            [
+              153,
+              "active"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи номера действующих контрактов: status = active. Отсортируй по id.",
+      "expected": {
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            151
+          ],
+          [
+            153
+          ]
+        ]
+      },
+      "solution": "SELECT id\nFROM contracts\nWHERE status = 'active'\nORDER BY id;",
+      "hint": "Текст active пишется в одинарных кавычках. SELECT id оставляет только номер.",
+      "explain": "Текст active пишется в одинарных кавычках. SELECT id оставляет только номер."
+    },
+    {
+      "id": "s90",
+      "section": "start",
+      "topic": "GROUP BY",
+      "level": 1,
+      "title": "Сколько поставщиков в каждом городе?",
+      "tables": [
+        {
+          "name": "providers",
+          "columns": [
+            "name",
+            "city",
+            "rating"
+          ],
+          "rows": [
+            [
+              "Маяк",
+              "Тула",
+              4
+            ],
+            [
+              "Сфера",
+              "Омск",
+              5
+            ],
+            [
+              "Вектор",
+              "Тула",
+              5
+            ],
+            [
+              "Луч",
+              "Пермь",
+              3
+            ]
+          ]
+        }
+      ],
+      "question": "Для каждого города выведи city и число поставщиков с именем столбца suppliers.",
+      "expected": {
+        "columns": [
+          "city",
+          "suppliers"
+        ],
+        "rows": [
+          [
+            "Омск",
+            1
+          ],
+          [
+            "Пермь",
+            1
+          ],
+          [
+            "Тула",
+            2
+          ]
+        ]
+      },
+      "solution": "SELECT city, COUNT(*) AS suppliers FROM providers GROUP BY city;",
+      "hint": "Сгруппируй строки по city.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s42",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Поставщики из Москвы",
+      "tables": [
+        {
+          "name": "providers",
+          "columns": [
+            "name",
+            "city"
+          ],
+          "rows": [
+            [
+              "Вектор",
+              "Москва"
+            ],
+            [
+              "Орбита",
+              "Тула"
+            ],
+            [
+              "Спектр",
+              "Москва"
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи названия поставщиков из Москвы в алфавитном порядке.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Вектор"
+          ],
+          [
+            "Спектр"
+          ]
+        ]
+      },
+      "solution": "SELECT name\nFROM providers\nWHERE city = 'Москва'\nORDER BY name;",
+      "hint": "Фильтруем по city, а показываем name. Столбец фильтра не обязан входить в SELECT.",
+      "explain": "Фильтруем по city, а показываем name. Столбец фильтра не обязан входить в SELECT."
+    },
+    {
+      "id": "s91",
+      "section": "start",
+      "topic": "MAX",
+      "level": 1,
+      "title": "Последний номер активного договора",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "status",
+            "fee"
+          ],
+          "rows": [
+            [
+              104,
+              "active",
+              700
+            ],
+            [
+              101,
+              "draft",
+              400
+            ],
+            [
+              108,
+              "active",
+              900
+            ],
+            [
+              103,
+              "closed",
+              500
+            ]
+          ]
+        }
+      ],
+      "question": "Найди наибольший номер договора со статусом active. Назови результат last_id.",
+      "expected": {
+        "columns": [
+          "last_id"
+        ],
+        "rows": [
+          [
+            108
+          ]
+        ]
+      },
+      "solution": "SELECT MAX(id) AS last_id FROM contracts WHERE status = 'active';",
+      "hint": "Сравни номера, а не суммы договоров.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s92",
+      "section": "start",
+      "topic": "AND",
+      "level": 1,
+      "title": "Какие заявки решили за час?",
+      "tables": [
+        {
+          "name": "tickets",
+          "columns": [
+            "id",
+            "status",
+            "hours"
+          ],
+          "rows": [
+            [
+              12,
+              "new",
+              null
+            ],
+            [
+              15,
+              "done",
+              3
+            ],
+            [
+              11,
+              "open",
+              2
+            ],
+            [
+              18,
+              "done",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи номера закрытых заявок, на которые ушёл ровно один час.",
+      "expected": {
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            18
+          ]
+        ]
+      },
+      "solution": "SELECT id FROM tickets WHERE status = 'done' AND hours = 1;",
+      "hint": "Проверь и статус, и часы.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s44",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Кому нужно уточнить телефон?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "phone"
+          ],
+          "rows": [
+            [
+              "Вера",
+              "101"
+            ],
+            [
+              "Павел",
+              null
+            ],
+            [
+              "Лена",
+              null
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имена пользователей без телефона в алфавитном порядке.",
+      "expected": {
+        "columns": [
+          "name"
+        ],
+        "rows": [
+          [
+            "Лена"
+          ],
+          [
+            "Павел"
+          ]
+        ]
+      },
+      "solution": "SELECT name\nFROM users\nWHERE phone IS NULL\nORDER BY name;",
+      "hint": "NULL означает отсутствие значения. Для проверки нужен IS NULL.",
+      "explain": "NULL означает отсутствие значения. Для проверки нужен IS NULL."
+    },
+    {
+      "id": "s93",
+      "section": "start",
+      "topic": "WHERE",
+      "level": 1,
+      "title": "Остались ли пользователи без баллов?",
+      "tables": [
+        {
+          "name": "users",
+          "columns": [
+            "name",
+            "plan",
+            "points"
+          ],
+          "rows": [
+            [
+              "Лев",
+              "pro",
+              80
+            ],
+            [
+              "Ира",
+              "free",
+              20
+            ],
+            [
+              "Мила",
+              "pro",
+              40
+            ],
+            [
+              "Вера",
+              "free",
+              0
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи имена и тарифы пользователей с нулевым балансом баллов.",
+      "expected": {
+        "columns": [
+          "name",
+          "plan"
+        ],
+        "rows": [
+          [
+            "Вера",
+            "free"
+          ]
+        ]
+      },
+      "solution": "SELECT name, plan FROM users WHERE points = 0;",
+      "hint": "Нулевой баланс записан числом 0.",
+      "ordered": false,
+      "names": false
+    },
+    {
+      "id": "s46",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Две самые дорогие услуги",
+      "tables": [
+        {
+          "name": "services",
+          "columns": [
+            "name",
+            "price"
+          ],
+          "rows": [
+            [
+              "Интернет",
+              700
+            ],
+            [
+              "Хранилище",
+              350
+            ],
+            [
+              "Поддержка",
+              500
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи две самые дорогие услуги и их цены.",
+      "expected": {
+        "columns": [
+          "name",
+          "price"
+        ],
+        "rows": [
+          [
+            "Интернет",
+            700
+          ],
+          [
+            "Поддержка",
+            500
+          ]
+        ]
+      },
+      "solution": "SELECT name, price\nFROM services\nORDER BY price DESC\nLIMIT 2;",
+      "hint": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки.",
+      "explain": "DESC ставит большие цены первыми. LIMIT 2 оставляет две строки."
+    },
+    {
+      "id": "s94",
+      "section": "start",
+      "topic": "SUM",
+      "level": 1,
+      "title": "Сколько заплатили картой?",
+      "tables": [
+        {
+          "name": "payments",
+          "columns": [
+            "id",
+            "amount",
+            "method"
+          ],
+          "rows": [
+            [
+              31,
+              600,
+              "card"
+            ],
+            [
+              35,
+              350,
+              "cash"
+            ],
+            [
+              32,
+              250,
+              "card"
+            ],
+            [
+              38,
+              800,
+              "card"
+            ]
+          ]
+        }
+      ],
+      "question": "Найди общую сумму платежей с method = 'card'. Назови результат card_total.",
+      "expected": {
+        "columns": [
+          "card_total"
+        ],
+        "rows": [
+          [
+            1650
+          ]
+        ]
+      },
+      "solution": "SELECT SUM(amount) AS card_total FROM payments WHERE method = 'card';",
+      "hint": "SUM складывает суммы только выбранных платежей.",
+      "ordered": false,
+      "names": true
+    },
+    {
+      "id": "s95",
+      "section": "start",
+      "topic": "BETWEEN",
+      "level": 1,
+      "title": "Слот для небольшой команды",
+      "tables": [
+        {
+          "name": "slots",
+          "columns": [
+            "id",
+            "day",
+            "seats"
+          ],
+          "rows": [
+            [
+              24,
+              "пт",
+              2
+            ],
+            [
+              21,
+              "пн",
+              0
+            ],
+            [
+              25,
+              "пт",
+              4
+            ],
+            [
+              22,
+              "ср",
+              1
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи номера слотов с одним или двумя свободными местами, от меньшего номера к большему.",
+      "expected": {
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            22
+          ],
+          [
+            24
+          ]
+        ]
+      },
+      "solution": "SELECT id FROM slots WHERE seats BETWEEN 1 AND 2 ORDER BY id;",
+      "hint": "Обе границы диапазона входят в ответ.",
+      "ordered": true,
+      "names": false
+    },
+    {
+      "id": "s48",
+      "section": "start",
+      "topic": "SELECT",
+      "level": 1,
+      "title": "Контракты от 500 ₽",
+      "tables": [
+        {
+          "name": "contracts",
+          "columns": [
+            "id",
+            "amount"
+          ],
+          "rows": [
+            [
+              151,
+              350
+            ],
+            [
+              152,
+              550
+            ],
+            [
+              153,
+              850
+            ]
+          ]
+        }
+      ],
+      "question": "Выведи контракты на сумму от 500 включительно, по возрастанию id.",
+      "expected": {
+        "columns": [
+          "id",
+          "amount"
+        ],
+        "rows": [
+          [
+            152,
+            550
+          ],
+          [
+            153,
+            850
+          ]
+        ]
+      },
+      "solution": "SELECT id, amount\nFROM contracts\nWHERE amount >= 500\nORDER BY id;",
+      "hint": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит.",
+      "explain": "Оператор >= включает границу. Поэтому контракт на 500 тоже подходит."
     },
     {
       "id": "002",
