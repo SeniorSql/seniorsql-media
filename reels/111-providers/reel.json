@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🏢",
+  "hook": "Поставщики • у кого **заказы** ровно 10?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "providers",
+    "columns": [
+      "name",
+      "jobs"
+    ],
+    "rows": [
+      [
+        "Луч",
+        12
+      ],
+      [
+        "Вега",
+        5
+      ],
+      [
+        "Атлас",
+        18
+      ],
+      [
+        "Маяк",
+        10
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM providers\nWHERE jobs = 10;",
+  "options": [
+    "Луч",
+    "Вега",
+    "Маяк"
+  ],
+  "correct": 2,
+  "explain": "Значение 10 есть только у «Маяк». Знак = ищет точное совпадение.",
+  "check": {
+    "sql": "SELECT name\nFROM providers\nWHERE jobs = 10;",
+    "answer": "Маяк"
+  },
+  "caption": "Поставщики • у кого заказы ровно 10?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

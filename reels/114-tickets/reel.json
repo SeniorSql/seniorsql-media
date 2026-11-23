@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • сколько **разных статусов**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "status"
+    ],
+    "rows": [
+      [
+        "Т-89",
+        "new"
+      ],
+      [
+        "Т-56",
+        "done"
+      ],
+      [
+        "Т-45",
+        "new"
+      ],
+      [
+        "Т-78",
+        "hold"
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(DISTINCT status)\nFROM tickets;",
+  "options": [
+    "3",
+    "4",
+    "2"
+  ],
+  "correct": 0,
+  "explain": "new встречается дважды. DISTINCT оставляет new, done и hold.",
+  "check": {
+    "sql": "SELECT COUNT(DISTINCT status)\nFROM tickets;",
+    "answer": "3"
+  },
+  "caption": "Заявки • сколько разных статусов?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

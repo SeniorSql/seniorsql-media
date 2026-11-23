@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🛠️",
+  "hook": "Услуги • у кого значение **ещё не указано**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "services",
+    "columns": [
+      "name",
+      "price"
+    ],
+    "rows": [
+      [
+        "Монтаж",
+        800
+      ],
+      [
+        "Связь",
+        350
+      ],
+      [
+        "Хостинг",
+        850
+      ],
+      [
+        "Настройка",
+        null
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM services\nWHERE price IS NULL;",
+  "options": [
+    "Настройка",
+    "Монтаж",
+    "Хостинг"
+  ],
+  "correct": 0,
+  "explain": "IS NULL находит строку без значения в столбце price. Это «Настройка».",
+  "check": {
+    "sql": "SELECT name\nFROM services\nWHERE price IS NULL;",
+    "answer": "Настройка"
+  },
+  "caption": "Услуги • у кого значение ещё не указано?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

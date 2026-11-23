@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • чему равна **сумма** после фильтра?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "points"
+    ],
+    "rows": [
+      [
+        "Оля",
+        75
+      ],
+      [
+        "Яна",
+        10
+      ],
+      [
+        "Лев",
+        80
+      ],
+      [
+        "Нина",
+        20
+      ]
+    ]
+  },
+  "code": "SELECT SUM(points)\nFROM users\nWHERE points <= 20;",
+  "options": [
+    "185",
+    "30",
+    "20"
+  ],
+  "correct": 1,
+  "explain": "После фильтра остаются 10 и 20. Их сумма равна 30.",
+  "check": {
+    "sql": "SELECT SUM(points)\nFROM users\nWHERE points <= 20;",
+    "answer": "30"
+  },
+  "caption": "Пользователи • чему равна сумма после фильтра?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

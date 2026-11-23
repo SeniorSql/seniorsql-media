@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🛠️",
+  "hook": "Услуги • кто займёт **второе место**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "services",
+    "columns": [
+      "name",
+      "price"
+    ],
+    "rows": [
+      [
+        "Настройка",
+        350
+      ],
+      [
+        "Хостинг",
+        150
+      ],
+      [
+        "Доставка",
+        450
+      ],
+      [
+        "Доступ",
+        250
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM services\nORDER BY price DESC\nLIMIT 1 OFFSET 1;",
+  "options": [
+    "Доставка",
+    "Доступ",
+    "Настройка"
+  ],
+  "correct": 2,
+  "explain": "После сортировки первым идёт 450. OFFSET 1 пропускает его, следующим идёт 350.",
+  "check": {
+    "sql": "SELECT name\nFROM services\nORDER BY price DESC\nLIMIT 1 OFFSET 1;",
+    "answer": "Настройка"
+  },
+  "caption": "Услуги • кто займёт второе место?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

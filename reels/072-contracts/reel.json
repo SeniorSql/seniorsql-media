@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • какие строки попадут **в список**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-57",
+        33
+      ],
+      [
+        "К-24",
+        6
+      ],
+      [
+        "К-11",
+        42
+      ],
+      [
+        "К-35",
+        21
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM contracts\nWHERE days IN (6, 42)\nORDER BY days;",
+  "options": [
+    "К-57, К-35",
+    "К-24, К-11",
+    "К-11"
+  ],
+  "correct": 1,
+  "explain": "IN оставляет только точные совпадения с 6 или 42.",
+  "check": {
+    "sql": "SELECT name\nFROM contracts\nWHERE days IN (6, 42)\nORDER BY days;",
+    "answer": "К-24, К-11"
+  },
+  "caption": "Договоры • какие строки попадут в список?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

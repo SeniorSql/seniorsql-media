@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🏢",
+  "hook": "Поставщики • сколько **заполненных значений**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "providers",
+    "columns": [
+      "name",
+      "jobs"
+    ],
+    "rows": [
+      [
+        "Мир",
+        null
+      ],
+      [
+        "Атлас",
+        2
+      ],
+      [
+        "Вега",
+        null
+      ],
+      [
+        "Маяк",
+        7
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(jobs)\nFROM providers;",
+  "options": [
+    "2",
+    "4",
+    "0"
+  ],
+  "correct": 0,
+  "explain": "COUNT(jobs) пропускает NULL. Заполнены две ячейки из четырёх.",
+  "check": {
+    "sql": "SELECT COUNT(jobs)\nFROM providers;",
+    "answer": "2"
+  },
+  "caption": "Поставщики • сколько заполненных значений?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

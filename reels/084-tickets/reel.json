@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • какая строка станет **первой**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-56",
+        12
+      ],
+      [
+        "Т-67",
+        2
+      ],
+      [
+        "Т-45",
+        14
+      ],
+      [
+        "Т-12",
+        8
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM tickets\nORDER BY hours DESC\nLIMIT 1;",
+  "options": [
+    "Т-56",
+    "Т-67",
+    "Т-45"
+  ],
+  "correct": 2,
+  "explain": "DESC ставит 14 на первое место. LIMIT 1 оставляет только эту строку.",
+  "check": {
+    "sql": "SELECT name\nFROM tickets\nORDER BY hours DESC\nLIMIT 1;",
+    "answer": "Т-45"
+  },
+  "caption": "Заявки • какая строка станет первой?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

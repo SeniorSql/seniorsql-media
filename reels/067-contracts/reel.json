@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • какие имена **между границами**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-35",
+        33
+      ],
+      [
+        "К-11",
+        9
+      ],
+      [
+        "К-62",
+        36
+      ],
+      [
+        "К-82",
+        18
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM contracts\nWHERE days BETWEEN 18 AND 33\nORDER BY days;",
+  "options": [
+    "К-82, К-35",
+    "К-82",
+    "К-11, К-62"
+  ],
+  "correct": 0,
+  "explain": "BETWEEN включает обе границы. Подходят 18 и 33.",
+  "check": {
+    "sql": "SELECT name\nFROM contracts\nWHERE days BETWEEN 18 AND 33\nORDER BY days;",
+    "answer": "К-82, К-35"
+  },
+  "caption": "Договоры • какие имена между границами?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

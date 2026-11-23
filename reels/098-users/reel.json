@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • какая строка станет **первой**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "points"
+    ],
+    "rows": [
+      [
+        "Марк",
+        55
+      ],
+      [
+        "Ира",
+        25
+      ],
+      [
+        "Лев",
+        65
+      ],
+      [
+        "Илья",
+        35
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM users\nORDER BY points DESC\nLIMIT 1;",
+  "options": [
+    "Марк",
+    "Ира",
+    "Лев"
+  ],
+  "correct": 2,
+  "explain": "DESC ставит 65 на первое место. LIMIT 1 оставляет только эту строку.",
+  "check": {
+    "sql": "SELECT name\nFROM users\nORDER BY points DESC\nLIMIT 1;",
+    "answer": "Лев"
+  },
+  "caption": "Пользователи • какая строка станет первой?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

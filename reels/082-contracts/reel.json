@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • у кого значение **ещё не указано**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-24",
+        30
+      ],
+      [
+        "К-57",
+        12
+      ],
+      [
+        "К-74",
+        54
+      ],
+      [
+        "К-46",
+        null
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM contracts\nWHERE days IS NULL;",
+  "options": [
+    "К-24",
+    "К-74",
+    "К-46"
+  ],
+  "correct": 2,
+  "explain": "IS NULL находит строку без значения в столбце days. Это «К-46».",
+  "check": {
+    "sql": "SELECT name\nFROM contracts\nWHERE days IS NULL;",
+    "answer": "К-46"
+  },
+  "caption": "Договоры • у кого значение ещё не указано?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🏢",
+  "hook": "Поставщики • у кого значение **ещё не указано**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "providers",
+    "columns": [
+      "name",
+      "jobs"
+    ],
+    "rows": [
+      [
+        "Вега",
+        8
+      ],
+      [
+        "Маяк",
+        3
+      ],
+      [
+        "Луч",
+        18
+      ],
+      [
+        "Пульс",
+        null
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM providers\nWHERE jobs IS NULL;",
+  "options": [
+    "Пульс",
+    "Вега",
+    "Луч"
+  ],
+  "correct": 0,
+  "explain": "IS NULL находит строку без значения в столбце jobs. Это «Пульс».",
+  "check": {
+    "sql": "SELECT name\nFROM providers\nWHERE jobs IS NULL;",
+    "answer": "Пульс"
+  },
+  "caption": "Поставщики • у кого значение ещё не указано?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

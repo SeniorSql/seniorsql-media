@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • войдёт ли **граница 60**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "points"
+    ],
+    "rows": [
+      [
+        "Яна",
+        70
+      ],
+      [
+        "Нина",
+        10
+      ],
+      [
+        "Оля",
+        75
+      ],
+      [
+        "Анна",
+        60
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM users\nWHERE points <= 60\nORDER BY points;",
+  "options": [
+    "Нина",
+    "Анна",
+    "Нина, Анна"
+  ],
+  "correct": 2,
+  "explain": "Условие <= включает сам порог. Остаются строки со значениями 10 и 60.",
+  "check": {
+    "sql": "SELECT name\nFROM users\nWHERE points <= 60\nORDER BY points;",
+    "answer": "Нина, Анна"
+  },
+  "caption": "Пользователи • войдёт ли граница 60?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

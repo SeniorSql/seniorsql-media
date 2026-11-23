@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • что покажет **среднее**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "points"
+    ],
+    "rows": [
+      [
+        "Яна",
+        60
+      ],
+      [
+        "Илья",
+        40
+      ],
+      [
+        "Анна",
+        85
+      ],
+      [
+        "Нина",
+        50
+      ]
+    ]
+  },
+  "code": "SELECT AVG(points)\nFROM users\nWHERE points >= 60;",
+  "options": [
+    "72.5",
+    "85",
+    "145"
+  ],
+  "correct": 0,
+  "explain": "После фильтра остаются 60 и 85. Их среднее равно 72.5.",
+  "check": {
+    "sql": "SELECT AVG(points)\nFROM users\nWHERE points >= 60;",
+    "answer": "72.5"
+  },
+  "caption": "Пользователи • что покажет среднее?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • сколько строк **пройдёт фильтр**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "points"
+    ],
+    "rows": [
+      [
+        "Оля",
+        80
+      ],
+      [
+        "Лев",
+        25
+      ],
+      [
+        "Илья",
+        90
+      ],
+      [
+        "Ира",
+        60
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(*)\nFROM users\nWHERE points >= 60;",
+  "options": [
+    "2",
+    "3",
+    "4"
+  ],
+  "correct": 1,
+  "explain": "Подходят 60, 80 и 90. COUNT(*) считает эти три строки.",
+  "check": {
+    "sql": "SELECT COUNT(*)\nFROM users\nWHERE points >= 60;",
+    "answer": "3"
+  },
+  "caption": "Пользователи • сколько строк пройдёт фильтр?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

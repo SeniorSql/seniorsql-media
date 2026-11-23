@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • сколько **заполненных значений**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-46",
+        null
+      ],
+      [
+        "К-74",
+        12
+      ],
+      [
+        "К-82",
+        null
+      ],
+      [
+        "К-57",
+        24
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(days)\nFROM contracts;",
+  "options": [
+    "2",
+    "4",
+    "0"
+  ],
+  "correct": 0,
+  "explain": "COUNT(days) пропускает NULL. Заполнены две ячейки из четырёх.",
+  "check": {
+    "sql": "SELECT COUNT(days)\nFROM contracts;",
+    "answer": "2"
+  },
+  "caption": "Договоры • сколько заполненных значений?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • сколько **разных статусов**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "status"
+    ],
+    "rows": [
+      [
+        "Нина",
+        "new"
+      ],
+      [
+        "Оля",
+        "done"
+      ],
+      [
+        "Илья",
+        "new"
+      ],
+      [
+        "Лев",
+        "hold"
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(DISTINCT status)\nFROM users;",
+  "options": [
+    "4",
+    "3",
+    "2"
+  ],
+  "correct": 1,
+  "explain": "new встречается дважды. DISTINCT оставляет new, done и hold.",
+  "check": {
+    "sql": "SELECT COUNT(DISTINCT status)\nFROM users;",
+    "answer": "3"
+  },
+  "caption": "Пользователи • сколько разных статусов?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

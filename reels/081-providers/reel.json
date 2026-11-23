@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🏢",
+  "hook": "Поставщики • какие имена **между границами**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "providers",
+    "columns": [
+      "name",
+      "jobs"
+    ],
+    "rows": [
+      [
+        "Вега",
+        12
+      ],
+      [
+        "Заря",
+        2
+      ],
+      [
+        "Орион",
+        16
+      ],
+      [
+        "Мир",
+        4
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM providers\nWHERE jobs BETWEEN 4 AND 12\nORDER BY jobs;",
+  "options": [
+    "Мир",
+    "Мир, Вега",
+    "Заря, Орион"
+  ],
+  "correct": 1,
+  "explain": "BETWEEN включает обе границы. Подходят 4 и 12.",
+  "check": {
+    "sql": "SELECT name\nFROM providers\nWHERE jobs BETWEEN 4 AND 12\nORDER BY jobs;",
+    "answer": "Мир, Вега"
+  },
+  "caption": "Поставщики • какие имена между границами?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

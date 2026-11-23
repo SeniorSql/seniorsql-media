@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • сколько **заполненных значений**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "points"
+    ],
+    "rows": [
+      [
+        "Лев",
+        null
+      ],
+      [
+        "Марк",
+        15
+      ],
+      [
+        "Нина",
+        null
+      ],
+      [
+        "Илья",
+        25
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(points)\nFROM users;",
+  "options": [
+    "4",
+    "0",
+    "2"
+  ],
+  "correct": 2,
+  "explain": "COUNT(points) пропускает NULL. Заполнены две ячейки из четырёх.",
+  "check": {
+    "sql": "SELECT COUNT(points)\nFROM users;",
+    "answer": "2"
+  },
+  "caption": "Пользователи • сколько заполненных значений?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

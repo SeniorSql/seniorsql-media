@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • кто займёт **второе место**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-57",
+        39
+      ],
+      [
+        "К-62",
+        30
+      ],
+      [
+        "К-35",
+        54
+      ],
+      [
+        "К-82",
+        33
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM contracts\nORDER BY days DESC\nLIMIT 1 OFFSET 1;",
+  "options": [
+    "К-35",
+    "К-57",
+    "К-82"
+  ],
+  "correct": 1,
+  "explain": "После сортировки первым идёт 54. OFFSET 1 пропускает его, следующим идёт 39.",
+  "check": {
+    "sql": "SELECT name\nFROM contracts\nORDER BY days DESC\nLIMIT 1 OFFSET 1;",
+    "answer": "К-57"
+  },
+  "caption": "Договоры • кто займёт второе место?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

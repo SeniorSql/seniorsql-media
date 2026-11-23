@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🛠️",
+  "hook": "Услуги • какие строки **выше порога**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "services",
+    "columns": [
+      "name",
+      "price"
+    ],
+    "rows": [
+      [
+        "Монтаж",
+        750
+      ],
+      [
+        "Доставка",
+        300
+      ],
+      [
+        "Хостинг",
+        850
+      ],
+      [
+        "Ремонт",
+        700
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM services\nWHERE price > 700\nORDER BY price;",
+  "options": [
+    "Монтаж, Хостинг",
+    "Ремонт, Монтаж",
+    "Хостинг, Монтаж"
+  ],
+  "correct": 0,
+  "explain": "Строго больше 700 только 750 и 850. ORDER BY ставит меньшее первым.",
+  "check": {
+    "sql": "SELECT name\nFROM services\nWHERE price > 700\nORDER BY price;",
+    "answer": "Монтаж, Хостинг"
+  },
+  "caption": "Услуги • какие строки выше порога?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

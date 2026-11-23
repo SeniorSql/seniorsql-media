@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • войдёт ли **граница 7**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-12",
+        9
+      ],
+      [
+        "Т-45",
+        4
+      ],
+      [
+        "Т-56",
+        17
+      ],
+      [
+        "Т-23",
+        7
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM tickets\nWHERE hours <= 7\nORDER BY hours;",
+  "options": [
+    "Т-45",
+    "Т-45, Т-23",
+    "Т-23"
+  ],
+  "correct": 1,
+  "explain": "Условие <= включает сам порог. Остаются строки со значениями 4 и 7.",
+  "check": {
+    "sql": "SELECT name\nFROM tickets\nWHERE hours <= 7\nORDER BY hours;",
+    "answer": "Т-45, Т-23"
+  },
+  "caption": "Заявки • войдёт ли граница 7?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

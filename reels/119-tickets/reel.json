@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • у кого значение **ещё не указано**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-34",
+        11
+      ],
+      [
+        "Т-23",
+        7
+      ],
+      [
+        "Т-56",
+        13
+      ],
+      [
+        "Т-12",
+        null
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM tickets\nWHERE hours IS NULL;",
+  "options": [
+    "Т-12",
+    "Т-34",
+    "Т-56"
+  ],
+  "correct": 0,
+  "explain": "IS NULL находит строку без значения в столбце hours. Это «Т-12».",
+  "check": {
+    "sql": "SELECT name\nFROM tickets\nWHERE hours IS NULL;",
+    "answer": "Т-12"
+  },
+  "caption": "Заявки • у кого значение ещё не указано?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

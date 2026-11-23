@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • чему равна **сумма** после фильтра?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-46",
+        33
+      ],
+      [
+        "К-57",
+        12
+      ],
+      [
+        "К-74",
+        51
+      ],
+      [
+        "К-62",
+        30
+      ]
+    ]
+  },
+  "code": "SELECT SUM(days)\nFROM contracts\nWHERE days <= 30;",
+  "options": [
+    "126",
+    "30",
+    "42"
+  ],
+  "correct": 2,
+  "explain": "После фильтра остаются 12 и 30. Их сумма равна 42.",
+  "check": {
+    "sql": "SELECT SUM(days)\nFROM contracts\nWHERE days <= 30;",
+    "answer": "42"
+  },
+  "caption": "Договоры • чему равна сумма после фильтра?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

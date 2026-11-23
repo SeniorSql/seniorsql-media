@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • какие строки **выше порога**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-62",
+        24
+      ],
+      [
+        "К-74",
+        6
+      ],
+      [
+        "К-24",
+        54
+      ],
+      [
+        "К-11",
+        18
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM contracts\nWHERE days > 18\nORDER BY days;",
+  "options": [
+    "К-11, К-62",
+    "К-24, К-62",
+    "К-62, К-24"
+  ],
+  "correct": 2,
+  "explain": "Строго больше 18 только 24 и 54. ORDER BY ставит меньшее первым.",
+  "check": {
+    "sql": "SELECT name\nFROM contracts\nWHERE days > 18\nORDER BY days;",
+    "answer": "К-62, К-24"
+  },
+  "caption": "Договоры • какие строки выше порога?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

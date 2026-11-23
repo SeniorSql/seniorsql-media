@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • какие строки **выше порога**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "points"
+    ],
+    "rows": [
+      [
+        "Яна",
+        70
+      ],
+      [
+        "Марк",
+        30
+      ],
+      [
+        "Илья",
+        90
+      ],
+      [
+        "Анна",
+        45
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM users\nWHERE points > 45\nORDER BY points;",
+  "options": [
+    "Анна, Яна",
+    "Яна, Илья",
+    "Илья, Яна"
+  ],
+  "correct": 1,
+  "explain": "Строго больше 45 только 70 и 90. ORDER BY ставит меньшее первым.",
+  "check": {
+    "sql": "SELECT name\nFROM users\nWHERE points > 45\nORDER BY points;",
+    "answer": "Яна, Илья"
+  },
+  "caption": "Пользователи • какие строки выше порога?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

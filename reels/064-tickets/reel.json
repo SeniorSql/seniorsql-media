@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • что покажет **среднее**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-23",
+        11
+      ],
+      [
+        "Т-78",
+        5
+      ],
+      [
+        "Т-12",
+        16
+      ],
+      [
+        "Т-34",
+        9
+      ]
+    ]
+  },
+  "code": "SELECT AVG(hours)\nFROM tickets\nWHERE hours >= 11;",
+  "options": [
+    "16",
+    "27",
+    "13.5"
+  ],
+  "correct": 2,
+  "explain": "После фильтра остаются 11 и 16. Их среднее равно 13.5.",
+  "check": {
+    "sql": "SELECT AVG(hours)\nFROM tickets\nWHERE hours >= 11;",
+    "answer": "13.5"
+  },
+  "caption": "Заявки • что покажет среднее?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

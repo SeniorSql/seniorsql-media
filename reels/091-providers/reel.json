@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🏢",
+  "hook": "Поставщики • сколько **разных статусов**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "providers",
+    "columns": [
+      "name",
+      "status"
+    ],
+    "rows": [
+      [
+        "Орион",
+        "new"
+      ],
+      [
+        "Пульс",
+        "done"
+      ],
+      [
+        "Мир",
+        "new"
+      ],
+      [
+        "Атлас",
+        "hold"
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(DISTINCT status)\nFROM providers;",
+  "options": [
+    "4",
+    "2",
+    "3"
+  ],
+  "correct": 2,
+  "explain": "new встречается дважды. DISTINCT оставляет new, done и hold.",
+  "check": {
+    "sql": "SELECT COUNT(DISTINCT status)\nFROM providers;",
+    "answer": "3"
+  },
+  "caption": "Поставщики • сколько разных статусов?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

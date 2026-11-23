@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • что покажет **среднее**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-46",
+        36
+      ],
+      [
+        "К-82",
+        12
+      ],
+      [
+        "К-11",
+        39
+      ],
+      [
+        "К-57",
+        21
+      ]
+    ]
+  },
+  "code": "SELECT AVG(days)\nFROM contracts\nWHERE days >= 36;",
+  "options": [
+    "37.5",
+    "39",
+    "75"
+  ],
+  "correct": 0,
+  "explain": "После фильтра остаются 36 и 39. Их среднее равно 37.5.",
+  "check": {
+    "sql": "SELECT AVG(days)\nFROM contracts\nWHERE days >= 36;",
+    "answer": "37.5"
+  },
+  "caption": "Договоры • что покажет среднее?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • какие имена **между границами**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-78",
+        16
+      ],
+      [
+        "Т-56",
+        5
+      ],
+      [
+        "Т-67",
+        18
+      ],
+      [
+        "Т-34",
+        13
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM tickets\nWHERE hours BETWEEN 13 AND 16\nORDER BY hours;",
+  "options": [
+    "Т-34",
+    "Т-34, Т-78",
+    "Т-56, Т-67"
+  ],
+  "correct": 1,
+  "explain": "BETWEEN включает обе границы. Подходят 13 и 16.",
+  "check": {
+    "sql": "SELECT name\nFROM tickets\nWHERE hours BETWEEN 13 AND 16\nORDER BY hours;",
+    "answer": "Т-34, Т-78"
+  },
+  "caption": "Заявки • какие имена между границами?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

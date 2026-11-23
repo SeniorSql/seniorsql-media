@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🏢",
+  "hook": "Поставщики • кто займёт **второе место**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "providers",
+    "columns": [
+      "name",
+      "jobs"
+    ],
+    "rows": [
+      [
+        "Луч",
+        15
+      ],
+      [
+        "Мир",
+        8
+      ],
+      [
+        "Пульс",
+        16
+      ],
+      [
+        "Орион",
+        9
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM providers\nORDER BY jobs DESC\nLIMIT 1 OFFSET 1;",
+  "options": [
+    "Пульс",
+    "Орион",
+    "Луч"
+  ],
+  "correct": 2,
+  "explain": "После сортировки первым идёт 16. OFFSET 1 пропускает его, следующим идёт 15.",
+  "check": {
+    "sql": "SELECT name\nFROM providers\nORDER BY jobs DESC\nLIMIT 1 OFFSET 1;",
+    "answer": "Луч"
+  },
+  "caption": "Поставщики • кто займёт второе место?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

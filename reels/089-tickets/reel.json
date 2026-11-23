@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • кто займёт **второе место**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-45",
+        10
+      ],
+      [
+        "Т-23",
+        7
+      ],
+      [
+        "Т-12",
+        14
+      ],
+      [
+        "Т-67",
+        9
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM tickets\nORDER BY hours DESC\nLIMIT 1 OFFSET 1;",
+  "options": [
+    "Т-12",
+    "Т-67",
+    "Т-45"
+  ],
+  "correct": 2,
+  "explain": "После сортировки первым идёт 14. OFFSET 1 пропускает его, следующим идёт 10.",
+  "check": {
+    "sql": "SELECT name\nFROM tickets\nORDER BY hours DESC\nLIMIT 1 OFFSET 1;",
+    "answer": "Т-45"
+  },
+  "caption": "Заявки • кто займёт второе место?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

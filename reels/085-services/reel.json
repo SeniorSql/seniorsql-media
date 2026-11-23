@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🛠️",
+  "hook": "Услуги • сколько строк **пройдёт фильтр**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "services",
+    "columns": [
+      "name",
+      "price"
+    ],
+    "rows": [
+      [
+        "Доступ",
+        750
+      ],
+      [
+        "Доставка",
+        150
+      ],
+      [
+        "Аудит",
+        900
+      ],
+      [
+        "Ремонт",
+        350
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(*)\nFROM services\nWHERE price >= 350;",
+  "options": [
+    "3",
+    "2",
+    "4"
+  ],
+  "correct": 0,
+  "explain": "Подходят 350, 750 и 900. COUNT(*) считает эти три строки.",
+  "check": {
+    "sql": "SELECT COUNT(*)\nFROM services\nWHERE price >= 350;",
+    "answer": "3"
+  },
+  "caption": "Услуги • сколько строк пройдёт фильтр?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

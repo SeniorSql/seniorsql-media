@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🛠️",
+  "hook": "Услуги • какие строки попадут **в список**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "services",
+    "columns": [
+      "name",
+      "price"
+    ],
+    "rows": [
+      [
+        "Настройка",
+        750
+      ],
+      [
+        "Доступ",
+        650
+      ],
+      [
+        "Ремонт",
+        900
+      ],
+      [
+        "Монтаж",
+        700
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM services\nWHERE price IN (650, 900)\nORDER BY price;",
+  "options": [
+    "Настройка, Монтаж",
+    "Ремонт",
+    "Доступ, Ремонт"
+  ],
+  "correct": 2,
+  "explain": "IN оставляет только точные совпадения с 650 или 900.",
+  "check": {
+    "sql": "SELECT name\nFROM services\nWHERE price IN (650, 900)\nORDER BY price;",
+    "answer": "Доступ, Ремонт"
+  },
+  "caption": "Услуги • какие строки попадут в список?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

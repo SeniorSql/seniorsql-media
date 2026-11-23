@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🏢",
+  "hook": "Поставщики • сколько строк **пройдёт фильтр**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "providers",
+    "columns": [
+      "name",
+      "jobs"
+    ],
+    "rows": [
+      [
+        "Мир",
+        15
+      ],
+      [
+        "Луч",
+        12
+      ],
+      [
+        "Орион",
+        18
+      ],
+      [
+        "Атлас",
+        14
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(*)\nFROM providers\nWHERE jobs >= 14;",
+  "options": [
+    "2",
+    "4",
+    "3"
+  ],
+  "correct": 2,
+  "explain": "Подходят 14, 15 и 18. COUNT(*) считает эти три строки.",
+  "check": {
+    "sql": "SELECT COUNT(*)\nFROM providers\nWHERE jobs >= 14;",
+    "answer": "3"
+  },
+  "caption": "Поставщики • сколько строк пройдёт фильтр?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

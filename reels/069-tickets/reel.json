@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • у кого **время** ровно 11?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-78",
+        13
+      ],
+      [
+        "Т-23",
+        10
+      ],
+      [
+        "Т-12",
+        14
+      ],
+      [
+        "Т-45",
+        11
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM tickets\nWHERE hours = 11;",
+  "options": [
+    "Т-45",
+    "Т-78",
+    "Т-23"
+  ],
+  "correct": 0,
+  "explain": "Значение 11 есть только у «Т-45». Знак = ищет точное совпадение.",
+  "check": {
+    "sql": "SELECT name\nFROM tickets\nWHERE hours = 11;",
+    "answer": "Т-45"
+  },
+  "caption": "Заявки • у кого время ровно 11?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

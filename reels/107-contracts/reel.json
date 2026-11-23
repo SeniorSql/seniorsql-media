@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • войдёт ли **граница 21**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-62",
+        27
+      ],
+      [
+        "К-35",
+        9
+      ],
+      [
+        "К-11",
+        45
+      ],
+      [
+        "К-82",
+        21
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM contracts\nWHERE days <= 21\nORDER BY days;",
+  "options": [
+    "К-35",
+    "К-82",
+    "К-35, К-82"
+  ],
+  "correct": 2,
+  "explain": "Условие <= включает сам порог. Остаются строки со значениями 9 и 21.",
+  "check": {
+    "sql": "SELECT name\nFROM contracts\nWHERE days <= 21\nORDER BY days;",
+    "answer": "К-35, К-82"
+  },
+  "caption": "Договоры • войдёт ли граница 21?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

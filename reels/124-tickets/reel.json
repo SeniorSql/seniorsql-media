@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • сколько **заполненных значений**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-89",
+        null
+      ],
+      [
+        "Т-56",
+        5
+      ],
+      [
+        "Т-78",
+        null
+      ],
+      [
+        "Т-45",
+        10
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(hours)\nFROM tickets;",
+  "options": [
+    "4",
+    "2",
+    "0"
+  ],
+  "correct": 1,
+  "explain": "COUNT(hours) пропускает NULL. Заполнены две ячейки из четырёх.",
+  "check": {
+    "sql": "SELECT COUNT(hours)\nFROM tickets;",
+    "answer": "2"
+  },
+  "caption": "Заявки • сколько заполненных значений?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

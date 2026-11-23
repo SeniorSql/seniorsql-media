@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🏢",
+  "hook": "Поставщики • войдёт ли **граница 6**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "providers",
+    "columns": [
+      "name",
+      "jobs"
+    ],
+    "rows": [
+      [
+        "Орион",
+        8
+      ],
+      [
+        "Заря",
+        5
+      ],
+      [
+        "Луч",
+        12
+      ],
+      [
+        "Маяк",
+        6
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM providers\nWHERE jobs <= 6\nORDER BY jobs;",
+  "options": [
+    "Заря, Маяк",
+    "Заря",
+    "Маяк"
+  ],
+  "correct": 0,
+  "explain": "Условие <= включает сам порог. Остаются строки со значениями 5 и 6.",
+  "check": {
+    "sql": "SELECT name\nFROM providers\nWHERE jobs <= 6\nORDER BY jobs;",
+    "answer": "Заря, Маяк"
+  },
+  "caption": "Поставщики • войдёт ли граница 6?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

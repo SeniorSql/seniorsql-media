@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • какие строки **выше порога**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-23",
+        14
+      ],
+      [
+        "Т-45",
+        3
+      ],
+      [
+        "Т-67",
+        17
+      ],
+      [
+        "Т-89",
+        11
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM tickets\nWHERE hours > 11\nORDER BY hours;",
+  "options": [
+    "Т-23, Т-67",
+    "Т-89, Т-23",
+    "Т-67, Т-23"
+  ],
+  "correct": 0,
+  "explain": "Строго больше 11 только 14 и 17. ORDER BY ставит меньшее первым.",
+  "check": {
+    "sql": "SELECT name\nFROM tickets\nWHERE hours > 11\nORDER BY hours;",
+    "answer": "Т-23, Т-67"
+  },
+  "caption": "Заявки • какие строки выше порога?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

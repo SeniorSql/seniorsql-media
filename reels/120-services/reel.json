@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🛠️",
+  "hook": "Услуги • что покажет **среднее**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "services",
+    "columns": [
+      "name",
+      "price"
+    ],
+    "rows": [
+      [
+        "Настройка",
+        550
+      ],
+      [
+        "Хостинг",
+        350
+      ],
+      [
+        "Аудит",
+        800
+      ],
+      [
+        "Монтаж",
+        450
+      ]
+    ]
+  },
+  "code": "SELECT AVG(price)\nFROM services\nWHERE price >= 550;",
+  "options": [
+    "800",
+    "1350",
+    "675"
+  ],
+  "correct": 2,
+  "explain": "После фильтра остаются 550 и 800. Их среднее равно 675.",
+  "check": {
+    "sql": "SELECT AVG(price)\nFROM services\nWHERE price >= 550;",
+    "answer": "675"
+  },
+  "caption": "Услуги • что покажет среднее?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

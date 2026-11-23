@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🏢",
+  "hook": "Поставщики • что покажет **среднее**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "providers",
+    "columns": [
+      "name",
+      "jobs"
+    ],
+    "rows": [
+      [
+        "Орион",
+        10
+      ],
+      [
+        "Пульс",
+        4
+      ],
+      [
+        "Луч",
+        11
+      ],
+      [
+        "Заря",
+        5
+      ]
+    ]
+  },
+  "code": "SELECT AVG(jobs)\nFROM providers\nWHERE jobs >= 10;",
+  "options": [
+    "11",
+    "10.5",
+    "21"
+  ],
+  "correct": 1,
+  "explain": "После фильтра остаются 10 и 11. Их среднее равно 10.5.",
+  "check": {
+    "sql": "SELECT AVG(jobs)\nFROM providers\nWHERE jobs >= 10;",
+    "answer": "10.5"
+  },
+  "caption": "Поставщики • что покажет среднее?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

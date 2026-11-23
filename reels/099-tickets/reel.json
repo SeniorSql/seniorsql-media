@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • чему равна **сумма** после фильтра?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-23",
+        15
+      ],
+      [
+        "Т-12",
+        3
+      ],
+      [
+        "Т-67",
+        16
+      ],
+      [
+        "Т-56",
+        12
+      ]
+    ]
+  },
+  "code": "SELECT SUM(hours)\nFROM tickets\nWHERE hours <= 12;",
+  "options": [
+    "46",
+    "15",
+    "12"
+  ],
+  "correct": 1,
+  "explain": "После фильтра остаются 3 и 12. Их сумма равна 15.",
+  "check": {
+    "sql": "SELECT SUM(hours)\nFROM tickets\nWHERE hours <= 12;",
+    "answer": "15"
+  },
+  "caption": "Заявки • чему равна сумма после фильтра?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

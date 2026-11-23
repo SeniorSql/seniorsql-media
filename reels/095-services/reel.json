@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🛠️",
+  "hook": "Услуги • какие имена **между границами**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "services",
+    "columns": [
+      "name",
+      "price"
+    ],
+    "rows": [
+      [
+        "Связь",
+        600
+      ],
+      [
+        "Доступ",
+        250
+      ],
+      [
+        "Монтаж",
+        650
+      ],
+      [
+        "Хостинг",
+        500
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM services\nWHERE price BETWEEN 500 AND 600\nORDER BY price;",
+  "options": [
+    "Хостинг",
+    "Хостинг, Связь",
+    "Доступ, Монтаж"
+  ],
+  "correct": 1,
+  "explain": "BETWEEN включает обе границы. Подходят 500 и 600.",
+  "check": {
+    "sql": "SELECT name\nFROM services\nWHERE price BETWEEN 500 AND 600\nORDER BY price;",
+    "answer": "Хостинг, Связь"
+  },
+  "caption": "Услуги • какие имена между границами?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

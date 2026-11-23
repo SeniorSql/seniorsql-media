@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🎫",
+  "hook": "Заявки • сколько строк **пройдёт фильтр**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "tickets",
+    "columns": [
+      "name",
+      "hours"
+    ],
+    "rows": [
+      [
+        "Т-12",
+        13
+      ],
+      [
+        "Т-67",
+        3
+      ],
+      [
+        "Т-34",
+        17
+      ],
+      [
+        "Т-23",
+        6
+      ]
+    ]
+  },
+  "code": "SELECT COUNT(*)\nFROM tickets\nWHERE hours >= 6;",
+  "options": [
+    "3",
+    "2",
+    "4"
+  ],
+  "correct": 0,
+  "explain": "Подходят 6, 13 и 17. COUNT(*) считает эти три строки.",
+  "check": {
+    "sql": "SELECT COUNT(*)\nFROM tickets\nWHERE hours >= 6;",
+    "answer": "3"
+  },
+  "caption": "Заявки • сколько строк пройдёт фильтр?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

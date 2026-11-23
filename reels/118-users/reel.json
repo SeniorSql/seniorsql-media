@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • какие имена **между границами**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "points"
+    ],
+    "rows": [
+      [
+        "Оля",
+        50
+      ],
+      [
+        "Ира",
+        30
+      ],
+      [
+        "Нина",
+        75
+      ],
+      [
+        "Лев",
+        40
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM users\nWHERE points BETWEEN 40 AND 50\nORDER BY points;",
+  "options": [
+    "Лев",
+    "Ира, Нина",
+    "Лев, Оля"
+  ],
+  "correct": 2,
+  "explain": "BETWEEN включает обе границы. Подходят 40 и 50.",
+  "check": {
+    "sql": "SELECT name\nFROM users\nWHERE points BETWEEN 40 AND 50\nORDER BY points;",
+    "answer": "Лев, Оля"
+  },
+  "caption": "Пользователи • какие имена между границами?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

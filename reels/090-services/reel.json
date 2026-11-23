@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "🛠️",
+  "hook": "Услуги • чему равна **сумма** после фильтра?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "services",
+    "columns": [
+      "name",
+      "price"
+    ],
+    "rows": [
+      [
+        "Аудит",
+        500
+      ],
+      [
+        "Настройка",
+        250
+      ],
+      [
+        "Монтаж",
+        900
+      ],
+      [
+        "Связь",
+        300
+      ]
+    ]
+  },
+  "code": "SELECT SUM(price)\nFROM services\nWHERE price <= 300;",
+  "options": [
+    "1950",
+    "550",
+    "300"
+  ],
+  "correct": 1,
+  "explain": "После фильтра остаются 250 и 300. Их сумма равна 550.",
+  "check": {
+    "sql": "SELECT SUM(price)\nFROM services\nWHERE price <= 300;",
+    "answer": "550"
+  },
+  "caption": "Услуги • чему равна сумма после фильтра?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

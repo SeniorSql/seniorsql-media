@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "👤",
+  "hook": "Пользователи • какие строки попадут **в список**?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "users",
+    "columns": [
+      "name",
+      "points"
+    ],
+    "rows": [
+      [
+        "Марк",
+        85
+      ],
+      [
+        "Илья",
+        15
+      ],
+      [
+        "Лев",
+        90
+      ],
+      [
+        "Оля",
+        50
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM users\nWHERE points IN (15, 90)\nORDER BY points;",
+  "options": [
+    "Илья, Лев",
+    "Марк, Оля",
+    "Лев"
+  ],
+  "correct": 0,
+  "explain": "IN оставляет только точные совпадения с 15 или 90.",
+  "check": {
+    "sql": "SELECT name\nFROM users\nWHERE points IN (15, 90)\nORDER BY points;",
+    "answer": "Илья, Лев"
+  },
+  "caption": "Пользователи • какие строки попадут в список?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}

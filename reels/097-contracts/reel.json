@@ -1,0 +1,46 @@
+{
+  "ready": true,
+  "series": "SQL-задачка",
+  "emoji": "📄",
+  "hook": "Договоры • у кого **срок** ровно 39?",
+  "badge": "Для новичков",
+  "question": "Что выведет запрос?",
+  "table": {
+    "name": "contracts",
+    "columns": [
+      "name",
+      "days"
+    ],
+    "rows": [
+      [
+        "К-62",
+        45
+      ],
+      [
+        "К-35",
+        15
+      ],
+      [
+        "К-11",
+        54
+      ],
+      [
+        "К-82",
+        39
+      ]
+    ]
+  },
+  "code": "SELECT name\nFROM contracts\nWHERE days = 39;",
+  "options": [
+    "К-62",
+    "К-82",
+    "К-35"
+  ],
+  "correct": 1,
+  "explain": "Значение 39 есть только у «К-82». Знак = ищет точное совпадение.",
+  "check": {
+    "sql": "SELECT name\nFROM contracts\nWHERE days = 39;",
+    "answer": "К-82"
+  },
+  "caption": "Договоры • у кого срок ровно 39?\n\nПрочитай таблицу и SELECT. Выбери A, B или C до появления ответа.\n\n#sql #sqlдляначинающих #аналитикданных"
+}
