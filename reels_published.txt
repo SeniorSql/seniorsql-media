@@ -26,3 +26,4 @@
 032-in
 045-service-select
 033-group-count
+034-group-sum
