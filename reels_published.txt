@@ -28,3 +28,4 @@
 033-group-count
 034-group-sum
 035-order-desc
+036-max
