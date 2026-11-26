@@ -31,3 +31,4 @@
 036-max
 037-count-where
 038-order-limit
+039-round-avg
