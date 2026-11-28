@@ -34,3 +34,4 @@
 039-round-avg
 040-bolshe-ravno
 041-like-konec
+042-sum-where
